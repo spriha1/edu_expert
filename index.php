@@ -39,12 +39,16 @@
 
 			$sql .= "CREATE TABLE IF NOT EXISTS sender_receiver (
 				id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				from_id INT(6),
-				to_id INT(6),
+				from_id INT(6) UNSIGNED,
+				to_id INT(6) UNSIGNED,
 				message_id INT(6) UNSIGNED,
 				time_of_mail TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-				CONSTRAINT testkey FOREIGN KEY (message_id)
-   				REFERENCES mails(id)
+				CONSTRAINT testkey1 FOREIGN KEY (message_id)
+   				REFERENCES mails(id),
+   				CONSTRAINT testkey2 FOREIGN KEY (from_id)
+   				REFERENCES users(id),
+   				CONSTRAINT testkey3 FOREIGN KEY (to_id)
+   				REFERENCES users(id)
 			);";
 
 			if ($conn->multi_query($sql) === TRUE) {
