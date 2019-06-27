@@ -1,61 +1,58 @@
-<?php
-			$servername = "localhost";
-			$username = "spriha";
-			$password = "mindfire";
-			$conn = new mysqli($servername, $username, $password);
+<?php include 'header.html';?>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+	  <form class="form-inline" action="login.php">
+	    <input class="form-control mr-sm-2" type="text" placeholder="Enter Username">
+	    <input class="form-control mr-sm-2" type="text" placeholder="Enter Password">
+	    <button class="btn btn-success form-control mr-sm-2" type="submit">Login</button>
+	    <a href="register.php">Signup</a>
+	  </form>
+	</nav>
+<br>
+	<div class="container">
+		<h1 class="justify-content-center">WELCOME</h1>
+	</div>
+	<?php
+	//create database
+	$servername = "localhost";
+	$username = "spriha";
+	$password = "mindfire";
+	try {
+	    $conn = new PDO("mysql:host=$servername", $username, $password);
+	    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	    $sql = "CREATE DATABASE IF NOT EXISTS php_project";
+	    $conn->exec($sql);
+    }
+	catch(PDOException $e)
+	    {
+	    echo $sql . "<br>" . $e->getMessage();
+	    }
+	//create table
+	$conn = new PDO("mysql:host=$servername;dbname=php_project", $username, $password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "CREATE TABLE IF NOT EXISTS users (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			firstname VARCHAR(20),
+			lastname VARCHAR(20),
+			email VARCHAR(50) NOT NULL UNIQUE,
+			username VARCHAR(50) NOT NULL UNIQUE,
+			password VARCHAR(50) NOT NULL,
+			verify_hash VARCHAR(32) NOT NULL ,
+			verify_status INT(1) NOT NULL DEFAULT '0',
+			verified_user INT(1) NOT NULL DEFAULT '0'
 
-			if ($conn->connect_error) {
-				die("Connection failed: " . $conn->connect_error);
-			}
+		)";
+	$conn->exec($sql);
+	$sql = "CREATE TABLE IF NOT EXISTS type_of_user (
+			u_id INT UNSIGNED,
+			user_type VARCHAR(20),
+			CONSTRAINT test FOREIGN KEY (u_id)
+   			REFERENCES users(id) 
+		)";
+	$conn->exec($sql);
+		
+?>
+</body>
+</html>
 
-			$sql = "CREATE DATABASE IF NOT EXISTS email";
 
-			if ($conn->query($sql) === TRUE) {
-				echo "Database created successfully";
-			} else {
-				echo "Error creating database: " . $conn->error;
-			}
-
-			$dbname = "email";
-			$conn = new mysqli($servername, $username, $password, $dbname);
-
-			if ($conn->connect_error) {
-				die("Connection failed: " . $conn->connect_error);
-			}
-
-			$sql = "CREATE TABLE IF NOT EXISTS users (
-				id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				firstname VARCHAR(30) NOT NULL,
-				lastname VARCHAR(30) NOT NULL,
-				email VARCHAR(50) NOT NULL UNIQUE,
-				password VARCHAR(10) NOT NULL
-				);";
-			
-			$sql .= "CREATE TABLE IF NOT EXISTS mails (
-				id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				subject VARCHAR(30) NOT NULL,
-				body VARCHAR(30) NOT NULL
-			);";
-
-			$sql .= "CREATE TABLE IF NOT EXISTS sender_receiver (
-				id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				from_id INT(6) UNSIGNED,
-				to_id INT(6) UNSIGNED,
-				message_id INT(6) UNSIGNED,
-				time_of_mail TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-				CONSTRAINT testkey1 FOREIGN KEY (message_id)
-   				REFERENCES mails(id),
-   				CONSTRAINT testkey2 FOREIGN KEY (from_id)
-   				REFERENCES users(id),
-   				CONSTRAINT testkey3 FOREIGN KEY (to_id)
-   				REFERENCES users(id)
-			);";
-
-			if ($conn->multi_query($sql) === TRUE) {
-			echo "New tables created successfully";
-			} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-			}
-
-			$conn->close();
-		?>
