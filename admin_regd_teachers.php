@@ -2,8 +2,10 @@
 <body>
 	<?php
 		include 'db_connection.php';
+		include 'db_credentials.php';
+
 	    $obj = new DB_connect();
-	    $conn = $obj->connect('localhost','php_project','spriha','mindfire');
+	    $conn = $obj->connect('localhost','php_project',$username,$password);
 		$sql = $conn->prepare("SELECT firstname, lastname, email, username FROM users where user_reg_status = 1 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Teacher')");
 	    $sql->execute();
 	    $result = $sql->setFetchMode(PDO::FETCH_ASSOC);user_type_id

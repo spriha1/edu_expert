@@ -17,7 +17,12 @@
 		    </div>
 		    <div class="card bg-secondary">
 		      <div class="card-body text-center">
-		        <p class="card-text"><a href="admin_pending_requests.php" style="color: #000000">Pending Requests</p></a>
+		        <p class="card-text"><a href="student_pending_requests.php" style="color: #000000">Pending Requests of Students</p></a>
+		      </div>
+		    </div>
+		    <div class="card bg-secondary">
+		      <div class="card-body text-center">
+		        <p class="card-text"><a href="teacher_pending_requests.php" style="color: #000000">Pending Requests of Teachers</p></a>
 		      </div>
 		    </div>
 		</div>
