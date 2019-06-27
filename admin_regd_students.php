@@ -1,13 +1,10 @@
 <?php include 'header.html';?>
 <body>
 	<?php
-		$servername = "localhost";
-		$username = "spriha";
-		$password = "mindfire";
-		$db = "php_project";
-		$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $conn->prepare("SELECT firstname, lastname, email, username FROM users where verified_user = 1 AND id IN (SELECT u_id FROM type_of_user where user_type = 'Student')");
+		include 'db_connection.php';
+	    $obj = new DB_connect();
+	    $conn = $obj->connect('localhost','php_project','spriha','mindfire');
+		$sql = $conn->prepare("SELECT firstname, lastname, email, username FROM users where user_reg_status = 1 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Student')");
 	    $sql->execute();
 	    $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
 	    $result = $sql->fetchAll();
@@ -30,8 +27,8 @@
 					    <div class="form-group">
 					      Email:<input type="text" class="form-control" value="'.$value["email"].'">
 					    </div>
-					    <a href=""><button>Accept</button></a>
-					    <a href=""><button>Reject</button></a>
+					    <a href=""><button>Update</button></a>
+					    <a href=""><button>Remove</button></a>
 					    <a href=""><button>Block</button></a>
 					    </form>';
 
