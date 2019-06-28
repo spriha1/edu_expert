@@ -8,7 +8,7 @@
  
 
 
-	include 'db_connection.php';
+	include_once 'db_connection.php';
     $obj = new DB_connect();
     $conn = $obj->connect('localhost','php_project',$username,$password);
 

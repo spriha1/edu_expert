@@ -1,4 +1,11 @@
-<?php include 'header.html';?>
+<?php 
+session_start();
+
+if(isset($_SESSION["username"]))
+{
+	
+	include_once 'header.html';
+echo '
 <body>
 	<br>
 	<br>
@@ -27,4 +34,11 @@
 		    </div>
 		</div>
 	</div>	
-</body>
+	<a href="logout.php"><button>LOGOUT</button></a>
+</body>';
+}
+else
+{
+	header("Location:index.php");
+}
+?>

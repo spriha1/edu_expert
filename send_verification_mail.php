@@ -5,7 +5,7 @@
 		$email = $_POST['email'];
 		$firstname = $_POST['fname'];
 		$lastname = $_POST['lname'];
-		$pass = $_POST['password'];
+		$pass = MD5($_POST['password']);
 		$user_type = $_POST['user_type'];
 		$msg = "Please verify it by clicking the activation link that has been send to your email.";
 		$hash = md5(uniqid());
@@ -15,11 +15,8 @@
 
 	    $obj = new DB_connect();
 	    $conn = $obj->connect('localhost','php_project',$username,$password);
-
-		$sql = $conn->prepare("SELECT u_id FROM type_of_user where user_type = '".$user_type."'");
-	    $sql->execute();
-	    $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-	    $result = $sql->fetch();
+	    $query = "SELECT u_id FROM type_of_user where user_type = '".$user_type."'";
+	    $result = $obj->select_records($query);
 	    //echo $result['u_id'];
 		$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
 	    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$result['u_id']."')";

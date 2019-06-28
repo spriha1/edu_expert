@@ -1,4 +1,6 @@
-<?php include 'header.html';?>
+<?php 
+session_start();
+include 'header.html';?>
 <body>
 	<?php
 		include 'db_connection.php';
@@ -6,10 +8,9 @@
 
 	    $obj = new DB_connect();
 	    $conn = $obj->connect('localhost','php_project',$username,$password);
-		$sql = $conn->prepare("SELECT firstname, lastname, email, username FROM users where user_reg_status = 1 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Student')");
-	    $sql->execute();
-	    $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
-	    $result = $sql->fetchAll();
+	    $query = "SELECT firstname, lastname, email, username FROM users where user_reg_status = 1 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Student')";
+
+	    $result = $obj->select_records($query);
 	    echo "<br><br>";
 	    echo "<div class='container'>";
 	    echo "<div class='card-columns'>";
@@ -29,10 +30,10 @@
 					    <div class="form-group">
 					      Email:<input type="text" class="form-control" value="'.$value["email"].'">
 					    </div>
-					    <a href=""><button>Update</button></a>
-					    <a href=""><button>Remove</button></a>
-					    <a href=""><button>Block</button></a>
 					    </form>';
+			
+			echo '<a href="remove_users.php?username='.$value["username"].'"><button>Remove</button></a>';
+			echo '<a href="block_users.php?username='.$value["username"].'"><button>Block</button></a>';
 
 	     	echo "</div></div>";
 	     } 
