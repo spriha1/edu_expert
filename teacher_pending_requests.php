@@ -1,15 +1,16 @@
 <?php 
 session_start();
-
-include 'header.html';?>
-<body>
-	<?php
-		include 'db_connection.php';
-		include 'db_credentials.php';
+if(isset($_SESSION["username"]))
+{
+include_once 'header.html';
+echo '<body>';
+	
+		include_once 'db_connection.php';
+		include_once 'db_credentials.php';
 
 	    $obj = new DB_connect();
-	    $conn = $obj->connect('localhost','php_project',$username,$password);
-	    $query = "SELECT firstname, lastname, email, username FROM users where user_reg_status = 0 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Teacher')";
+	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	    $query = "SELECT firstname, lastname, email, username FROM users where user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types where user_type = 'Teacher')";
 	    $result = $obj->select_records($query);
 	    echo "<br><br>";
 	    echo "<div class='container'>";
@@ -38,5 +39,11 @@ include 'header.html';?>
 
 	     	echo "</div></div>";
 	     } 
+	 }
+	 else
+	{
+		header("Location:index.php");
+	}
 	?>	
 </body>
+</html>

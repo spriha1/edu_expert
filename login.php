@@ -10,14 +10,14 @@
         $pass = MD5($_POST['password']);
 
         $obj = new DB_connect();
-        $conn = $obj->connect('localhost','php_project',$username,$password);
-        $query = "SELECT id,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1 limit 1";
+        $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+        $query = "SELECT id,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
         $result = $obj->select_records($query);
        
         foreach ($result as $key => $value) {
             
        
-            $query2 = 'SELECT user_type FROM type_of_user WHERE u_id = '.$value["user_type_id"];
+            $query2 = 'SELECT user_type FROM user_types WHERE id = '.$value["user_type_id"];
             $result2 = $obj->select_records($query2);
             foreach ($result2 as $key2 => $value2) {
                
@@ -25,9 +25,13 @@
                 if($result)
                 {
                     if ($value2["user_type"] == "Student") {
+                        session_start();
+                        $_SESSION['username'] = $uname;
                         header("Location:student_dashboard.php");
                     }
                     else if ($value2["user_type"] == "Teacher") {
+                        session_start();
+                        $_SESSION['username'] = $uname;
                         header("Location:teacher_dashboard.php");
                     }
                     else if ($value2["user_type"] == "Admin") {

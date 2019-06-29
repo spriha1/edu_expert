@@ -1,9 +1,9 @@
-<?php include 'header.html';?>
+<?php include_once 'header.html';?>
 <body>
 <?php 
-	include 'db_connection.php';
+	include_once 'db_connection.php';
     $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project','spriha','mindfire');
+    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
     
 	if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
 	    $email = $_GET['email'];

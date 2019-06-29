@@ -1,7 +1,8 @@
 <?php 
-session_start();
+	session_start();
 
-include 'header.html' ?>
+	include_once 'header.html' 
+?>
 <body>
 	<h1>TEACHER DASHBOARD</h1>
 </body>

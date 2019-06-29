@@ -10,21 +10,23 @@
 		$msg = "Please verify it by clicking the activation link that has been send to your email.";
 		$hash = md5(uniqid());
 
-		include 'db_connection.php';
-		include 'db_credentials.php';
+		include_once 'db_connection.php';
+		include_once 'db_credentials.php';
 
 	    $obj = new DB_connect();
-	    $conn = $obj->connect('localhost','php_project',$username,$password);
-	    $query = "SELECT u_id FROM type_of_user where user_type = '".$user_type."'";
+	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	    $query = "SELECT id FROM user_types where user_type = '".$user_type."'";
 	    $result = $obj->select_records($query);
 	    //echo $result['u_id'];
-		$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
-	    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$result['u_id']."')";
+	    foreach ($result as $key => $value) {
+			$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
+		    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
 
-	    $conn->exec($sql);
+		    $conn->exec($sql);
+	    }
 
-	    require '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-		require '/usr/share/php/libphp-phpmailer/class.smtp.php';
+	    require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+		require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 		$mail = new PHPMailer;
 		$mail->setFrom('spriha.mindfire@gmail.com');
 		$mail->addAddress(''.$email.'');
@@ -49,13 +51,12 @@
 		$mail->SMTPAuth = true;
 		$mail->Port = 465;
 
-		include 'mail_credentials.php';
+		include_once 'mail_credentials.php';
 		$mail->Username = $mail_username;
 
 		$mail->Password = $mail_password;
 		if(!$mail->send()) {
-		  echo 'Email is not sent.';
-		  echo 'Email error: ' . $mail->ErrorInfo;
+		  $msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
 		}
 								
 	}

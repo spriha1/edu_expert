@@ -1,19 +1,16 @@
 <?php
 	$servername = "localhost";
-	include 'db_credentials.php';
-    $conn = new PDO("mysql:host=$servername", $username, $password);
+	include_once 'db_credentials.php';
+    $conn = new PDO("mysql:host=$servername", $db_username, $db_password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "CREATE DATABASE IF NOT EXISTS php_project";
     $conn->exec($sql);
- 
-
-
 	include_once 'db_connection.php';
     $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project',$username,$password);
+    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 
-	$sql = "CREATE TABLE IF NOT EXISTS type_of_user (
-			u_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	$sql = "CREATE TABLE IF NOT EXISTS user_types (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			user_type VARCHAR(20)
 			
 		)";
@@ -30,8 +27,8 @@
 			user_reg_status TINYINT(1) NOT NULL DEFAULT '0',
 			user_type_id INT UNSIGNED,
 			CONSTRAINT test FOREIGN KEY (user_type_id)
-   			REFERENCES type_of_user(u_id) ,
-   			INDEX (email_verification_code,firstname,lastname)
+   			REFERENCES user_types(id) ,
+   			INDEX (email_verification_code,firstname,lastname,username)
 
 		)";
 	$conn->exec($sql);

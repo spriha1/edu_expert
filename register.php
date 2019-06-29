@@ -1,6 +1,6 @@
-<?php include 'header.html';?>
+<?php include_once 'header.html';?>
 	<body>
-		<?php include 'send_verification_mail.php';	?>
+		<?php include_once 'send_verification_mail.php';	?>
 		<div class="container" style="text-align: center">
 			<h1>Create Account </h1>
 			<p> <?php echo $msg; ?> </p>
