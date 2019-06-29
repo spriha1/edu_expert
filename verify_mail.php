@@ -2,6 +2,8 @@
 <body>
 <?php 
 	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
+
     $obj = new DB_connect();
     $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
     

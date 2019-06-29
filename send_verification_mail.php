@@ -27,6 +27,8 @@
 
 	    require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 		require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
+		//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
+
 		$mail = new PHPMailer;
 		$mail->setFrom('spriha.mindfire@gmail.com');
 		$mail->addAddress(''.$email.'');
