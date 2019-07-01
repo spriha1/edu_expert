@@ -11,7 +11,7 @@
 
         $obj = new DB_connect();
         $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-        $query = "SELECT id,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
+        $query = "SELECT id,firstname,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
         $result = $obj->select_records($query);
        
         foreach ($result as $key => $value) {
@@ -26,16 +26,19 @@
                 {
                     if ($value2["user_type"] == "Student") {
                         session_start();
+                        $_SESSION['firstname'] = $value['firstname'];
                         $_SESSION['username'] = $uname;
                         header("Location:student_dashboard.php");
                     }
                     else if ($value2["user_type"] == "Teacher") {
                         session_start();
+                        $_SESSION['firstname'] = $value['firstname'];
                         $_SESSION['username'] = $uname;
                         header("Location:teacher_dashboard.php");
                     }
                     else if ($value2["user_type"] == "Admin") {
                         session_start();
+                        $_SESSION['firstname'] = $value['firstname'];
                         $_SESSION['username'] = $uname;
                         header("Location:admin_dashboard.php");
                     }

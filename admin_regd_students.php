@@ -4,6 +4,7 @@
 	{
 		echo '<body>';
 		include_once 'header.html';
+		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
 
