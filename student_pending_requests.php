@@ -9,9 +9,9 @@
 	include_once 'db_credentials.php';
 
     $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project',$username,$password);
+    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 
-    $query = "SELECT firstname, lastname, email, username FROM users where user_reg_status = 0 AND user_type_id = (SELECT u_id FROM type_of_user where user_type = 'Student')";
+    $query = "SELECT firstname, lastname, email, username FROM users where user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types where user_type = 'Student')";
 	
     $result = $obj->select_records($query);
     echo "<div class='container'>";

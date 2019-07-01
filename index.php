@@ -5,6 +5,7 @@
 	    <input class="form-control mr-sm-2" id="username" name="username" type="text" placeholder="Enter Username">
 	    <input class="form-control mr-sm-2" id="password" name="password" type="password" placeholder="Enter Password">
 	    <button class="btn btn-success form-control mr-sm-2" type="submit">Login</button>
+	    <a href="forgot_password.php" style="padding: 15px" >Forgot Password?</a>
 	    <a href="register.php">Signup</a>
 	  </form>
 	</nav>

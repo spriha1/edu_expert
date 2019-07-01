@@ -10,10 +10,8 @@
 	if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
 	    $email = $_GET['email'];
 	    $hash = $_GET['hash'];
-	    $search = $conn->prepare("SELECT email, email_verification_code, email_verification_status FROM users WHERE email='".$email."' AND email_verification_code='".$hash."' AND email_verification_status='0'"); 
-	    $search->execute();
-    	$result = $search->setFetchMode(PDO::FETCH_ASSOC);
-    	$result = $search->fetchAll();
+	    $query = "SELECT email, email_verification_code, email_verification_status FROM users WHERE email='".$email."' AND email_verification_code='".$hash."' AND email_verification_status='0'";
+	    $result = $obj->select_records($query);
 	    if($result){
 	    	$sql = $conn->prepare("UPDATE users SET email_verification_status='1' WHERE email='".$email."' AND email_verification_code='".$hash."' AND email_verification_status=0");
 	    	$sql->execute();

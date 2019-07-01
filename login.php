@@ -4,8 +4,6 @@
     if(isset($_POST['username']) && !empty($_POST['username']) AND isset($_POST['password']) && !empty($_POST['password']))
     {
         $uname = $_POST['username'];
-        //echo $uname;
-        //exit();
 
         $pass = MD5($_POST['password']);
 

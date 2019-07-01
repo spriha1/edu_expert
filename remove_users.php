@@ -11,6 +11,7 @@ if(isset($_SESSION["username"]))
 	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 	    $sql = "DELETE FROM users WHERE username = '".$username."'";
 	    $conn->exec($sql);
+	    header("Location:admin_dashboard.php");
 	}
 }
 else
