@@ -3,13 +3,12 @@
 	if(isset($_POST['username']) && !empty($_POST['username']))
 	{
 		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$msg = "Please reset your password by clicking the activation link that has been sent to your email.";
+		$msg = "Please reset your password by clicking the link that has been sent to your email.";
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
 		$obj = new DB_connect();
 	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-	    $query = "SELECT email FROM users WHERE username = '".$username."'";
+	    $query = "SELECT id,email FROM users WHERE username = '".$username."'";
 	    $result = $obj->select_records($query);
 	    if ($result) {
 	    	foreach ($result as $key => $value) {
@@ -25,7 +24,7 @@
 				 
 				Please click this link to reset your passsword:
 				
-				http://php.project.com/reset_password.php?username='.$username.'&password='.$password.'
+				http://php.project.com/reset_password_form.php?q='.$value["id"].'
 				 ';
 				$mail->IsSMTP();
 				$mail->SMTPSecure = 'ssl';

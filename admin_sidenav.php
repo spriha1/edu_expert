@@ -9,6 +9,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <p style="font-size: 20px; color:#f1f1f1;">Welcome <?php echo $_SESSION['firstname'] ?></p>
+  <a href="profile.php">My Profile</a>
   <a href="admin_regd_students.php">Registered Students</a>
   <a href="admin_regd_teachers.php">Registered Teachers</a>
   <a href="student_pending_requests.php">Pending Requests of Students</a>
