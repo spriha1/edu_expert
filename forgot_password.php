@@ -1,4 +1,9 @@
-<?php include_once 'header.html';?>
+<?php 
+	session_start();
+	if (isset($_SESSION['username'])) {
+		session_unset();
+	}
+	include_once 'header.html';?>
 	<body>
 		<?php include_once 'send_password_mail.php';	?>
 		<br><br>
