@@ -1,31 +1,36 @@
-<?php include_once 'header.html';?>
-<body>
 <?php 
-	include_once 'db_connection.php';
-	include_once 'db_credentials.php';
+	session_start();
+	if (isset($_SESSION['username'])) {
+	
+		include_once 'db_connection.php';
+		include_once 'db_credentials.php';
 
-    $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-    
-	if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['username']) && !empty($_GET['username'])){
-	    $email = $_GET['email'];
-	    $username = $_GET['username'];
-	    $query = "SELECT id FROM users WHERE username='".$username."' AND email_verification_status=0";
-	    $result = $obj->select_records($query);
-	    if($result){
-	    	foreach ($result as $key => $value) {
-	    		$sql = $conn->prepare("UPDATE users SET email_verification_status=1 ,email = $email WHERE id=".$value['id']." AND email_verification_status=0");
-		    	$sql->execute();
-		        echo '<div>Your email has been updated, you can now <a href="index.php"> login</a></div>';
-	    	}
-	    	
-	    }else{
-	        echo '<div>The url is either invalid or you already have activated your account.</div>';
-	    }
-	                 
-	}else{
-	    echo '<div>Invalid approach, please use the link that has been send to your email.</div>';
+	    $obj = new DB_connect();
+	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	    
+		if(isset($_GET['q']) && !empty($_GET['q']) && isset($_GET['q1']) && !empty($_GET['q1'])){
+		    $hash = base64_decode($_GET['q']);
+		    $email = base64_decode($_GET['q1']);
+
+		    $query = "SELECT id FROM users WHERE email_verification_code='".$hash."' AND email_verification_status=0";
+		    $result = $obj->select_records($query);
+		    if($result){
+		    	foreach ($result as $key => $value) {
+		    		$sql = $conn->prepare("UPDATE users SET email_verification_status=1 ,email = '".$email ."' WHERE id=".$value['id']." AND email_verification_status=0");
+			    	$sql->execute();
+			        echo '<div>Your email has been updated, you can continue <a href="edit_profile.php"> here</a></div>';
+		    	}
+		    	
+		    }else{
+		        echo '<div>The url is either invalid or you already have activated your account.</div>';
+		    }
+		                 
+		}else{
+		    echo '<div>Invalid approach, please use the link that has been send to your email.</div>';
+		}
+	}
+	else
+	{
+		header("Location:index.php");
 	}
  ?>
-</body>
-</html>

@@ -7,8 +7,8 @@
     $obj = new DB_connect();
     $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
     
-	if(isset($_GET['hash']) && !empty($_GET['hash'])){
-	    $hash = base64_decode($_GET['hash']);
+	if(isset($_GET['q']) && !empty($_GET['q'])){
+	    $hash = base64_decode($_GET['q']);
 	    $query = "SELECT email, email_verification_code, email_verification_status FROM users WHERE email_verification_code='".$hash."' AND email_verification_status='0'";
 	    $result = $obj->select_records($query);
 	    if($result){

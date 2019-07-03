@@ -54,7 +54,7 @@
 					 
 					Please click this link to activate your account:
 					
-					http://php.project.com/verify_mail.php?hash='.base64_encode($hash).'
+					http://php.project.com/verify_mail.php?q='.base64_encode($hash).'
 					 ';
 					$mail->IsSMTP();
 					$mail->SMTPSecure = 'ssl';

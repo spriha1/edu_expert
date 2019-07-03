@@ -2,6 +2,7 @@
 	session_start();
 	if(isset($_SESSION["username"]))
 	{
+		$msg = "";
 		include_once 'header.html';
 		echo '<body>';
 		include_once 'admin_sidenav.php';
@@ -9,7 +10,7 @@
 		
 		echo '<div class="container" style="text-align: center">
 			<h1>Edit Your Personal Information </h1>
-			<p> <?php echo $msg; ?> </p>
+			<p> '.$msg.'</p>
 			<div class="card bg-secondary mx-auto" style="width: 50%">
     			<div class="card-body">
 					<form method="POST" action="">
@@ -31,7 +32,6 @@
 					    <div class="form-group">
 					    	<button type="submit" class="btn btn-success">Update</button>
 					    </div>
-					    <p>Already have an account? <a href="index.php" style="color: #000000">Log In</a></p> 
 					</form>
 				</div>
 			</div>

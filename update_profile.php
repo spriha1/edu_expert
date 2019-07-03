@@ -34,6 +34,12 @@
 			}
 			else
 			{
+				$msg = "Please verify it by clicking the activation link that has been send to your email.";
+				$query = "SELECT email_verification_code FROM users WHERE username = '".$_SESSION['username']."'";
+				$result = $obj->select_records($query);
+				foreach ($result as $key => $value) {
+					$hash = $value['email_verification_code'];
+				}
 				$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
 				$stmt = $conn->prepare($query);
 				$stmt->execute();
@@ -50,7 +56,7 @@
 				 
 				Please click this link to update your email:
 				
-				http://php.project.com/update_mail.php?email='.$_POST['email'].'&username='.$_SESSION['username'].'
+				http://php.project.com/update_mail.php?q='.base64_encode($hash).'&q1='.base64_encode($_POST['email']).'
 				 
 				 ';
 				$mail->IsSMTP();
