@@ -22,6 +22,7 @@
 			email VARCHAR(50) NOT NULL UNIQUE,
 			username VARCHAR(50) NOT NULL UNIQUE,
 			password VARCHAR(50) NOT NULL,
+			token VARCHAR(50),
 			email_verification_code VARCHAR(32) ,
 			email_verification_status TINYINT(1) NOT NULL DEFAULT '0',
 			user_reg_status TINYINT(1) NOT NULL DEFAULT '0',
