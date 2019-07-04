@@ -1,6 +1,10 @@
 body {
   font-family: "Lato", sans-serif;
 }
+ .body1 {
+  background-image: linear-gradient(black, white); 
+  background-repeat: no-repeat;
+ }
 
 .sidenav {
   height: 100%;

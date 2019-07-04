@@ -2,7 +2,7 @@
 	session_start();
 	if(isset($_SESSION["username"]))
 	{
-		echo '<body>';
+		echo '<body class="body1">';
 		include_once 'header.html';
 		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
@@ -17,7 +17,7 @@
 	    echo "<div class='container'>";
 	    echo "<div class='card-columns'>";
 	    foreach ($result as $key => $value) {
-	     	echo "<div class='card bg-secondary'>";
+	     	echo "<div class='card bg-light'>";
 	     	echo "<div class='card-body text-center'>";
 	     	echo '<form>
 					    <div class="form-group">
@@ -32,11 +32,11 @@
 					    <div class="form-group">
 					      Email:<input type="text" class="form-control" value="'.$value["email"].'">
 					    </div>
+					    <div class="form-group">
+					      <a href="remove_users.php?username='.$value["username"].'"><button class="btn btn-success">Remove</button></a>
+					      <a href="block_users.php?username='.$value["username"].'"><button class="btn btn-success">Block</button></a>
+					    </div>
 					    </form>';
-			
-			echo '<a href="remove_users.php?username='.$value["username"].'"><button>Remove</button></a>';
-			echo '<a href="block_users.php?username='.$value["username"].'"><button>Block</button></a>';
-
 	     	echo "</div></div>";
 	     } 
 	 }

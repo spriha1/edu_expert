@@ -3,7 +3,7 @@
 	if(isset($_SESSION["username"]))
 	{
 	include_once 'header.html';
-	echo '<body>';
+	echo '<body class="body1">';
 	include_once 'admin_sidenav.php';
 	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
@@ -17,7 +17,7 @@
     echo "<div class='container'>";
     echo "<div class='card-columns'>";
     foreach ($result as $key => $value) {
-     	echo "<div class='card bg-secondary'>";
+     	echo "<div class='card bg-light'>";
      	echo "<div class='card-body text-center'>";
      	echo '<form>
 				    <div class="form-group">
@@ -32,12 +32,13 @@
 				    <div class="form-group">
 				      Email:<input type="text" class="form-control" value="'.$value["email"].'">
 				    </div>
+				    <div class="form-group">
+				      <a href="add_users.php?username='.$value["username"].'"><button class="btn btn-success">Accept</button></a>
+				      <a href="remove_users.php?username='.$value["username"].'"><button class="btn btn-success">Reject</button></a>
+				      <a href="block_users.php?username='.$value["username"].'"><button class="btn btn-success">Block</button></a>
+				    </div>
 
 				    </form>';
-		echo '<a href="add_users.php?username='.$value["username"].'"><button>Accept</button></a>';
-		echo '<a href="remove_users.php?username='.$value["username"].'"><button>Reject</button></a>';
-		echo '<a href="block_users.php?username='.$value["username"].'"><button>Block</button></a>';
-
      	echo "</div></div>";
 	} 
 }

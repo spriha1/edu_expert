@@ -4,14 +4,17 @@
 	{
 		$msg = "";
 		include_once 'header.html';
-		echo '<body>';
+		echo '<body class="body1">';
 		include_once 'admin_sidenav.php';
 		include_once 'update_profile.php'; 
 		
 		echo '<div class="container" style="text-align: center">
-			<h1>Edit Your Personal Information </h1>
+			
 			<p> '.$msg.'</p>
-			<div class="card bg-secondary mx-auto" style="width: 50%">
+			<div class="card bg-light mx-auto" style="width: 50%">
+				<div class="card-header">
+					<h3>Edit Your Personal Information</h3>
+				</div>
     			<div class="card-body">
 					<form method="POST" action="">
 					    <div class="form-group">

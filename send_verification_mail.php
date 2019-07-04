@@ -1,7 +1,14 @@
 <?php
-	$msg = "";
-	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password'])){
-		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']))
+	$username_msg = "";
+	$firstname_msg = "";
+	$lastname_msg = "";
+	$email_msg = "";
+	$password_msg = "";
+	$user_type_msg = "";
+
+	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type'])){
+
+		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']))
 		{
 			$user_name = $_POST['username'];
 			$email = $_POST['email'];
@@ -83,7 +90,24 @@
 		}
 		else
 		{
-			$msg = "Please fill in all the details";
+			if (empty($_POST['username'])) {
+				$username_msg = "Please enter the username";
+			}
+			if (empty($_POST['fname'])) {
+				$firstname_msg = "Please enter your first name";
+			}
+			if (empty($_POST['lname'])) {
+				$lastname_msg = "Please enter your last name";
+			}
+			if (empty($_POST['password'])) {
+				$password_msg = "Please enter the password";
+			}
+			if (empty($_POST['email'])) {
+				$email_msg = "Please enter an email";
+			}
+			if (empty($_POST['user_type'])) {
+				$user_type_msg = "Please select a user type";
+			}
 		}						
 	}
 	
