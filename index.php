@@ -27,7 +27,7 @@
 	<div class="container" style="text-align: center">
 		<br>
 		<br>
-		<div class="card bg-light mx-auto" style="width: 30%">
+		<div class="card bg-light mx-auto responsive">
 			<div class="card-header">
 				<h3>Sign In</h3>
 			</div>

@@ -11,7 +11,7 @@
 		echo '<div class="container" style="text-align: center">
 			
 			<p> '.$msg.'</p>
-			<div class="card bg-light mx-auto" style="width: 50%">
+			<div class="card responsive bg-light mx-auto">
 				<div class="card-header">
 					<h3>Edit Your Personal Information</h3>
 				</div>

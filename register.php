@@ -27,7 +27,7 @@
 	<div class="container">
 		<br><br>
 	<div class="d-flex justify-content-center">
-		<div class="card bg-light" style="width: 30%">
+		<div class="card bg-light responsive">
 			<div class="card-header" style="text-align: center;">
 				<h4>Create Account </h4>
 				<p style="color: #ff0000;"> <?php echo $msg; ?> </p>
@@ -86,8 +86,17 @@
 						</div>
 						<select class="form-control" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>
-					        <option value="Teacher">Teacher</option>
-					        <option value="Student">Student</option>
+					        <?php 
+								include_once 'db_credentials.php';
+								include_once 'db_connection.php';
+								$obj = new DB_connect();
+	            				$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	            				$query = "SELECT user_type FROM user_types";
+	            				$result = $obj->select_records($query);
+	            				foreach ($result as $key => $value) {
+	            					echo '<option value="'.$value['user_type'].'">'.$value['user_type'].'</option>';
+	            				}
+							?>
 				      	</select>
 					</div>
 					<div style="text-align: center;">

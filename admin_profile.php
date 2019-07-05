@@ -15,7 +15,7 @@
 	    $result = $obj->select_records($query);
 	    echo "<br><br>";
 	    echo "<div class='container'>";
-	    echo "<div class='card-columns'>";
+	    echo "<div class='card responsive mx-auto'>";
 	    foreach ($result as $key => $value) {
 	     	echo "<div class='card bg-light'>";
 	     	echo "<div class='card-body text-center'>";

@@ -25,7 +25,7 @@
 		<?php include_once 'send_password_mail.php';	?>
 		<br><br>
 		<div class="container" style="text-align: center">
-			<div class="card bg-light mx-auto" style="width: 30%">
+			<div class="card bg-light responsive mx-auto">
     			<div class="card-header">
     				<h3>Forgot Password ? </h3>
 					<p style="color : #ff0000"> <?php echo $msg; ?> </p>
