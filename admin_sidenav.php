@@ -4,10 +4,9 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <p style="font-size: 20px; color:#f1f1f1;">Welcome <?php echo $_SESSION['firstname'] ?></p>
   <a href="admin_profile.php">My Profile</a>
-  <a href="admin_regd_students.php">Registered Students</a>
-  <a href="admin_regd_teachers.php">Registered Teachers</a>
-  <a href="student_pending_requests.php">Pending Requests of Students</a>
-  <a href="teacher_pending_requests.php">Pending Requests of Teachers</a>
+  <a href="pending_requests.php">Pending Requests</a>
+  <a href="regd_users.php">Registered Users</a>
+
   <a href="logout.php">Logout</a>
 </div>
 <span style="font-size:30px;cursor:pointer;color: #ffffff" onclick="openNav()">&#9776; </span>
