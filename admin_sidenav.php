@@ -6,13 +6,9 @@
   <a href="admin_profile.php">My Profile</a>
   <a href="pending_requests.php">Pending Requests</a>
   <a href="regd_users.php">Registered Users</a>
-
   <a href="logout.php">Logout</a>
 </div>
 <span style="font-size:30px;cursor:pointer;color: #ffffff" onclick="openNav()">&#9776; </span>
-
-<script src="sidenav.js">
-</script>
-   
+<script src="sidenav.js"></script>
 </body>
 </html> 

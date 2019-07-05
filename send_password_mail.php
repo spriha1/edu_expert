@@ -14,9 +14,8 @@
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
-			    $sql = "UPDATE users SET token = '".uniqid()."' WHERE username = '".$username."'";
-			    $stmt = $conn->prepare($sql);
-			    $stmt->execute();
+			    $query = "UPDATE users SET token = '".uniqid()."' WHERE username = '".$username."'";
+			    $obj->update($query);
 			    $query = "SELECT token,email FROM users WHERE username = '".$username."'";
 			    $result = $obj->select_records($query);
 			   

@@ -7,12 +7,11 @@
 		include_once 'teacher_sidenav.php';
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
-
 	    $obj = new DB_connect();
 	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 	    $query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
-
 	    $result = $obj->select_records($query);
+	    
 	    echo "<br><br>";
 	    echo "<div class='container'>";
 	    echo "<div class='card mx-auto responsive'>";

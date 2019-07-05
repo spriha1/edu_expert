@@ -1,6 +1,5 @@
 <?php 
 	session_start();
-
 	if(isset($_SESSION["username"]) && isset($_SESSION['firstname']))
 	{
 		include_once 'teacher_sidenav.php';

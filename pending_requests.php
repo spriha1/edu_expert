@@ -7,15 +7,14 @@
 		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
-
+		$obj = new DB_connect();
+		$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
+		$result = $obj->select_records($query);
 	    echo '<nav class="navbar navbar-transparent justify-content-center">
 				  <form class="form-inline" method="POST" action="">
 				    <select class="form-control" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>';
-								$obj = new DB_connect();
-	            				$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-	            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
-	            				$result = $obj->select_records($query);
 	            				foreach ($result as $key => $value) {
 	            					echo '<option value="'.$value['user_type'].'">'.$value['user_type'].'</option>';
 	            				}

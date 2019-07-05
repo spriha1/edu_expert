@@ -10,20 +10,17 @@
 		if(isset($_POST['fname']) && !empty($_POST['fname']))
 		{
 			$query = "UPDATE users SET firstname = '".$_POST['fname']."' WHERE username = '".$_SESSION['username']."'";
-			$stmt = $conn->prepare($query);
-			$stmt->execute();
+			$obj->update($query);
 		}
 		if(isset($_POST['lname']) && !empty($_POST['lname']))
 		{
 			$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
-			$stmt = $conn->prepare($query);
-			$stmt->execute();
+			$obj->update($query);
 		}
 		if(isset($_POST['password']) && !empty($_POST['password']))
 		{
 			$query = "UPDATE users SET password = '".md5($_POST['password'])."' WHERE username = '".$_SESSION['username']."'";
-			$stmt = $conn->prepare($query);
-			$stmt->execute();
+			$obj->update($query);
 		}
 		if(isset($_POST['email']) && !empty($_POST['email']))
 		{
@@ -41,8 +38,7 @@
 					$hash = $value['email_verification_code'];
 				}
 				$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
-				$stmt = $conn->prepare($query);
-				$stmt->execute();
+				$obj->update($query);
 
 				require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 				require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
@@ -85,8 +81,7 @@
 			else
 			{
 				$query = "UPDATE users SET username = '".$_POST['username']."' WHERE username = '".$_SESSION['username']."'";
-				$stmt = $conn->prepare($query);
-				$stmt->execute();
+				$obj->update($query);
 			}
 			header("Location:logout.php");
 			

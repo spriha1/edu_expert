@@ -15,6 +15,7 @@
 			
 		)";
 	$conn->exec($sql);
+	
 	$sql = "CREATE TABLE IF NOT EXISTS users (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			firstname VARCHAR(20),
@@ -33,7 +34,4 @@
 
 		)";
 	$conn->exec($sql);
-
-	
-	   		  
 ?>

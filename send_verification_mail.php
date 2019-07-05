@@ -37,7 +37,6 @@
 				    foreach ($result as $key => $value) {
 						$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
 					    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
-
 					    $conn->exec($sql);
 				    }
 

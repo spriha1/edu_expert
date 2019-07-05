@@ -16,5 +16,10 @@
 		    $result = $sql->fetchAll();
 		    return $result;
 		}
+		function update($query)
+		{
+			$sql = $this->conn->prepare($query);
+		    $sql->execute();
+		}
 	}
  ?>

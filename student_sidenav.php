@@ -7,9 +7,7 @@
   <a href="logout.php">Logout</a>
 </div>
 <span style="font-size:30px;cursor:pointer;color: #ffffff" onclick="openNav()">&#9776; </span>
-
 <script src="sidenav.js">
 </script>
-   
 </body>
 </html> 
