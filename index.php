@@ -8,6 +8,8 @@
 	<div class="container" style="text-align: center">
 		<br>
 		<br>
+		<div class="row h-100">
+   		<div class="col-sm-12 my-auto">
 		<div class="card bg-light mx-auto responsive">
 			<div class="card-header">
 				<h3>Sign In</h3>
@@ -40,7 +42,7 @@
 		    	<a href="forgot_password.php" style="padding: 15px" >Forgot Password?</a>
 		    	<a href="register.php">Signup</a>
     		</div>
-    	<div>
+    	<div></div></div>
     </div>
 	<?php include_once 'db_tables_creation.php'; ?>
 </body>

@@ -27,6 +27,7 @@
 			email_verification_code VARCHAR(32) ,
 			email_verification_status TINYINT(1) NOT NULL DEFAULT '0',
 			user_reg_status TINYINT(1) NOT NULL DEFAULT '0',
+			block_status TINYINT(1) NOT NULL DEFAULT '0',
 			user_type_id INT UNSIGNED,
 			CONSTRAINT test FOREIGN KEY (user_type_id)
    			REFERENCES user_types(id) ,

@@ -72,7 +72,7 @@
 								include_once 'db_connection.php';
 								$obj = new DB_connect();
 	            				$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-	            				$query = "SELECT user_type FROM user_types";
+	            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 	            				$result = $obj->select_records($query);
 	            				foreach ($result as $key => $value) {
 	            					echo '<option value="'.$value['user_type'].'">'.$value['user_type'].'</option>';

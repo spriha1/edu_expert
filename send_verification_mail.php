@@ -24,7 +24,7 @@
 
 		    $obj = new DB_connect();
 		    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-		    $query = "SELECT id FROM users WHERE email = '".$email."'";
+		    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
 		    $result = $obj->select_records($query);
 		    if(!$result)
 		    {
@@ -84,7 +84,16 @@
 
 			else
 			{
-				$msg = "Email already exists";
+				foreach ($result as $key => $value) {
+					if($value['block_status']==1)
+					{
+						$msg = "This user has been blocked by the admin";
+					}
+					else
+					{
+						$msg = "Email already exists";
+					}
+				}
 			}    
 		}
 		else
