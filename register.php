@@ -4,7 +4,14 @@
 	include_once 'header.html';
 ?>
 <body class="body1">
-	<?php include_once 'send_verification_mail.php'; ?>
+	<?php 
+		include_once 'send_verification_mail.php';
+		$tooltip_msg = "The password : 
+		Must be a minimum of 8 characters
+		Must contain at least 1 number
+		Must contain at least one uppercase character
+		Must contain at least one lowercase character";
+	 ?>
 	<div class="container">
 		<br><br>
 	<div class="d-flex justify-content-center">
@@ -47,7 +54,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
+						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $username_msg; ?> </p>
@@ -56,7 +63,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+						<input type="password" class="form-control" id="password" data-toggle="tooltip" title="<?php echo $tooltip_msg; ?>" placeholder="Enter Password" name="password">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $password_msg; ?> </p>

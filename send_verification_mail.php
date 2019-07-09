@@ -10,91 +10,129 @@
 
 		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']))
 		{
-			$user_name = $_POST['username'];
-			$email = $_POST['email'];
-			$firstname = $_POST['fname'];
-			$lastname = $_POST['lname'];
-			$pass = MD5($_POST['password']);
+			include_once 'validate_input.php';
+
+			$user_name = Validation::test_input($_POST['username']);
+			$email = Validation::test_input($_POST['email']);
+			$firstname = Validation::test_input($_POST['fname']);
+			$lastname = Validation::test_input($_POST['lname']);
+			$password = Validation::test_input($_POST['password']);
+			$pass = MD5($password);
 			$user_type = $_POST['user_type'];
-			$msg = "Please verify it by clicking the activation link that has been send to your email.";
 			$hash = md5(uniqid());
 
-			include_once 'db_connection.php';
-			include_once 'db_credentials.php';
+			$fname_test = Validation::validate_name($firstname);
+			$lname_test = Validation::validate_name($lastname);
+			$username_test = Validation::validate_username($user_name);
+			$email_test = Validation::validate_name($email);
+			$password_test = Validation::validate_password($password);
 
-		    $obj = new DB_connect();
-		    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
-		    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
-		    $result = $obj->select_records($query);
-		    if(!$result)
-		    {
-		    	$query = "SELECT id FROM users WHERE username = '".$user_name."'";
-		    	$result = $obj->select_records($query);
-		    	if(!$result)
-		    	{
-		    		$query = "SELECT id FROM user_types where user_type = '".$user_type."'";
-				    $result = $obj->select_records($query);
-				    foreach ($result as $key => $value) {
-						$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
-					    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
-					    $conn->exec($sql);
-				    }
-
-				    require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-					require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
-					//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
-
-					$mail = new PHPMailer;
-					$mail->setFrom('spriha.mindfire@gmail.com');
-					$mail->addAddress(''.$email.'');
-					$mail->Subject = 'Signup | Verification';
-					$mail->Body = '
-					 
-					Thanks for signing up!
-					Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-					 
-					------------------------
-					Username: '.$user_name.'
-					Password: '.$pass.'
-					------------------------
-					 
-					Please click this link to activate your account:
-					
-					http://php.project.com/verify_mail.php?q='.base64_encode($hash).'
-					 ';
-					$mail->IsSMTP();
-					$mail->SMTPSecure = 'ssl';
-					$mail->Host = 'ssl://smtp.gmail.com';
-					$mail->SMTPAuth = true;
-					$mail->Port = 465;
-
-					include_once 'mail_credentials.php';
-					$mail->Username = $mail_username;
-
-					$mail->Password = $mail_password;
-					if(!$mail->send()) {
-					  $msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
-					}
-		    	}
-		    	else
-		    	{
-		    		$msg = "Username already exists";
-		    	}
-		    }
-
-			else
+			if($fname_test && $lname_test && $username_test && $email_test && $password_test)
 			{
-				foreach ($result as $key => $value) {
-					if($value['block_status']==1)
-					{
-						$msg = "This user has been blocked by the admin";
-					}
-					else
-					{
-						$msg = "Email already exists";
+				include_once 'db_connection.php';
+				include_once 'db_credentials.php';
+
+			    $obj = new DB_connect();
+			    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+			    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
+			    $result = $obj->select_records($query);
+			    if(!$result)
+			    {
+			    	$query = "SELECT id FROM users WHERE username = '".$user_name."'";
+			    	$result = $obj->select_records($query);
+			    	if(!$result)
+			    	{
+			    		$query = "SELECT id FROM user_types where user_type = '".$user_type."'";
+					    $result = $obj->select_records($query);
+					    foreach ($result as $key => $value) {
+							$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
+						    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
+						    $conn->exec($sql);
+					    }
+
+					    require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+						require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
+						//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
+
+						$mail = new PHPMailer;
+						$mail->setFrom('spriha.mindfire@gmail.com');
+						$mail->addAddress(''.$email.'');
+						$mail->Subject = 'Signup | Verification';
+						$mail->Body = '
+						 
+						Thanks for signing up!
+						Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+						 
+						------------------------
+						Username: '.$user_name.'
+						Password: '.$pass.'
+						------------------------
+						 
+						Please click this link to activate your account:
+						
+						http://php.project.com/verify_mail.php?q='.base64_encode($hash).'
+						 ';
+						$mail->IsSMTP();
+						$mail->SMTPSecure = 'ssl';
+						$mail->Host = 'ssl://smtp.gmail.com';
+						$mail->SMTPAuth = true;
+						$mail->Port = 465;
+
+						include_once 'mail_credentials.php';
+						$mail->Username = $mail_username;
+
+						$mail->Password = $mail_password;
+						if(!$mail->send()) {
+						  $msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
+						}
+						else
+						{
+							$msg = "Please verify it by clicking the activation link that has been send to your email.";
+						}
+			    	}
+			    	else
+			    	{
+			    		$msg = "Username already exists";
+			    	}
+			    }
+
+				else
+				{
+					foreach ($result as $key => $value) {
+						if($value['block_status']==1)
+						{
+							$msg = "This user has been blocked by the admin";
+						}
+						else
+						{
+							$msg = "Email already exists";
+						}
 					}
 				}
-			}    
+			}
+			else
+			{
+				if(!$fname_test)
+				{
+					$firstname_msg = "Invalid name format";
+				}
+				if(!$lname_test)
+				{
+					$lastname_msg = "Invalid name format";
+				}
+				if(!$username_test)
+				{
+					$username_msg = "Invalid username format";
+				}
+				if(!$email_test)
+				{
+					$email_msg = "Invalid email format";
+				}
+				if(!$password_test)
+				{
+					$password_msg = "Invalid password format";
+				}
+			} 
 		}
 		else
 		{

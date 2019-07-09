@@ -6,11 +6,16 @@
 		include_once 'header.html';
 		echo '<body class="body1">';
 		include_once 'admin_sidenav.php';
-		include_once 'update_profile.php'; 
+		include_once 'update_profile.php';
+		$tooltip_msg = "The password : 
+		Must be a minimum of 8 characters
+		Must contain at least 1 number
+		Must contain at least one uppercase character
+		Must contain at least one lowercase character"; 
 		
 		echo '<div class="container" style="text-align: center">
 			
-			<p> '.$msg.'</p>
+			<p style="color: #ff0000;"> '.$msg.'</p>
 			<div class="card responsive bg-light mx-auto">
 				<div class="card-header">
 					<h3>Edit Your Personal Information</h3>
@@ -20,18 +25,33 @@
 					    <div class="form-group">
 					      <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
 					    </div>
+					    <div style="text-align: center;">
+							<p style="color: #ff0000;">'.$firstname_msg.'</p>	
+						</div>
 					    <div class="form-group">
 					      <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
 					    </div>
+					     <div style="text-align: center;">
+							<p style="color: #ff0000;">'.$lastname_msg.'</p>	
+						</div>
 					    <div class="form-group">
 					      <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
 					    </div>
+					     <div style="text-align: center;">
+							<p style="color: #ff0000;">'.$email_msg.'</p>	
+						</div>
 					    <div class="form-group">
-					      <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
+					      <input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
 					    </div>
+					     <div style="text-align: center;">
+							<p style="color: #ff0000;">'.$username_msg.'</p>	
+						</div>
 					    <div class="form-group">
-					      <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+					      <input type="password" class="form-control" id="password" data-toggle="tooltip" title="'.$tooltip_msg.'" placeholder="Enter Password" name="password">
 					    </div>
+					     <div style="text-align: center;">
+							<p style="color: #ff0000;">'.$fpassword_msg.'</p>	
+						</div>
 					    <div class="form-group">
 					    	<button type="submit" class="btn btn-success">Update</button>
 					    </div>

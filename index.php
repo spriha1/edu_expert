@@ -2,7 +2,8 @@
 	session_start();
 	include_once 'check_login_status.php';
 	include_once 'header.html';
-	include_once 'login.php'; 
+	require_once 'csrf_token.php'; 
+	include_once 'login.php';
 ?>
 <body class="body1">
 	<div class="container" style="text-align: center">
@@ -35,6 +36,7 @@
 		    	    <div>
 				  		<p style="color:#ff0000;"><?php echo $password_msg; ?></p>
 				  	</div>
+				  	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 		    	    <button class="btn btn-success form-control" type="submit">Login</button>
 		    	   
 		    	</form>

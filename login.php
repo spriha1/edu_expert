@@ -9,6 +9,8 @@
     {
         if(!empty($_POST['username']) AND !empty($_POST['password']))
         {
+            if(Token::check($_POST['token']))
+            {
             $uname = $_POST['username'];
 
             $pass = MD5($_POST['password']);
@@ -60,7 +62,7 @@
                 if (!$result2) {
                     $password_msg = "Incorrect Password";
                 }
-            }
+            }}
         }
         else
         {
