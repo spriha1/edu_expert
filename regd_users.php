@@ -80,8 +80,57 @@
 			}
 		}
 
-		if (isset($_POST['search'])) {
-			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND firstname LIKE '%".$_POST['search']."%'";
+		else if (isset($_POST['search'])) {
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%'";
+
+			// print($query);
+			// exit();
+		    $result = $obj->select_records($query);
+		    if($result)
+		    {
+		    	include_once 'pagination.php';
+			    echo "<br><br>";
+			    echo "<div class='container'>";
+			    echo '<div class="table-responsive">
+							<table class="table table-bordered" align="center" style="width:90%">
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Username</th>
+									<th>Email</th>
+									<th></th>
+									<th></th>
+								</tr>';
+			    foreach ($res as $key => $value) {
+			     	echo '<tr>
+									<td>'.$value['firstname'].'</td>
+									<td>'.$value['lastname'].'</td>
+									<td>'.$value['username'].'</td>
+									<td>'.$value['email'].'</td>
+									<td><a href="remove_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Remove</button></a></td>';
+									if($value['block_status']==0){
+										echo '<td><a href="block_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Block</button></a></td>
+								</tr>';
+							}
+								else if($value['block_status']==1)
+								{
+									echo '<td><a href="unblock_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Unblock</button></a></td>
+								</tr>';
+								}
+			    } 
+			    echo '</table></div>';
+			}
+			else
+			{
+				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record for the selected user</h4></div>';
+			}
+		}
+
+		else if (isset($_GET['s'])) {
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_GET['s']."%'";
+
+			// print($query);
+			// exit();
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
