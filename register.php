@@ -2,6 +2,7 @@
 	session_start();
 	include_once 'check_login_status.php';
 	include_once 'header.html';
+	require_once 'csrf_token.php'; 
 ?>
 <body class="body1">
 	<?php 
@@ -91,6 +92,7 @@
 						<p style="color: #ff0000;"> <?php echo $user_type_msg; ?> </p>
 					</div>
 					<div class="form-group">
+						<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 				    	<button type="submit" class="btn btn-success btn-block">Register</button>
 				    </div>
 				</form>

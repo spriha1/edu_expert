@@ -1,18 +1,20 @@
 <?php 
 	 
-	
-		$msg = "";
-		$username_msg = "";
-		$firstname_msg = "";
-		$lastname_msg = "";
-		$email_msg = "";
-		$password_msg = "";
-		include_once 'db_connection.php';
-		include_once 'db_credentials.php';
-		include_once 'validate_input.php';
 
-	    $obj = new DB_connect();
-	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	$msg = "";
+	$username_msg = "";
+	$firstname_msg = "";
+	$lastname_msg = "";
+	$email_msg = "";
+	$password_msg = "";
+	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
+	include_once 'validate_input.php';
+
+    $obj = new DB_connect();
+    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+    if(Token::check($_POST['token']))
+    {
 		if(isset($_POST['fname']) && !empty($_POST['fname']))
 		{
 			$firstname = Validation::test_input($_POST['fname']);
@@ -139,5 +141,9 @@
 			}
 			
 		}
-	
+	}
+	else
+	{
+		header("Location:index.php");
+	}
  ?>

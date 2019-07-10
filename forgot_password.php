@@ -2,6 +2,7 @@
 	session_start();
 	include_once 'check_login_status.php';
 	include_once 'header.html';
+	require_once 'csrf_token.php';
 ?>
 	<body class="body1">
 		<?php include_once 'send_password_mail.php';	?>
@@ -21,6 +22,7 @@
 					      	<input type="text" class="form-control" id="username" placeholder="Enter Your Username" name="username">
 					  	</div>
 					    <div class="form-group">
+					    	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 					    	<button type="submit" class="btn btn-success">Reset Password</button>
 					    	<button formaction="index.php" class="btn btn-success">Go Back</button>
 					    </div>
@@ -28,6 +30,5 @@
 				</div>
 			</div>
 		</div>
-
 	</body>
 </html>

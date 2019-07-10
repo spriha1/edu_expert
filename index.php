@@ -38,7 +38,6 @@
 				  	</div>
 				  	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 		    	    <button class="btn btn-success form-control" type="submit">Login</button>
-		    	   
 		    	</form>
 		    	<br>
 		    	<a href="forgot_password.php" style="padding: 15px" >Forgot Password?</a>

@@ -7,6 +7,10 @@
 		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
+
+		require_once 'csrf_token.php';
+		$token  = Token::generate();
+
 		$obj = new DB_connect();
 		$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
@@ -48,14 +52,14 @@
 									<td>'.$value['lastname'].'</td>
 									<td>'.$value['username'].'</td>
 									<td>'.$value['email'].'</td>
-									<td><a href="remove_users.php?username='.$value["username"].'"><button class="btn btn-success">Remove</button></a></td>';
+									<td><a href="remove_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Remove</button></a></td>';
 									if($value['block_status']==0){
-										echo '<td><a href="block_users.php?username='.$value["username"].'"><button class="btn btn-success">Block</button></a></td>
+										echo '<td><a href="block_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Block</button></a></td>
 								</tr>';
 							}
 								else if($value['block_status']==1)
 								{
-									echo '<td><a href="unblock_users.php?username='.$value["username"].'"><button class="btn btn-success">Unblock</button></a></td>
+									echo '<td><a href="unblock_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Unblock</button></a></td>
 								</tr>';
 								}
 			    } 
@@ -84,27 +88,25 @@
 									<th>Email</th>
 									<th></th>
 									<th></th>
-									<th></th>
 								</tr>';
 			    foreach ($result as $key => $value) {
 			     	echo '<tr>
-								<td>'.$value['firstname'].'</td>
-								<td>'.$value['lastname'].'</td>
-								<td>'.$value['username'].'</td>
-								<td>'.$value['email'].'</td>
-								<td><a href="add_users.php?username='.$value["username"].'"><button class="btn btn-success">Accept</button></a></td>
-								<td><a href="remove_users.php?username='.$value["username"].'"><button class="btn btn-success">Reject</button></a></td>';
+						<td>'.$value['firstname'].'</td>
+						<td>'.$value['lastname'].'</td>
+						<td>'.$value['username'].'</td>
+						<td>'.$value['email'].'</td>
+						<td><a href="remove_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Remove</button></a></td>';
 
-								if($value['block_status']==0){
-									echo '<td><a href="block_users.php?username='.$value["username"].'"><button class="btn btn-success">Block</button></a></td>
-									</tr>';
-								}
-							else if($value['block_status']==1)
-							{
-								echo '<td><a href="unblock_users.php?username='.$value["username"].'"><button class="btn btn-success">Unblock</button></a></td>
-								</tr>';
-							}
-			    } 
+						if($value['block_status']==0){
+							echo '<td><a href="block_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Block</button></a></td>
+							</tr>';
+						}
+						else if($value['block_status']==1)
+						{
+							echo '<td><a href="unblock_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Unblock</button></a></td>
+							</tr>';
+						}
+		    	} 
 			    echo '</table></div>';
 			}
 

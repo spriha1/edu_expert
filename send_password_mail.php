@@ -2,7 +2,7 @@
 	$msg = "";
 	if(isset($_POST['username']))
 	{
-		if(!empty($_POST['username']))
+		if(!empty($_POST['username']) && Token::check($_POST['token']))
 		{
 			$username = $_POST['username'];
 			$msg = "Please reset your password by clicking the link that has been sent to your email.";

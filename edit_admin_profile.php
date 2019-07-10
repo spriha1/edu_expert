@@ -4,6 +4,7 @@
 	{
 		$msg = "";
 		include_once 'header.html';
+		require_once 'csrf_token.php';
 		echo '<body class="body1">';
 		include_once 'admin_sidenav.php';
 		include_once 'update_profile.php';
@@ -53,6 +54,7 @@
 							<p style="color: #ff0000;">'.$fpassword_msg.'</p>	
 						</div>
 					    <div class="form-group">
+					    	<input type="hidden" name="token" value="'.Token::generate().'">
 					    	<button type="submit" class="btn btn-success">Update</button>
 					    </div>
 					</form>

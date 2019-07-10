@@ -4,6 +4,7 @@
 	{
 		$msg = "";
 		include_once 'header.html';
+		require_once 'csrf_token.php';
 		echo '<body class="body1">';
 		include_once 'student_sidenav.php';
 		include_once 'update_profile.php'; 
@@ -38,6 +39,7 @@
 					      <input type="password" class="form-control" id="password" data-toggle="tooltip" title="'.$tooltip_msg.'" placeholder="Enter Password" name="password">
 					    </div>
 					    <div class="form-group">
+					    	<input type="hidden" name="token" value="'.Token::generate().'">
 					    	<button type="submit" class="btn btn-success">Update</button>
 					    </div>
 					</form>

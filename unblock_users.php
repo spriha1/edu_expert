@@ -1,8 +1,9 @@
 <?php 
 	session_start();
+	require_once 'csrf_token.php';
 	if(isset($_SESSION["username"]))
 	{
-		if (isset($_GET['username']) && !empty($_GET['username'])) {
+		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) {
 			$username = $_GET['username'];
 
 			include_once 'db_connection.php';

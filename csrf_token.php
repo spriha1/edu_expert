@@ -1,15 +1,15 @@
 <?php 
 	class Token
 	{
-		public $token;
 		public static function generate()
 		{
-			return $this->token = base64_encode(uniqid());
+			return $_SESSION['token'] = base64_encode(uniqid());
 		}
 		public static function check($token)
 		{
-			if($token === $this->token)
+			if(isset($_SESSION['token']) && $token === $_SESSION['token'])
 			{
+				unset($_SESSION['token']);
 				return true;
 			}
 			return false;
