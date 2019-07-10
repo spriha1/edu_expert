@@ -2,7 +2,7 @@
 	session_start();
 	if(isset($_SESSION["username"]))
 	{
-		echo '<body class="body1">';
+		echo '<body class="body2">';
 		include_once 'header.html';
 		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
@@ -22,8 +22,8 @@
 						<input type="text" class="form-control" id="search" value="'.$_POST['search'].'" placeholder="Enter first name" name="search">
 			      		<button class="btn btn-success form-control mr-sm-2" type="submit">Search</button>
 			      	</div>
-			      	</form>
-				  	<form class="form-inline" method="POST" action="">
+		      	</form>
+			  	<form class="form-inline" method="POST" action="">
 					<div class="form-group">
 				    <select class="form-control" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>';
@@ -42,10 +42,11 @@
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
+		    	include_once 'pagination.php';
 			    echo "<br><br>";
 			    echo "<div class='container'>";
 			    echo '<div class="table-responsive">
-							<table class="table table-hover table-bordered" align="center" style="width:90%">
+							<table class="table table-bordered" align="center" style="width:90%">
 								<tr>
 									<th>First Name</th>
 									<th>Last Name</th>
@@ -54,7 +55,7 @@
 									<th></th>
 									<th></th>
 								</tr>';
-			    foreach ($result as $key => $value) {
+			    foreach ($res as $key => $value) {
 			     	echo '<tr>
 									<td>'.$value['firstname'].'</td>
 									<td>'.$value['lastname'].'</td>
@@ -80,14 +81,15 @@
 		}
 
 		if (isset($_POST['search'])) {
-			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND firstname = '".$_POST['search']."'";
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND firstname LIKE '%".$_POST['search']."%'";
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
+		    	include_once 'pagination.php';
 			    echo "<br><br>";
 			    echo "<div class='container'>";
 			    echo '<div class="table-responsive">
-							<table class="table table-hover table-bordered" align="center" style="width:90%">
+							<table class="table table-bordered" align="center" style="width:90%">
 								<tr>
 									<th>First Name</th>
 									<th>Last Name</th>
@@ -96,7 +98,7 @@
 									<th></th>
 									<th></th>
 								</tr>';
-			    foreach ($result as $key => $value) {
+			    foreach ($res as $key => $value) {
 			     	echo '<tr>
 									<td>'.$value['firstname'].'</td>
 									<td>'.$value['lastname'].'</td>
@@ -128,10 +130,11 @@
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
+		    	include_once 'pagination.php';
 			    echo "<br><br>";
 			    echo "<div class='container'>";
 			    echo '<div class="table-responsive">
-							<table class="table table-hover table-bordered" align="center" style="width:90%">
+							<table class="table table-bordered" align="center" style="width:90%">
 								<tr>
 									<th>First Name</th>
 									<th>Last Name</th>
@@ -140,7 +143,7 @@
 									<th></th>
 									<th></th>
 								</tr>';
-			    foreach ($result as $key => $value) {
+			    foreach ($res as $key => $value) {
 			     	echo '<tr>
 						<td>'.$value['firstname'].'</td>
 						<td>'.$value['lastname'].'</td>

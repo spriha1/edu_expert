@@ -9,3 +9,4 @@ function closeNav() {
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip(); 
 });
+
