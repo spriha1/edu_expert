@@ -16,16 +16,34 @@
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 		$result = $obj->select_records($query);
 		
+		$search_value = "";
+		if (isset($_POST['search'])) 
+		{
+			$search_value_fname = $_POST['search'];
+		}
+		else if(isset($_GET['s']))
+		{
+			$search_value_fname = $_GET['s'];
+		}
+		if (isset($_POST['user_type'])) 
+		{
+			$search_value_usertype = $_POST['user_type'];
+		}
+		else if(isset($_GET['u']))
+		{
+			$search_value_usertype = $_GET['u'];
+		}
+
 	    echo '<nav class="navbar navbar-transparent justify-content-center">
 				<form class="form-inline" method="POST" action="">
 				  	<div class="form-group mx-auto">
-						<input type="text" class="form-control mb-2 mr-sm-2" id="search" value="'.($_POST['search']?$_POST['search']:$_GET['s']).'" placeholder="Enter first name" name="search">
+						<input type="text" class="form-control mb-2 mr-sm-2" id="search" value="'.$search_value_fname.'" placeholder="Enter first name" name="search">
 			      	</div>
 					<div class="form-group mx-auto">
 				    <select class="form-control mb-2 mr-sm-2" id="user_type" name="user_type">
 				        <option value="0">Select User Type</option>';
             				foreach ($result as $key => $value) {
-            					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$_POST['user_type'])?"selected":"").'>'.$value['user_type'].'</option>';
+            					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$search_value_usertype)?"selected":"").'>'.$value['user_type'].'</option>';
             				}
 			      	echo '</select>
 			      	</div>
@@ -59,7 +77,6 @@
  		if (isset($_POST['user_type']) && $check && isset($_POST['search'])) 
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 1 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%'";
-			//print($query);exit();
 		    $result = $obj->select_records($query);
 		    if($result)
 		    {
@@ -141,11 +158,9 @@
 				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record</h4></div>';
 			}
 		}
-
 	}
 	else
 	{
 		header("Location:index.php");
 	}
-
 ?>
