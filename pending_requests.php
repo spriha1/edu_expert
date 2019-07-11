@@ -20,21 +20,85 @@
 	    		<form class="form-inline" method="POST" action="">
 				  	<div class="form-group">
 						<input type="text" class="form-control" id="search" value="'.($_POST['search']?$_POST['search']:$_GET['s']).'" placeholder="Enter first name" name="search">
-			      		<button class="btn btn-success form-control mr-sm-2" type="submit">Search</button>
 			      	</div>
-		      	</form>
-				  <form class="form-inline" method="POST" action="">
+		      		<div class="form-group">
 				    <select class="form-control" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>';
 	            				foreach ($result as $key => $value) {
 	            					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$_POST['user_type'])?"selected":"").'>'.$value['user_type'].'</option>';
 	            				}
 				      	echo '</select>
+				      	</div>
+				      	<div class="form-group">
 				      	<button class="btn btn-success form-control mr-sm-2" type="submit">Go</button>
+				      	</div>
 				  </form>
 				</nav>';
 
+		if (isset($_POST['user_type'])) 
+		{
+			$c = 0;
+			$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
+			$result = $obj->select_records($query);
+			foreach ($result as $key => $value) 
+			{
+				if($value['user_type'] === $_POST['user_type'])
+				{
+					$c++;
+				}
+			}
+			if ($c > 0) {
+				$check = true;
+			}
+			else
+			{
+				$check = false;
+			}
+		}
 
+		if (isset($_POST['user_type']) && $check && isset($_POST['search'])) 
+		{
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%'";
+			//print($query);exit();
+		    $result = $obj->select_records($query);
+		    if($result)
+		    {
+		    	include_once 'pagination.php';
+			}
+			else
+			{
+				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record for the selected category</h4></div>';
+			}
+		}
+
+		else if (isset($_POST['user_type']) && $check && isset($_GET['s'])) 
+		{
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_GET['s']."%'";
+		    $result = $obj->select_records($query);
+		    if($result)
+		    {
+		    	include_once 'pagination.php';
+			}
+			else
+			{
+				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record for the selected category</h4></div>';
+			}
+		}
+
+
+		else if (isset($_POST['user_type']) && $check) 
+		{
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type = '".$_POST['user_type']."'";
+		    $result = $obj->select_records($query);
+		    if($result)
+		    {
+		    	include_once 'pagination.php';
+			}
+			else
+			{
+				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record for the selected category</h4></div>';
+			}
+		}
 
 		if (isset($_POST['user_type'])) {
 		    $query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type = '".$_POST['user_type']."'";
