@@ -1,6 +1,5 @@
 <?php 
 	 
-
 	$msg = "";
 	$username_msg = "";
 	$firstname_msg = "";
@@ -133,7 +132,7 @@
 					$query = "UPDATE users SET username = '".$_POST['username']."' WHERE username = '".$_SESSION['username']."'";
 					$obj->update($query);
 				}
-				header("Location:logout.php");
+				//header("Location:logout.php");
 			}
 			else
 			{
@@ -141,9 +140,5 @@
 			}
 			
 		}
-	}
-	else
-	{
-		header("Location:index.php");
 	}
  ?>

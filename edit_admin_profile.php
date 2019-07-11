@@ -1,10 +1,11 @@
 <?php 
 	session_start();
+
 	if(isset($_SESSION["username"]))
 	{
 		$msg = "";
 		include_once 'header.html';
-		require_once 'csrf_token.php';
+		include_once 'csrf_token.php';
 		echo '<body class="body1">';
 		include_once 'admin_sidenav.php';
 		include_once 'update_profile.php';
@@ -51,7 +52,7 @@
 					      <input type="password" class="form-control" id="password" data-toggle="tooltip" title="'.$tooltip_msg.'" placeholder="Enter Password" name="password">
 					    </div>
 					     <div style="text-align: center;">
-							<p style="color: #ff0000;">'.$fpassword_msg.'</p>	
+							<p style="color: #ff0000;">'.$password_msg.'</p>	
 						</div>
 					    <div class="form-group">
 					    	<input type="hidden" name="token" value="'.Token::generate().'">
