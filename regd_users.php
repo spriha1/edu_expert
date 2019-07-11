@@ -18,19 +18,19 @@
 		
 	    echo '<nav class="navbar navbar-transparent justify-content-center">
 				<form class="form-inline" method="POST" action="">
-				  	<div class="form-group">
-						<input type="text" class="form-control" id="search" value="'.($_POST['search']?$_POST['search']:$_GET['s']).'" placeholder="Enter first name" name="search">
+				  	<div class="form-group mx-auto">
+						<input type="text" class="form-control mb-2 mr-sm-2" id="search" value="'.($_POST['search']?$_POST['search']:$_GET['s']).'" placeholder="Enter first name" name="search">
 			      	</div>
-					<div class="form-group">
-				    <select class="form-control" id="user_type" name="user_type">
+					<div class="form-group mx-auto">
+				    <select class="form-control mb-2 mr-sm-2" id="user_type" name="user_type">
 				        <option value="0">Select User Type</option>';
             				foreach ($result as $key => $value) {
             					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$_POST['user_type'])?"selected":"").'>'.$value['user_type'].'</option>';
             				}
 			      	echo '</select>
 			      	</div>
-			      	<div class="form-group">
-			      	<button class="btn btn-success form-control mr-sm-2" type="submit">Go</button>
+			      	<div class="form-group mx-auto">
+			      	<button class="btn btn-success form-control mr-sm-2 mb-2" type="submit">Go</button>
 			      	</div>
 			  </form>
 			</nav>';
@@ -84,7 +84,6 @@
 				echo '<div style="text-align:center;"><h4 style="color : #ff0000;">There is no record for the selected category</h4></div>';
 			}
 		}
-
 
 		else if (isset($_POST['user_type']) && $check) 
 		{
