@@ -13,74 +13,50 @@
 		$limit = 10;   
 	}  
 	$totalPages = ceil( $total/ $limit );
+	$link_part3 = "";
 
-	if($_POST && $check && $check1)
+	if($_POST)
 	{
 		$previous = "";
 		$next = "";
 		$offset = 0;
+		if(isset($_POST['record']) && $check1)
+		{
+			$link_part3 = "&r=".$_POST['record'];
+		}
 	 	if (isset($_POST['user_type']) && $check &&  isset($_POST['search']))
 	 	{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 			$res = $obj->select_records($query);
 
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&s='.$_POST['search'].'&u='.$_POST['user_type'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&s='.$_POST['search'].'&u='.$_POST['user_type'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&s='.$_POST['search'].'&u='.$_POST['user_type'].'">Next</a></li>
-				</ul>';
-			}
+			$prev_link = "regd_users.php?page=".$previous."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&s=".$_POST['search']."&u=".$_POST['user_type'];
+			$next_link = "regd_users.php?page=".$next."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
+			include_once 'pagination_bar.php';
 	 	}
+
 	 	else if(isset($_POST['search']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&s='.$_POST['search'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&s='.$_POST['search'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&s='.$_POST['search'].'">Next</a></li>
-				</ul>';
-			}
+		    $prev_link = "regd_users.php?page=".$previous."&s=".$_POST['search'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&s=".$_POST['search'];
+			$next_link = "regd_users.php?page=".$next."&s=".$_POST['search'].$link_part3;
+			include_once 'pagination_bar.php';
 		} 
 		else if(isset($_POST['user_type']) && $check)
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_POST['user_type']."' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&u='.$_POST['user_type'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&u='.$_POST['user_type'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&u='.$_POST['user_type'].'">Next</a></li>
-				</ul>';
-			}
-		}
-		else
-		{
-			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
-		    
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'">Next</a></li>
-				</ul>';
-			}
+
+		    $prev_link = "regd_users.php?page=".$previous."&u=".$_POST['user_type'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&u=".$_POST['user_type'];
+			$next_link = "regd_users.php?page=".$next."&u=".$_POST['user_type'].$link_part3;
+			include_once 'pagination_bar.php';
 		}
 	}
 
@@ -95,67 +71,54 @@
 		$previous = $page-1;
 		$next = $page+1;
 
+		if(isset($_GET['r']))
+		{
+			$link_part3 = "&r=".$_GET['r'];
+		}
 		if(isset($_GET['s']) && isset($_GET['u']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_GET['u']."') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&s='.$_GET['s'].'&u='.$_GET['u'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&s='.$_GET['s'].'&u='.$_GET['u'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&s='.$_GET['s'].'&u='.$_GET['u'].'">Next</a></li>
-				</ul>';
-			}
+
+		    $prev_link = "regd_users.php?page=".$previous."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&s=".$_GET['s']."&u=".$_GET['u'];
+			$next_link = "regd_users.php?page=".$next."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
+			include_once 'pagination_bar.php';
 		}
 		else if(isset($_GET['s']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&s='.$_GET['s'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&s='.$_GET['s'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&s='.$_GET['s'].'">Next</a></li>
-				</ul>';
-			}
+
+		    $prev_link = "regd_users.php?page=".$previous."&s=".$_GET['s'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&s=".$_GET['s'];
+			$next_link = "regd_users.php?page=".$next."&s=".$_GET['s'].$link_part3;
+			include_once 'pagination_bar.php';
 		}
 		else if(isset($_GET['u']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_GET['u']."' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'&u='.$_GET['u'].'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&u='.$_GET['u'].'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&u='.$_GET['u'].'">Next</a></li>
-				</ul>';
-			}
+
+		    $prev_link = "regd_users.php?page=".$previous."&u=".$_GET['u'].$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "&u=".$_GET['u'];
+			$next_link = "regd_users.php?page=".$next."&u=".$_GET['u'].$link_part3;
+			include_once 'pagination_bar.php';
 		}
 		else
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
 
 			$res = $obj->select_records($query);
-			
-			if($total > $limit)
-			{
-				echo '<ul class="pagination justify-content-center">
-				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'">Previous</a></li>';
-				    for ($i=1; $i < $totalPages; $i++) { 
-				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'">'.$i.'</a></li>';
-				    }
-				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'">Next</a></li>
-				</ul>';
-			}
+
+			$prev_link = "regd_users.php?page=".$previous.$link_part3;
+			$link_part1 = "regd_users.php?page=";
+			$link_part2 = "";
+			$next_link = "regd_users.php?page=".$next.$link_part3;
+			include_once 'pagination_bar.php';
 		}
 
 	}
@@ -167,17 +130,12 @@
 		$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
 
 		$res = $obj->select_records($query);
-		
-		if($total > $limit)
-		{
-			echo '<ul class="pagination justify-content-center">
-			    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'">Previous</a></li>';
-			    for ($i=1; $i < $totalPages; $i++) { 
-			    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'">'.$i.'</a></li>';
-			    }
-			echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'">Next</a></li>
-			</ul>';
-		}
+
+		$prev_link = "regd_users.php?page=".$previous.$link_part3;
+		$link_part1 = "regd_users.php?page=";
+		$link_part2 = "";
+		$next_link = "regd_users.php?page=".$next.$link_part3;
+		include_once 'pagination_bar.php';
 	}
 	
 	if($res)
