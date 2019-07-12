@@ -11,29 +11,32 @@
 	    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
 	    $query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
 	    $result = $obj->select_records($query);
-	    echo "<br><br>";
-	    echo "<div class='container'>";
-	    echo "<div class='card mx-auto responsive'>";
-	    foreach ($result as $key => $value) {
-	     	echo "<div class='card bg-light'>";
-	     	echo "<div class='card-body text-center'>";
-	     	echo '<form>
+	    ?>
+
+	    <br><br>
+	    <div class='container'>
+	    <div class='card mx-auto responsive'>
+	    <?php foreach ($result as $key => $value) { ?>
+	     	<div class='card bg-light'>
+	     		<div class='card-body text-center'>
+	     			<form>
 					    <div class="form-group">
-					      First Name :<input type="text" readonly class="form-control" value="'.$value["firstname"].'">
+					      First Name :<input type="text" readonly class="form-control" value="<?php echo $value['firstname'];?>">
 					    </div>
 					    <div class="form-group">
-					      Last Name :<input type="text" readonly class="form-control" value="'.$value["lastname"].'">
+					      Last Name :<input type="text" readonly class="form-control" value="<?php echo $value['lastname'];?>">
 					    </div>
 					    <div class="form-group">
-					      Username :<input type="text" readonly class="form-control" value="'.$value["username"].'">
+					      Username :<input type="text" readonly class="form-control" value="<?php echo $value['username'];?>">
 					    </div>
 					    <div class="form-group">
-					      Email:<input type="text" readonly class="form-control" value="'.$value["email"].'">
+					      Email:<input type="text" readonly class="form-control" value="<?php echo $value['email'];?>">
 					    </div>
-				</form>';
-			
-			echo '<a href="edit_student_profile.php?username='.$value["username"].'"><button class="btn btn-success">Edit</button></a>';
-	     	echo "</div></div>";
+					</form>
+					<a href="edit_student_profile.php?username='<?php echo $value['username'];?>'"><button class="btn btn-success">Edit</button></a>
+	     		</div>
+	     	</div>
+	     	<?php
 	    } 
 	}
 	else

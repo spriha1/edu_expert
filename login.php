@@ -22,7 +22,7 @@
                     $pass = MD5($_POST['password']);
 
                     $obj = new DB_connect();
-                    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+                    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
                     $query = "SELECT id,firstname,lastname,username,email,password,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
                     $result = $obj->select_records($query);
                     if($result)

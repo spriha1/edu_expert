@@ -7,7 +7,7 @@
     $conn->exec($sql);
 	include_once 'db_connection.php';
     $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 
 	$sql = "CREATE TABLE IF NOT EXISTS user_types (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

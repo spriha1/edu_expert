@@ -9,22 +9,23 @@
 			include_once 'db_credentials.php';
 
 		    $obj = new DB_connect();
-		    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 	    
 		
 		    $query = "SELECT username FROM users WHERE token ='".$_SESSION['token']."' AND user_reg_status = 1";
 		    $result = $obj->select_records($query);
-		    if($result){
+		    if($result)
+		    {
 		    	$query = "UPDATE users SET password='".md5($password)."' WHERE token ='".$_SESSION['token']."'";
 		    	$obj->update($query);
 		        echo '<div>Your password has been reset, you can now <a href="index.php"> login</a></div>';
-		    }else{
+		    }
+		    else
+		    {
 		        echo '<div>Your request has not been accepted by the admin yet</div>';
 		    }
 		}  
 	}           
-	
-
  ?>
 </body>
 </html>

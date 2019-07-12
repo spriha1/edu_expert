@@ -12,7 +12,7 @@
 		$token  = Token::generate();
 
 		$obj = new DB_connect();
-		$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+		$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 		$result = $obj->select_records($query);
 		
@@ -28,6 +28,8 @@
 		{
 			$search_value_fname = $_GET['s'];
 		}
+
+
 		if (isset($_POST['user_type'])) 
 		{
 			$search_value_usertype = $_POST['user_type'];
@@ -37,33 +39,14 @@
 			$search_value_usertype = $_GET['u'];
 		}
 
-	    echo '<nav class="navbar navbar-transparent justify-content-center">
-				<form class="form-inline" method="POST" action="">
-				  	<div class="form-group mx-auto">
-						<input type="text" class="form-control mb-2 mr-sm-2" id="search" value="'.$search_value_fname.'" placeholder="Enter first name" name="search">
-			      	</div>
-					<div class="form-group mx-auto">
-				    <select class="form-control mb-2 mr-sm-2" id="user_type" name="user_type">
-				        <option value="0">Select User Type</option>';
-            				foreach ($result as $key => $value) {
-            					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$search_value_usertype)?"selected":"").'>'.$value['user_type'].'</option>';
-            				}
-			      	echo '</select>
-			      	</div>
-			      	<div class="form-group mx-auto">
-					    <select class="form-control mb-2 mr-sm-2" id="record" name="record">
-					        <option value="0">Select Number of Records</option>
-					        <option value="10">10</option>
-					        <option value="20">20</option>
-					        <option value="50">50</option>
-					        <option value="100">100</option>
-					    </select>
-					</div>
-			      	<div class="form-group mx-auto">
-			      		<button class="btn btn-success form-control mr-sm-2 mb-2" type="submit">Go</button>
-			      	</div>
-			  </form>
-			</nav>';
+
+		$record = "";
+		if(isset($_POST['record']))
+		{
+			$record = $_POST['record'];
+		}
+		
+	    include_once 'search_navbar.php';
 
 		if (isset($_POST['user_type'])) 
 		{

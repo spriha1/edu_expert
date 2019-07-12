@@ -3,7 +3,8 @@
 	include_once 'header.html';?>
 	<body>
 		<br><br>
-		<?php if (isset($_GET["q"]) AND !empty($_GET["q"]) AND isset($_GET["t"]) AND !empty($_GET["t"])) {
+		<?php if (isset($_GET["q"]) AND !empty($_GET["q"]) AND isset($_GET["t"]) AND !empty($_GET["t"])) 
+		{
 			$token = base64_decode($_GET["q"]);
 			$_SESSION['token'] = $token;
 			$expiry_time = base64_decode($_GET["t"]);
@@ -14,14 +15,13 @@
 				include_once 'db_connection.php';
 				include_once 'db_credentials.php';
 				$obj = new DB_connect();
-			    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+			    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 				$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";
 				$obj->update($query);
 			}
 			else
-			{
-				echo '<div class="container" style="text-align: center">
-					
+			{ ?>
+				<div class="container" style="text-align: center">
 					<div class="card bg-secondary mx-auto" style="width: 50%">
 		    			<div class="card-body">
 							<form method="POST" action="reset_password.php">
@@ -34,7 +34,8 @@
 							</form>
 						</div>
 					</div>
-				</div>';
+				</div>
+				<?php 
 			}
 		} 
 ?>

@@ -9,7 +9,7 @@
 			include_once 'db_connection.php';
 			include_once 'db_credentials.php';
 			$obj = new DB_connect();
-		    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $query = "SELECT id FROM users WHERE username = '".$username."'";
 		    $result = $obj->select_records($query);
 		    if($result)
@@ -42,7 +42,6 @@
 
 					include_once 'mail_credentials.php';
 					$mail->Username = $mail_username;
-
 					$mail->Password = $mail_password;
 					if(!$mail->send()) {
 					  $msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;

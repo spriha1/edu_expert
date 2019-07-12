@@ -14,7 +14,7 @@
 		Must contain at least one lowercase character";
 	 ?>
 	<div class="container">
-		<br><br>
+	<br><br>
 	<div class="d-flex justify-content-center">
 		<div class="card bg-light responsive">
 			<div class="card-header" style="text-align: center;">
@@ -79,7 +79,7 @@
 								include_once 'db_credentials.php';
 								include_once 'db_connection.php';
 								$obj = new DB_connect();
-	            				$conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+	            				$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 	            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 	            				$result = $obj->select_records($query);
 	            				foreach ($result as $key => $value) {

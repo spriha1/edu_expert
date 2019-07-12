@@ -4,13 +4,17 @@
 	{
 		$limit = $_POST['record'];
 	}
+	else if($_GET['r'])
+	{
+		$limit = $_GET['r'];
+	}
 	else
 	{
 		$limit = 10;   
 	}  
 	$totalPages = ceil( $total/ $limit );
 
-	if($_POST)
+	if($_POST && $check && $check1)
 	{
 		$previous = "";
 		$next = "";
@@ -59,6 +63,22 @@
 				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'&u='.$_POST['user_type'].'">'.$i.'</a></li>';
 				    }
 				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'&u='.$_POST['user_type'].'">Next</a></li>
+				</ul>';
+			}
+		}
+		else
+		{
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
+		    $res = $obj->select_records($query);
+		    
+			if($total > $limit)
+			{
+				echo '<ul class="pagination justify-content-center">
+				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'">Previous</a></li>';
+				    for ($i=1; $i < $totalPages; $i++) { 
+				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'">'.$i.'</a></li>';
+				    }
+				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'">Next</a></li>
 				</ul>';
 			}
 		}

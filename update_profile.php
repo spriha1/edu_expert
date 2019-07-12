@@ -11,7 +11,7 @@
 	include_once 'validate_input.php';
 
     $obj = new DB_connect();
-    $conn = $obj->connect('localhost','php_project',$db_username,$db_password);
+    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
     if(Token::check($_POST['token']))
     {
 		if(isset($_POST['fname']) && !empty($_POST['fname']))
