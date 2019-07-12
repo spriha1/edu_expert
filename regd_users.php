@@ -51,7 +51,16 @@
 			      	echo '</select>
 			      	</div>
 			      	<div class="form-group mx-auto">
-			      	<button class="btn btn-success form-control mr-sm-2 mb-2" type="submit">Go</button>
+					    <select class="form-control mb-2 mr-sm-2" id="record" name="record">
+					        <option value="0">Select Number of Records</option>
+					        <option value="10">10</option>
+					        <option value="20">20</option>
+					        <option value="50">50</option>
+					        <option value="100">100</option>
+					    </select>
+					</div>
+			      	<div class="form-group mx-auto">
+			      		<button class="btn btn-success form-control mr-sm-2 mb-2" type="submit">Go</button>
 			      	</div>
 			  </form>
 			</nav>';
@@ -74,6 +83,22 @@
 			else
 			{
 				$check = false;
+			}
+		}
+
+		if (isset($_POST['record'])) 
+		{
+			$c = 0;
+			if($_POST['record'] > 0)
+			{
+				$c++;
+			}
+			if ($c > 0) {
+				$check1 = true;
+			}
+			else
+			{
+				$check1 = false;
 			}
 		}
  		

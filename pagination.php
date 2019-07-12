@@ -1,6 +1,13 @@
 <?php
-	$total = count( $result );   
-	$limit = 10;   
+	$total = count( $result ); 
+	if(isset($_POST['record']) && $check1)
+	{
+		$limit = $_POST['record'];
+	}
+	else
+	{
+		$limit = 10;   
+	}  
 	$totalPages = ceil( $total/ $limit );
 
 	if($_POST)
