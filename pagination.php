@@ -8,7 +8,7 @@
 		$previous = "";
 		$next = "";
 		$offset = 0;
-	 	if (isset($_POST['user_type']) && isset($_POST['search']))
+	 	if (isset($_POST['user_type']) && $check &&  isset($_POST['search']))
 	 	{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 1 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 			$res = $obj->select_records($query);
@@ -28,6 +28,7 @@
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
+
 			if($total > $limit)
 			{
 				echo '<ul class="pagination justify-content-center">
@@ -39,7 +40,7 @@
 				</ul>';
 			}
 		} 
-		else if(isset($_POST['user_type']))
+		else if(isset($_POST['user_type']) && $check)
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND user_type = '".$_POST['user_type']."' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
