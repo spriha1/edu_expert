@@ -18,6 +18,7 @@
 		
 		$search_value_fname = "";
 		$search_value_usertype = "";
+		$status = 1;
 
 		if (isset($_POST['search'])) 
 		{
