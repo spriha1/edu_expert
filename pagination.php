@@ -112,12 +112,31 @@
 				</ul>';
 			}
 		}
+		else
+		{
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 1 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
+
+			$res = $obj->select_records($query);
+			
+			if($total > $limit)
+			{
+				echo '<ul class="pagination justify-content-center">
+				    <li class="page-item"><a class="page-link" href="regd_users.php?page='.$previous.'">Previous</a></li>';
+				    for ($i=1; $i < $totalPages; $i++) { 
+				    	echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$i.'">'.$i.'</a></li>';
+				    }
+				echo '<li class="page-item"><a class="page-link" href="regd_users.php?page='.$next.'">Next</a></li>
+				</ul>';
+			}
+		}
 
 	}
 	else
 	{
 		$offset = 0;
-		$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 1 AND user_type_id NOT IN (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
+		$previous = "";
+		$next = "";
+		$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 1 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
 
 		$res = $obj->select_records($query);
 		

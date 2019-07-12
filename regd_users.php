@@ -16,7 +16,9 @@
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 		$result = $obj->select_records($query);
 		
-		$search_value = "";
+		$search_value_fname = "";
+		$search_value_usertype = "";
+
 		if (isset($_POST['search'])) 
 		{
 			$search_value_fname = $_POST['search'];

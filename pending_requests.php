@@ -22,7 +22,7 @@
 						<input type="text" class="form-control mb-2 mr-sm-2" id="search" value="'.($_POST['search']?$_POST['search']:$_GET['s']).'" placeholder="Enter first name" name="search">
 			      	</div>
 		      		<div class="form-group">
-				    <select class="form-control mb-2 mr-sm-2" id="user_type" name="user_type">
+				    	<select class="form-control mb-2 mr-sm-2" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>';
 	            				foreach ($result as $key => $value) {
 	            					echo '<option value="'.$value['user_type'].'" '.(($value['user_type']==$_POST['user_type'])?"selected":"").'>'.$value['user_type'].'</option>';
