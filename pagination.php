@@ -140,35 +140,6 @@
 	
 	if($res)
     {
-	    echo "<br><br>";
-	    echo "<div class='container'>";
-	    echo '<div class="table-responsive">
-					<table class="table table-bordered" align="center" style="width:90%">
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Username</th>
-							<th>Email</th>
-							<th></th>
-							<th></th>
-						</tr>';
-	    foreach ($res as $key => $value) {
-	     	echo '<tr>
-							<td>'.$value['firstname'].'</td>
-							<td>'.$value['lastname'].'</td>
-							<td>'.$value['username'].'</td>
-							<td>'.$value['email'].'</td>
-							<td><a href="remove_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Remove</button></a></td>';
-							if($value['block_status']==0){
-								echo '<td><a href="block_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Block</button></a></td>
-						</tr>';
-					}
-						else if($value['block_status']==1)
-						{
-							echo '<td><a href="unblock_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Unblock</button></a></td>
-						</tr>';
-						}
-	    } 
-	    echo '</table></div>';
+	    include_once 'display.php';
 	}
 ?>
