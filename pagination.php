@@ -29,10 +29,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 			$res = $obj->select_records($query);
 
-			$prev_link = "regd_users.php?page=".$previous."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+			$prev_link = $file."?page=".$previous."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&s=".$_POST['search']."&u=".$_POST['user_type'];
-			$next_link = "regd_users.php?page=".$next."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
+			$next_link = $file."?page=".$next."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
 			include_once 'pagination_bar.php';
 	 	}
 
@@ -41,10 +41,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-		    $prev_link = "regd_users.php?page=".$previous."&s=".$_POST['search'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+		    $prev_link = $file."?page=".$previous."&s=".$_POST['search'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&s=".$_POST['search'];
-			$next_link = "regd_users.php?page=".$next."&s=".$_POST['search'].$link_part3;
+			$next_link = $file."?page=".$next."&s=".$_POST['search'].$link_part3;
 			include_once 'pagination_bar.php';
 		} 
 		else if(isset($_POST['user_type']) && $check)
@@ -52,10 +52,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_POST['user_type']."' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-		    $prev_link = "regd_users.php?page=".$previous."&u=".$_POST['user_type'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+		    $prev_link = $file."?page=".$previous."&u=".$_POST['user_type'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&u=".$_POST['user_type'];
-			$next_link = "regd_users.php?page=".$next."&u=".$_POST['user_type'].$link_part3;
+			$next_link = $file."?page=".$next."&u=".$_POST['user_type'].$link_part3;
 			include_once 'pagination_bar.php';
 		}
 	}
@@ -80,10 +80,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_GET['u']."') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-		    $prev_link = "regd_users.php?page=".$previous."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+		    $prev_link = $file."?page=".$previous."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&s=".$_GET['s']."&u=".$_GET['u'];
-			$next_link = "regd_users.php?page=".$next."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
+			$next_link = $file."?page=".$next."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
 			include_once 'pagination_bar.php';
 		}
 		else if(isset($_GET['s']))
@@ -91,10 +91,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-		    $prev_link = "regd_users.php?page=".$previous."&s=".$_GET['s'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+		    $prev_link = $file."?page=".$previous."&s=".$_GET['s'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&s=".$_GET['s'];
-			$next_link = "regd_users.php?page=".$next."&s=".$_GET['s'].$link_part3;
+			$next_link = $file."?page=".$next."&s=".$_GET['s'].$link_part3;
 			include_once 'pagination_bar.php';
 		}
 		else if(isset($_GET['u']))
@@ -102,10 +102,10 @@
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_GET['u']."' LIMIT ".$offset." , ".$limit."";
 		    $res = $obj->select_records($query);
 
-		    $prev_link = "regd_users.php?page=".$previous."&u=".$_GET['u'].$link_part3;
-			$link_part1 = "regd_users.php?page=";
+		    $prev_link = $file."?page=".$previous."&u=".$_GET['u'].$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "&u=".$_GET['u'];
-			$next_link = "regd_users.php?page=".$next."&u=".$_GET['u'].$link_part3;
+			$next_link = $file."?page=".$next."&u=".$_GET['u'].$link_part3;
 			include_once 'pagination_bar.php';
 		}
 		else
@@ -114,10 +114,10 @@
 
 			$res = $obj->select_records($query);
 
-			$prev_link = "regd_users.php?page=".$previous.$link_part3;
-			$link_part1 = "regd_users.php?page=";
+			$prev_link = $file."?page=".$previous.$link_part3;
+			$link_part1 = $file."?page=";
 			$link_part2 = "";
-			$next_link = "regd_users.php?page=".$next.$link_part3;
+			$next_link = $file."?page=".$next.$link_part3;
 			include_once 'pagination_bar.php';
 		}
 
@@ -131,10 +131,10 @@
 
 		$res = $obj->select_records($query);
 
-		$prev_link = "regd_users.php?page=".$previous.$link_part3;
-		$link_part1 = "regd_users.php?page=";
+		$prev_link = $file."?page=".$previous.$link_part3;
+		$link_part1 = $file."?page=";
 		$link_part2 = "";
-		$next_link = "regd_users.php?page=".$next.$link_part3;
+		$next_link = $file."?page=".$next.$link_part3;
 		include_once 'pagination_bar.php';
 	}
 	

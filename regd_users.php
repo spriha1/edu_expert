@@ -15,7 +15,7 @@
 		$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
 		$result = $obj->select_records($query);
-		
+		$file = "regd_users.php";
 		$search_value_fname = "";
 		$search_value_usertype = "";
 		$status = 1;
@@ -29,7 +29,6 @@
 			$search_value_fname = $_GET['s'];
 		}
 
-
 		if (isset($_POST['user_type'])) 
 		{
 			$search_value_usertype = $_POST['user_type'];
@@ -38,7 +37,6 @@
 		{
 			$search_value_usertype = $_GET['u'];
 		}
-
 
 		$record = "";
 		if(isset($_POST['record']))
