@@ -24,7 +24,7 @@
 			$fname_test = Validation::validate_name($firstname);
 			$lname_test = Validation::validate_name($lastname);
 			$username_test = Validation::validate_username($user_name);
-			$email_test = Validation::validate_name($email);
+			$email_test = Validation::validate_email($email);
 			$password_test = Validation::validate_password($password);
 
 			if($fname_test && $lname_test && $username_test && $email_test && $password_test)
