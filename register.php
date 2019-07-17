@@ -5,14 +5,10 @@
 	require_once 'csrf_token.php'; 
 ?>
 <body class="body1">
+	
 	<?php 
 		include_once 'send_verification_mail.php';
-		$tooltip_msg = "The password : 
-		Must be a minimum of 8 characters
-		Must contain at least 1 number
-		Must contain at least one uppercase character
-		Must contain at least one lowercase character";
-	 ?>
+	?>
 	<div class="container">
 	<br><br>
 	<div class="d-flex justify-content-center">
@@ -22,12 +18,14 @@
 				<p style="color: #ff0000;"> <?php echo $msg; ?> </p>
 			</div>
 			<div class="card-body">
-				<form method="POST" action="">
+				<form method="POST" action="" name="registration" onsubmit="return validate_registration(this);">
+					<div id="alert">
+				    </div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="fname" placeholder="Your First Name" name="fname">
+						<input type="text" class="form-control" id="fname" placeholder="Your First Name" name="fname" onblur="validate_fname(this);">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $firstname_msg; ?> </p>	
@@ -37,7 +35,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="lname" placeholder="Your Last Name" name="lname">
+						<input type="text" class="form-control" id="lname" placeholder="Your Last Name" name="lname" onblur="validate_lname(this);">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $lastname_msg; ?> </p>
@@ -46,7 +44,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 						</div>
-						<input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+						<input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" onblur="validate_email(this);">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $email_msg; ?> </p>
@@ -55,7 +53,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
+						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username" onblur="validate_username(this);">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $username_msg; ?> </p>
@@ -64,7 +62,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" id="password" data-toggle="tooltip" title="<?php echo $tooltip_msg; ?>" placeholder="Enter Password" name="password">
+						<input autocomplete="off" type="password" class="form-control" id="password" placeholder="Enter Password" name="password" onblur="validate_password(this);" onclick="password_info();" >
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $password_msg; ?> </p>
@@ -104,5 +102,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="validate.js"></script>
+
 </body>
 </html>

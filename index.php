@@ -17,7 +17,9 @@
 					</div>
 					<div class="card-body">
 						<p style="color:#ff0000;"><?php echo $msg; ?></p>
-				    	<form action="" method="POST">
+				    	<form action="" method="POST" name="login" onsubmit="return validate_login(this);">
+				    		<div id="alert">
+				    		</div>
 				    		<div class="input-group form-group">
 						    	<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -48,5 +50,6 @@
 		</div>
     </div>
 	<?php include_once 'db_tables_creation.php'; ?>
+	<script src="validate.js"></script>
 </body>
 </html>
