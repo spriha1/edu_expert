@@ -12,7 +12,7 @@
 		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $query = "UPDATE users SET block_status = 1 WHERE username = '".$username."'";
 		    $obj->update($query);
-		    header("Location:admin_dashboard.php");
+		    header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	}
 	else

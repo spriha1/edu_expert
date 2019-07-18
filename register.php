@@ -4,6 +4,8 @@
 	include_once 'header.html';
 	require_once 'csrf_token.php'; 
 	include_once 'send_verification_mail.php';
+	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 
 ?>
 <body class="body1">
@@ -51,7 +53,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
+						<input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $username_msg; ?> </p>
@@ -72,8 +74,6 @@
 						<select class="form-control" id="user_type" name="user_type">
 					        <option value="0">Select User Type</option>
 					        <?php 
-								include_once 'db_credentials.php';
-								include_once 'db_connection.php';
 								$obj = new DB_connect();
 	            				$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 	            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
@@ -101,6 +101,5 @@
 		</div>
 	</div>
 	<script src="validate.js"></script>
-
 </body>
 </html>

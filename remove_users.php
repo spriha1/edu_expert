@@ -11,7 +11,7 @@
 		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $sql = "DELETE FROM users WHERE username = '".$username."'";
 		    $conn->exec($sql);
-		    header("Location:admin_dashboard.php");
+		    header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	}
 	else

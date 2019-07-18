@@ -6,6 +6,7 @@ document.getElementById("email").addEventListener("blur", validate_email);
 document.getElementById("username").addEventListener("blur", validate_username);
 document.getElementById("password").addEventListener("blur", validate_password);
 document.getElementById("password").addEventListener("click", password_info);
+document.getElementById("username").addEventListener("click", username_info);
 
 function validate_login(obj)
 {
@@ -211,5 +212,11 @@ function validate_password()
 function password_info()
 {
 	var msg = "The password :\nMust be a minimum of 8 characters\nMust contain at least 1 number\nMust contain at least one uppercase character\nMust contain at least one lowercase character";
+	document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
+}
+
+function username_info()
+{
+	var msg = "The username can contain letters, digits, @ and _";
 	document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
 }
