@@ -29,38 +29,18 @@ function validate_login(obj)
 
 function validate_registration(obj)
 {
-	var fname = document.forms.registration.fname.value.trim();
-	var lname = document.forms.registration.lname.value.trim();
-	var email = document.forms.registration.email.value.trim();
-	var username = document.forms.registration.username.value.trim();
-	var password = document.forms.registration.password.value.trim();
-	var user_type = document.forms.registration.user_type.value.trim();
-
-	if(fname === "")
+	var i,check,c = 0;
+	var length = document.getElementById("registration").elements.length;
+	for(i = 0 ; i < length ; i++)
 	{
-		document.getElementById('fname').style.borderColor = "red";
+		check = document.getElementById("registration").elements[i].value.trim();
+		if (check === "") 
+		{
+			document.getElementById("registration").elements[i].style.borderColor = "red";
+			c++;
+		}
 	}
-	if(lname === "")
-	{
-		document.getElementById('lname').style.borderColor = "red";
-	}
-	if(email === "")
-	{
-		document.getElementById('email').style.borderColor = "red";
-	}
-	if(username === "")
-	{
-		document.getElementById('username').style.borderColor = "red";
-	}
-	if(password === "")
-	{
-		document.getElementById('password').style.borderColor = "red";
-	}
-	if(user_type === "")
-	{
-		document.getElementById('user_type').style.borderColor = "red";
-	}
-	if(fname === "" || lname === "" || username === "" || password === "" || user_type === "")
+	if(c > 0)
 	{
 		document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Please fill in the highlighted fields</div>";
 		obj.preventDefault();
