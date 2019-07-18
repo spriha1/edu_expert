@@ -111,6 +111,25 @@ function validate_lname()
 function validate_email()
 {
 	var obj = document.forms.registration.email;
+	var email = obj.value;
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var arr = JSON.parse(this.responseText);
+			for(var i = 0; i < arr.length; i++)
+			{
+				if(arr[i] === email)
+				{
+					document.getElementById('email').style.borderColor = "red";
+					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
+				}
+			}
+		}
+	};
+	xhttp.open("GET", "fetch_info.php?q=email", true);
+	xhttp.send();
+
 	if(obj.value === "")
 	{
 		document.getElementById('email').style.borderColor = "grey";
@@ -132,6 +151,25 @@ function validate_username()
 {
 	var obj = document.forms.registration.username;
 	var username_pattern = /^([a-zA-Z0-9@_]+)$/;
+	var username = obj.value;
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var arr = JSON.parse(this.responseText);
+			for(var i = 0; i < arr.length; i++)
+			{
+				if(arr[i] === username)
+				{
+					document.getElementById('username').style.borderColor = "red";
+					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
+				}
+			}
+		}
+	};
+	xhttp.open("GET", "fetch_info.php?q=username", true);
+	xhttp.send();
+
 	if(obj.value === "")
 	{
 		document.getElementById('username').style.borderColor = "grey";
@@ -139,12 +177,12 @@ function validate_username()
 	}
 	else if(!username_pattern.test(obj.value))
 	{
-		document.getElementById('email').style.borderColor = "red";
+		document.getElementById('username').style.borderColor = "red";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid username</div>";
 	}
 	else
 	{
-		document.getElementById('email').style.borderColor = "green";
+		document.getElementById('username').style.borderColor = "green";
 		document.getElementById("alert").innerHTML = "";
 	}
 }
