@@ -1,13 +1,12 @@
 <?php 
 	session_start();
+	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 	if (isset($_SESSION['token'])) {
 	
 		if (isset($_POST["password"]) AND !empty($_POST["password"])) {
 			
 			$password = $_POST["password"];
-			include_once 'db_connection.php';
-			include_once 'db_credentials.php';
-
 		    $obj = new DB_connect();
 		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 	    

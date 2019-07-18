@@ -6,7 +6,6 @@
 		$msg = "";
 		include_once 'header.html';
 		include_once 'csrf_token.php';
-		echo '<body class="body1">';
 		include_once 'admin_sidenav.php';
 		include_once 'update_profile.php';
 		$tooltip_msg = "The password : 
@@ -15,7 +14,7 @@
 		Must contain at least one uppercase character
 		Must contain at least one lowercase character"; 
 		?>
-		
+		<body class="body1">
 		<div class="container" style="text-align: center">
 			
 			<p style="color: #ff0000;"><?php echo $msg;?></p>

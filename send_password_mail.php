@@ -1,4 +1,10 @@
 <?php
+	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
+	include_once 'mail_credentials.php';
+
 	$msg = "";
 	if(isset($_POST['username']))
 	{
@@ -6,8 +12,6 @@
 		{
 			$username = $_POST['username'];
 			$msg = "Please reset your password by clicking the link that has been sent to your email.";
-			include_once 'db_connection.php';
-			include_once 'db_credentials.php';
 			$obj = new DB_connect();
 		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $query = "SELECT id FROM users WHERE username = '".$username."'";
@@ -20,9 +24,6 @@
 			    $result = $obj->select_records($query);
 			   
 		    	foreach ($result as $key => $value) {
-			    	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-					require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
-					//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
 
 					$mail = new PHPMailer;
 					$mail->setFrom('spriha.mindfire@gmail.com');
@@ -40,7 +41,6 @@
 					$mail->SMTPAuth = true;
 					$mail->Port = 465;
 
-					include_once 'mail_credentials.php';
 					$mail->Username = $mail_username;
 					$mail->Password = $mail_password;
 					if(!$mail->send()) {

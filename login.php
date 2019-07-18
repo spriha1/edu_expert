@@ -1,6 +1,8 @@
 <?php 
     include_once 'db_credentials.php';
     include_once 'db_connection.php';
+    include_once 'validate_input.php';
+
     $msg = "";
     $username_msg = "";
     $password_msg = "";
@@ -11,7 +13,6 @@
         {
             if(Token::check($_POST['token']))
             {
-                include_once 'validate_input.php';
                 $username = Validation::test_input($_POST['username']);
                 $password = Validation::test_input($_POST['password']);
                 $username_test = Validation::validate_name($username);

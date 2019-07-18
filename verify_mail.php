@@ -1,9 +1,10 @@
-<?php include_once 'header.html';?>
-<body>
 <?php 
+	include_once 'header.html';
 	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
-
+?>
+<body>
+<?php 
     $obj = new DB_connect();
     $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
     

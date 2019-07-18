@@ -1,18 +1,16 @@
 <?php 
 	session_start();
 	require_once 'csrf_token.php';
+	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
 	if(isset($_SESSION["username"]))
 	{
 		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) {
 			$username = $_GET['username'];
-
-			include_once 'db_connection.php';
-			include_once 'db_credentials.php';
 		    $obj = new DB_connect();
 		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $sql = "DELETE FROM users WHERE username = '".$username."'";
 		    $conn->exec($sql);
-		    
 		    header("Location:admin_dashboard.php");
 		}
 	}

@@ -1,6 +1,9 @@
 <?php 
 	session_start();
-	include_once 'header.html';?>
+	include_once 'header.html';
+	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
+	?>
 	<body>
 		<br><br>
 		<?php if (isset($_GET["q"]) AND !empty($_GET["q"]) AND isset($_GET["t"]) AND !empty($_GET["t"])) 
@@ -12,8 +15,6 @@
 			if($current_time > $expiry_time)
 			{
 				echo "The link has expired";
-				include_once 'db_connection.php';
-				include_once 'db_credentials.php';
 				$obj = new DB_connect();
 			    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 				$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";

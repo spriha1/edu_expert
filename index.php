@@ -4,6 +4,7 @@
 	include_once 'header.html';
 	require_once 'csrf_token.php'; 
 	include_once 'login.php';
+	include_once 'db_tables_creation.php';
 ?>
 <body class="body1">
 	<div class="container" style="text-align: center">
@@ -49,7 +50,6 @@
 	    	</div>
 		</div>
     </div>
-	<?php include_once 'db_tables_creation.php'; ?>
 	<script src="validate.js"></script>
 </body>
 </html>

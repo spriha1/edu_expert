@@ -1,11 +1,12 @@
 <?php
-	$servername = "localhost";
 	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
+	$servername = "localhost";
     $conn = new PDO("mysql:host=$servername", $db_username, $db_password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "CREATE DATABASE IF NOT EXISTS php_project";
     $conn->exec($sql);
-	include_once 'db_connection.php';
+	
     $obj = new DB_connect();
     $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 

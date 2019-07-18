@@ -7,8 +7,8 @@
 		include_once 'admin_sidenav.php';
 		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
-
 		require_once 'csrf_token.php';
+		
 		$token  = Token::generate();
 
 		$obj = new DB_connect();
@@ -43,9 +43,8 @@
 		{
 			$record = $_POST['record'];
 		}
-
 	    include_once 'search_navbar.php';
-
+		
 		if (isset($_POST['user_type'])) 
 		{
 			$c = 0;

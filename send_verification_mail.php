@@ -1,4 +1,11 @@
 <?php
+	include_once 'validate_input.php';
+	include_once 'db_connection.php';
+	include_once 'db_credentials.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
+	include_once 'mail_credentials.php';
+
 	$username_msg = "";
 	$firstname_msg = "";
 	$lastname_msg = "";
@@ -10,7 +17,6 @@
 
 		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']) AND Token::check($_POST['token']))
 		{
-			include_once 'validate_input.php';
 
 			$user_name = Validation::test_input($_POST['username']);
 			$email = Validation::test_input($_POST['email']);
@@ -29,9 +35,6 @@
 
 			if($fname_test && $lname_test && $username_test && $email_test && $password_test)
 			{
-				include_once 'db_connection.php';
-				include_once 'db_credentials.php';
-
 			    $obj = new DB_connect();
 			    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 			    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
@@ -49,10 +52,6 @@
 						    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
 						    $conn->exec($sql);
 					    }
-
-					    require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-						require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
-						//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
 
 						$mail = new PHPMailer;
 						$mail->setFrom('spriha.mindfire@gmail.com');
@@ -78,7 +77,6 @@
 						$mail->SMTPAuth = true;
 						$mail->Port = 465;
 
-						include_once 'mail_credentials.php';
 						$mail->Username = $mail_username;
 						$mail->Password = $mail_password;
 						if(!$mail->send()) {

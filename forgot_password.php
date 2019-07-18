@@ -3,9 +3,9 @@
 	include_once 'check_login_status.php';
 	include_once 'header.html';
 	require_once 'csrf_token.php';
+	include_once 'send_password_mail.php';
 ?>
 	<body class="body1">
-		<?php include_once 'send_password_mail.php'; ?>
 		<br><br>
 		<div class="container" style="text-align: center">
 			<div class="card bg-light responsive mx-auto">

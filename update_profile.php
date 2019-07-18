@@ -9,6 +9,9 @@
 	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
 	include_once 'validate_input.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
+	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
+	include_once 'mail_credentials.php';
 
     $obj = new DB_connect();
     $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
@@ -76,11 +79,7 @@
 					}
 					$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
 					$obj->update($query);
-
-					require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
-					require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
-					//require_once '/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php';
-
+					
 					$mail = new PHPMailer;
 					$mail->setFrom('spriha.mindfire@gmail.com');
 					$mail->addAddress(''.$_POST['email'].'');
@@ -98,9 +97,7 @@
 					$mail->SMTPAuth = true;
 					$mail->Port = 465;
 
-					include_once 'mail_credentials.php';
 					$mail->Username = $mail_username;
-
 					$mail->Password = $mail_password;
 					if(!$mail->send()) {
 					  $email_msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
