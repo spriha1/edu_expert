@@ -1,7 +1,16 @@
+//document.getElementById("login").addEventListener("submit", validate_login);
+document.getElementById("registration").addEventListener("submit", validate_registration);
+document.getElementById("fname").addEventListener("blur", validate_fname);
+document.getElementById("lname").addEventListener("blur", validate_lname);
+document.getElementById("email").addEventListener("blur", validate_email);
+document.getElementById("username").addEventListener("blur", validate_username);
+document.getElementById("password").addEventListener("blur", validate_password);
+document.getElementById("password").addEventListener("click", password_info);
+
 function validate_login(obj)
 {
-	var username = obj.username.value.trim();
-	var password = obj.password.value.trim();
+	var username = document.forms.login.username.value.trim();
+	var password = document.forms.login.password.value.trim();
 	if(username === "")
 	{
 		document.getElementById('username').style.borderColor = "red";
@@ -13,20 +22,18 @@ function validate_login(obj)
 	if(username === "" || password === "")
 	{
 		document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Please fill in the highlighted fields</div>";
-		return false;
+		obj.preventDefault();
 	}
-	return true;
 }
-
 
 function validate_registration(obj)
 {
-	var fname = obj.fname.value.trim();
-	var lname = obj.lname.value.trim();
-	var email = obj.email.value.trim();
-	var username = obj.username.value.trim();
-	var password = obj.password.value.trim();
-	var user_type = obj.user_type.value.trim();
+	var fname = document.forms.registration.fname.value.trim();
+	var lname = document.forms.registration.lname.value.trim();
+	var email = document.forms.registration.email.value.trim();
+	var username = document.forms.registration.username.value.trim();
+	var password = document.forms.registration.password.value.trim();
+	var user_type = document.forms.registration.user_type.value.trim();
 
 	if(fname === "")
 	{
@@ -55,13 +62,13 @@ function validate_registration(obj)
 	if(fname === "" || lname === "" || username === "" || password === "" || user_type === "")
 	{
 		document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Please fill in the highlighted fields</div>";
-		return false;
+		obj.preventDefault();
 	}
-	return true;
 }
 
-function validate_fname(obj)
+function validate_fname()
 {
+	var obj = document.forms.registration.fname;
 	var name_pattern = /^([a-zA-Z]+)$/;
 	if(obj.value === "")
 	{
@@ -80,8 +87,9 @@ function validate_fname(obj)
 	}
 }
 
-function validate_lname(obj)
+function validate_lname()
 {
+	var obj = document.forms.registration.lname;
 	var name_pattern = /^([a-zA-Z]+)$/;
 	if(obj.value === "")
 	{
@@ -100,14 +108,15 @@ function validate_lname(obj)
 	}
 }
 
-function validate_email(obj)
+function validate_email()
 {
+	var obj = document.forms.registration.email;
 	if(obj.value === "")
 	{
 		document.getElementById('email').style.borderColor = "grey";
 		document.getElementById("alert").innerHTML = "";
 	}
-	else if(obj.value.indexOf("@") < 1 || obj.value.indexOf(".") < 1)
+	else if(obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0)
 	{
 		document.getElementById('email').style.borderColor = "red";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid email</div>";
@@ -119,8 +128,9 @@ function validate_email(obj)
 	}
 }
 
-function validate_username(obj)
+function validate_username()
 {
+	var obj = document.forms.registration.username;
 	var username_pattern = /^([a-zA-Z0-9@_]+)$/;
 	if(obj.value === "")
 	{
@@ -139,8 +149,9 @@ function validate_username(obj)
 	}
 }
 
-function validate_password(obj)
+function validate_password()
 {
+	var obj = document.forms.registration.password;
 	var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
 	if(obj.value === "")
 	{

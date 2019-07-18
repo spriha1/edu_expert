@@ -3,12 +3,10 @@
 	include_once 'check_login_status.php';
 	include_once 'header.html';
 	require_once 'csrf_token.php'; 
+	include_once 'send_verification_mail.php';
+
 ?>
 <body class="body1">
-	
-	<?php 
-		include_once 'send_verification_mail.php';
-	?>
 	<div class="container">
 	<br><br>
 	<div class="d-flex justify-content-center">
@@ -18,14 +16,14 @@
 				<p style="color: #ff0000;"> <?php echo $msg; ?> </p>
 			</div>
 			<div class="card-body">
-				<form method="POST" action="" name="registration" onsubmit="return validate_registration(this);">
+				<form method="POST" action="" id="registration" name="registration">
 					<div id="alert">
 				    </div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="fname" placeholder="Your First Name" name="fname" onblur="validate_fname(this);">
+						<input type="text" class="form-control" id="fname" placeholder="Your First Name" name="fname">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $firstname_msg; ?> </p>	
@@ -35,7 +33,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="lname" placeholder="Your Last Name" name="lname" onblur="validate_lname(this);">
+						<input type="text" class="form-control" id="lname" placeholder="Your Last Name" name="lname">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $lastname_msg; ?> </p>
@@ -44,7 +42,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 						</div>
-						<input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" onblur="validate_email(this);">
+						<input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $email_msg; ?> </p>
@@ -53,7 +51,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username" onblur="validate_username(this);">
+						<input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $username_msg; ?> </p>
@@ -62,7 +60,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input autocomplete="off" type="password" class="form-control" id="password" placeholder="Enter Password" name="password" onblur="validate_password(this);" onclick="password_info();" >
+						<input autocomplete="off" type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
 					</div>
 					<div style="text-align: center;">
 						<p style="color: #ff0000;"> <?php echo $password_msg; ?> </p>

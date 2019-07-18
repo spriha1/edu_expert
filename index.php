@@ -17,7 +17,7 @@
 					</div>
 					<div class="card-body">
 						<p style="color:#ff0000;"><?php echo $msg; ?></p>
-				    	<form action="" method="POST" name="login" onsubmit="return validate_login(this);">
+				    	<form action="" method="POST" id="login" name="login">
 				    		<div id="alert">
 				    		</div>
 				    		<div class="input-group form-group">
