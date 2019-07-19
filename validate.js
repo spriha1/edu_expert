@@ -22,6 +22,8 @@ function validate_forms(obj)
 			obj.preventDefault();
 		}
 	}
+
+	console.log(event.target.id);
 	if(event.target.id === 'registration')
 	{
 		var i,check,c = 0;
@@ -67,7 +69,7 @@ function validate_fields()
 
 		if(obj.value === "")
 		{
-			document.getElementById('username').style.borderColor = "grey";
+			document.getElementById('username').style.borderColor = "rgba(0,0,0,.125)";
 			document.getElementById("alert").innerHTML = "";
 		}
 		else if(!username_pattern.test(obj.value))
@@ -87,7 +89,7 @@ function validate_fields()
 		var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
 		if(obj.value === "")
 		{
-			document.getElementById('password').style.borderColor = "grey";
+			document.getElementById('password').style.borderColor = "rgba(0,0,0,.125)";
 			document.getElementById("alert").innerHTML = "";
 		}
 		else if(!password_pattern.test(obj.value))
@@ -123,7 +125,7 @@ function validate_fields()
 
 		if(obj.value === "")
 		{
-			document.getElementById('email').style.borderColor = "grey";
+			document.getElementById('email').style.borderColor = "rgba(0,0,0,.125)";
 			document.getElementById("alert").innerHTML = "";
 		}
 		else if(obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0)
@@ -143,7 +145,7 @@ function validate_fields()
 		var name_pattern = /^([a-zA-Z]+)$/;
 		if(obj.value === "")
 		{
-			document.getElementById('fname').style.borderColor = "grey";
+			document.getElementById('fname').style.borderColor = "rgba(0,0,0,.125)";
 			document.getElementById("alert").innerHTML = "";
 		}
 		else if(!name_pattern.test(obj.value))
@@ -163,7 +165,7 @@ function validate_fields()
 		var name_pattern = /^([a-zA-Z]+)$/;
 		if(obj.value === "")
 		{
-			document.getElementById('lname').style.borderColor = "grey";
+			document.getElementById('lname').style.borderColor = "rgba(0,0,0,.125)";
 			document.getElementById("alert").innerHTML = "";
 		}
 		else if(!name_pattern.test(obj.value))
@@ -176,19 +178,18 @@ function validate_fields()
 			document.getElementById('lname').style.borderColor = "green";
 			document.getElementById("alert").innerHTML = "";
 		}
-	}
-	
-	
+	}	
 }
 
 function display_info()
 {
-	if(event.target.id === 'password' && event.target.parentElement.id === 'registration')
+	console.log(event.target.parentElement.id);
+	if(event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration')
 	{
 		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
 	}
-	if(event.target.id === 'username' && event.target.parentElement.id === 'registration')
+	if(event.target.id === 'username' && event.target.closest("form").getAttribute("id") === 'registration')
 	{
 		var msg = "The username can contain letters, digits, @ and _";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
