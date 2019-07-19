@@ -54,18 +54,15 @@ function validate_fields()
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				var arr = JSON.parse(this.responseText);
-				for(var i = 0; i < arr.length; i++)
+				if(Number(this.responseText) === 1)
 				{
-					if(arr[i] === username)
-					{
-						document.getElementById('username').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
-					}
+					document.getElementById('username').style.borderColor = "red";
+					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
 				}
+				
 			}
 		};
-		xhttp.open("GET", "fetch_info.php?q=username", true);
+		xhttp.open("GET", "fetch_info.php?q1=username&q2="+username, true);
 		xhttp.send();
 
 		if(obj.value === "")
@@ -111,19 +108,17 @@ function validate_fields()
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var arr = JSON.parse(this.responseText);
-				for(var i = 0; i < arr.length; i++)
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				if(Number(this.responseText) === 1)
 				{
-					if(arr[i] === email)
-					{
-						document.getElementById('email').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
-					}
+					document.getElementById('email').style.borderColor = "red";
+					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
 				}
+				
 			}
 		};
-		xhttp.open("GET", "fetch_info.php?q=email", true);
+		xhttp.open("GET", "fetch_info.php?q1=email&q2="+email, true);
 		xhttp.send();
 
 		if(obj.value === "")
@@ -188,12 +183,12 @@ function validate_fields()
 
 function display_info()
 {
-	if(event.target.id === 'password' && event.target.parentNode.id === 'registration')
+	if(event.target.id === 'password' && event.target.parentElement.id === 'registration')
 	{
 		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
 	}
-	if(event.target.id === 'username' && event.target.parentNode.id === 'registration')
+	if(event.target.id === 'username' && event.target.parentElement.id === 'registration')
 	{
 		var msg = "The username can contain letters, digits, @ and _";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
