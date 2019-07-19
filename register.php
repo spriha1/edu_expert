@@ -6,7 +6,6 @@
 	include_once 'send_verification_mail.php';
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
-
 ?>
 <body class="body1">
 	<div class="container">
@@ -100,6 +99,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="validate.js"></script>
+	<script src="validate.js?v=1"></script>
 </body>
 </html>

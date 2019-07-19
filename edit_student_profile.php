@@ -63,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-	<script src="validate.js"></script>
+	<script src="validate.js?v=1"></script>
 	</body>
 </html>
 <?php

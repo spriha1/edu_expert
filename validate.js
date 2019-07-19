@@ -26,7 +26,7 @@ function validate_forms(obj)
 	{
 		var i,check,c = 0;
 		var length = document.getElementById("registration").elements.length;
-		for(i = 0 ; i < length ; i++)
+		for(i = 0 ; i < length-1 ; i++)
 		{
 			check = document.getElementById("registration").elements[i].value.trim();
 			if (check === "") 
@@ -188,12 +188,12 @@ function validate_fields()
 
 function display_info()
 {
-	if(event.target.id === 'password')
+	if(event.target.id === 'password' && event.target.parentNode.id === 'registration')
 	{
 		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
 	}
-	if(event.target.id === 'username')
+	if(event.target.id === 'username' && event.target.parentNode.id === 'registration')
 	{
 		var msg = "The username can contain letters, digits, @ and _";
 		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
