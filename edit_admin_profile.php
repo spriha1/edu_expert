@@ -18,7 +18,8 @@
 					<h3>Edit Your Personal Information</h3>
 				</div>
     			<div class="card-body">
-					<form method="POST" action="">
+    				<div id="alert"></div>
+					<form method="POST" action="" name="registration" id="registration">
 					    <div class="form-group">
 					      <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
 					    </div>
