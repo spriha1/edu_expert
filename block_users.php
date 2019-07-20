@@ -3,7 +3,6 @@
 	require_once 'csrf_token.php';
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
-
 	if(isset($_SESSION["username"]))
 	{
 		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) {

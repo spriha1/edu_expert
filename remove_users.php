@@ -5,11 +5,13 @@
 	include_once 'db_connection.php';
 	if(isset($_SESSION["username"]))
 	{
-		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) {
+		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) 
+		{
 			$username = $_GET['username'];
 		    $obj = new DB_connect();
-		    $sql = "DELETE FROM users WHERE username = '".$username."'";
-		    $conn->exec($sql);
+		    $table = "users";
+		    $conditions = array("username" => $username);
+		    $obj->delete($conn, $table, $conditions);
 		    header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	}

@@ -14,7 +14,7 @@
 	    $result = $obj->select_records($conn, $query);
 	    if($result)
 	    {
-	    	$query2 = "UPDATE users SET email_verification_status='1' WHERE email_verification_code='".$hash."' AND email_verification_status=0";
+	    	$query2 = "UPDATE users SET email_verification_status=1 WHERE email_verification_code='".$hash."' AND email_verification_status=0";
 	    	$obj->update($conn, $query2);
 	        echo '<div>Your account has been activated, you can now <a href="index.php"> login</a></div>';
 	    }
