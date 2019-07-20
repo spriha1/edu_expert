@@ -23,7 +23,6 @@ function validate_forms(obj)
 		}
 	}
 
-	console.log(event.target.id);
 	if(event.target.id === 'registration')
 	{
 		var i,check,c = 0;
@@ -47,143 +46,145 @@ function validate_forms(obj)
 
 function validate_fields()
 {
-	if (event.target.id === 'username') 
+	if (event.target.closest("form").getAttribute("id") === 'registration')
 	{
-		var obj = document.forms.registration.username;
-		var username_pattern = /^([a-zA-Z0-9@_]+)$/;
-		var username = obj.value;
+		if (event.target.id === 'username') 
+		{
+			var obj = document.forms.registration.username;
+			var username_pattern = /^([a-zA-Z0-9@_]+)$/;
+			var username = obj.value;
 
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				if(Number(this.responseText) === 1)
-				{
-					document.getElementById('username').style.borderColor = "red";
-					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					if(Number(this.responseText) === 1)
+					{
+						document.getElementById('username').style.borderColor = "red";
+						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
+					}
+					
 				}
-				
-			}
-		};
-		xhttp.open("GET", "fetch_info.php?q1=username&q2="+username, true);
-		xhttp.send();
+			};
+			xhttp.open("GET", "fetch_info.php?q1=username&q2="+username, true);
+			xhttp.send();
 
-		if(obj.value === "")
-		{
-			document.getElementById('username').style.borderColor = "rgba(0,0,0,.125)";
-			document.getElementById("alert").innerHTML = "";
-		}
-		else if(!username_pattern.test(obj.value))
-		{
-			document.getElementById('username').style.borderColor = "red";
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid username</div>";
-		}
-		else
-		{
-			document.getElementById('username').style.borderColor = "green";
-			document.getElementById("alert").innerHTML = "";
-		}
-	}
-	else if (event.target.id === 'password') 
-	{
-		var obj = document.forms.registration.password;
-		var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
-		if(obj.value === "")
-		{
-			document.getElementById('password').style.borderColor = "rgba(0,0,0,.125)";
-			document.getElementById("alert").innerHTML = "";
-		}
-		else if(!password_pattern.test(obj.value))
-		{
-			document.getElementById('password').style.borderColor = "red";
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid password</div>";
-		}
-		else
-		{
-			document.getElementById('password').style.borderColor = "green";
-			document.getElementById("alert").innerHTML = "";
-		}
-	}
-	else if(event.target.id ==="email")
-	{
-		var obj = document.forms.registration.email;
-		var email = obj.value;
-
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) 
+			if(obj.value === "")
 			{
-				if(Number(this.responseText) === 1)
-				{
-					document.getElementById('email').style.borderColor = "red";
-					document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
-				}
-				
+				document.getElementById('username').style.borderColor = "rgba(0,0,0,.125)";
+				document.getElementById("alert").innerHTML = "";
 			}
-		};
-		xhttp.open("GET", "fetch_info.php?q1=email&q2="+email, true);
-		xhttp.send();
+			else if(!username_pattern.test(obj.value))
+			{
+				document.getElementById('username').style.borderColor = "red";
+				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid username</div>";
+			}
+			else
+			{
+				document.getElementById('username').style.borderColor = "green";
+				document.getElementById("alert").innerHTML = "";
+			}
+		}
+		else if (event.target.id === 'password') 
+		{
+			var obj = document.forms.registration.password;
+			var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
+			if(obj.value === "")
+			{
+				document.getElementById('password').style.borderColor = "rgba(0,0,0,.125)";
+				document.getElementById("alert").innerHTML = "";
+			}
+			else if(!password_pattern.test(obj.value))
+			{
+				document.getElementById('password').style.borderColor = "red";
+				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid password</div>";
+			}
+			else
+			{
+				document.getElementById('password').style.borderColor = "green";
+				document.getElementById("alert").innerHTML = "";
+			}
+		}
+		else if(event.target.id ==="email")
+		{
+			var obj = document.forms.registration.email;
+			var email = obj.value;
 
-		if(obj.value === "")
-		{
-			document.getElementById('email').style.borderColor = "rgba(0,0,0,.125)";
-			document.getElementById("alert").innerHTML = "";
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					if(Number(this.responseText) === 1)
+					{
+						document.getElementById('email').style.borderColor = "red";
+						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
+					}
+					
+				}
+			};
+			xhttp.open("GET", "fetch_info.php?q1=email&q2="+email, true);
+			xhttp.send();
+
+			if(obj.value === "")
+			{
+				document.getElementById('email').style.borderColor = "rgba(0,0,0,.125)";
+				document.getElementById("alert").innerHTML = "";
+			}
+			else if(obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0)
+			{
+				document.getElementById('email').style.borderColor = "red";
+				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid email</div>";
+			}
+			else
+			{
+				document.getElementById('email').style.borderColor = "green";
+				document.getElementById("alert").innerHTML = "";
+			}
 		}
-		else if(obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0)
+		else if(event.target.id === 'fname')
 		{
-			document.getElementById('email').style.borderColor = "red";
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid email</div>";
+			var obj = document.forms.registration.fname;
+			var name_pattern = /^([a-zA-Z]+)$/;
+			if(obj.value === "")
+			{
+				document.getElementById('fname').style.borderColor = "rgba(0,0,0,.125)";
+				document.getElementById("alert").innerHTML = "";
+			}
+			else if(!name_pattern.test(obj.value))
+			{
+				document.getElementById('fname').style.borderColor = "red";
+				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid first name</div>";
+			}
+			else
+			{
+				document.getElementById('fname').style.borderColor = "green";
+				document.getElementById("alert").innerHTML = "";
+			}
 		}
-		else
+		else if(event.target.id === 'lname')
 		{
-			document.getElementById('email').style.borderColor = "green";
-			document.getElementById("alert").innerHTML = "";
-		}
-	}
-	else if(event.target.id === 'fname')
-	{
-		var obj = document.forms.registration.fname;
-		var name_pattern = /^([a-zA-Z]+)$/;
-		if(obj.value === "")
-		{
-			document.getElementById('fname').style.borderColor = "rgba(0,0,0,.125)";
-			document.getElementById("alert").innerHTML = "";
-		}
-		else if(!name_pattern.test(obj.value))
-		{
-			document.getElementById('fname').style.borderColor = "red";
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid first name</div>";
-		}
-		else
-		{
-			document.getElementById('fname').style.borderColor = "green";
-			document.getElementById("alert").innerHTML = "";
-		}
-	}
-	else if(event.target.id === 'lname')
-	{
-		var obj = document.forms.registration.lname;
-		var name_pattern = /^([a-zA-Z]+)$/;
-		if(obj.value === "")
-		{
-			document.getElementById('lname').style.borderColor = "rgba(0,0,0,.125)";
-			document.getElementById("alert").innerHTML = "";
-		}
-		else if(!name_pattern.test(obj.value))
-		{
-			document.getElementById('lname').style.borderColor = "red";
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid last name</div>";
-		}
-		else
-		{
-			document.getElementById('lname').style.borderColor = "green";
-			document.getElementById("alert").innerHTML = "";
+			var obj = document.forms.registration.lname;
+			var name_pattern = /^([a-zA-Z]+)$/;
+			if(obj.value === "")
+			{
+				document.getElementById('lname').style.borderColor = "rgba(0,0,0,.125)";
+				document.getElementById("alert").innerHTML = "";
+			}
+			else if(!name_pattern.test(obj.value))
+			{
+				document.getElementById('lname').style.borderColor = "red";
+				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid last name</div>";
+			}
+			else
+			{
+				document.getElementById('lname').style.borderColor = "green";
+				document.getElementById("alert").innerHTML = "";
+			}
 		}
 	}	
 }
 
 function display_info()
 {
-	console.log(event.target.parentElement.id);
 	if(event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration')
 	{
 		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";

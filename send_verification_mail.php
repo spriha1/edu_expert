@@ -1,10 +1,11 @@
 <?php
 	include_once 'validate_input.php';
-	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
+	require_once 'csrf_token.php'; 
 
 	$username_msg = "";
 	$firstname_msg = "";
@@ -13,11 +14,10 @@
 	$password_msg = "";
 	$user_type_msg = "";
 
-	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type'])){
-
+	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type']))
+	{
 		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']) AND Token::check($_POST['token']))
 		{
-
 			$user_name = Validation::test_input($_POST['username']);
 			$email = Validation::test_input($_POST['email']);
 			$firstname = Validation::test_input($_POST['fname']);
@@ -36,17 +36,16 @@
 			if($fname_test && $lname_test && $username_test && $email_test && $password_test)
 			{
 			    $obj = new DB_connect();
-			    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 			    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
-			    $result = $obj->select_records($query);
+			    $result = $obj->select_records($conn, $query);
 			    if(!$result)
 			    {
 			    	$query = "SELECT id FROM users WHERE username = '".$user_name."'";
-			    	$result = $obj->select_records($query);
+			    	$result = $obj->select_records($conn, $query);
 			    	if(!$result)
 			    	{
 			    		$query = "SELECT id FROM user_types where user_type = '".$user_type."'";
-					    $result = $obj->select_records($query);
+					    $result = $obj->select_records($conn, $query);
 					    foreach ($result as $key => $value) {
 							$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
 						    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
@@ -95,7 +94,8 @@
 
 				else
 				{
-					foreach ($result as $key => $value) {
+					foreach ($result as $key => $value) 
+					{
 						if($value['block_status']==1)
 						{
 							$msg = "This user has been blocked by the admin";
@@ -153,6 +153,4 @@
 			}
 		}						
 	}
-	
-			
 ?>

@@ -1,6 +1,6 @@
 <?php
-	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
@@ -13,15 +13,14 @@
 			$username = $_POST['username'];
 			$msg = "Please reset your password by clicking the link that has been sent to your email.";
 			$obj = new DB_connect();
-		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		    $query = "SELECT id FROM users WHERE username = '".$username."'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 			    $query = "UPDATE users SET token = '".uniqid()."' WHERE username = '".$username."'";
-			    $obj->update($query);
+			    $obj->update($conn, $query);
 			    $query = "SELECT token,email FROM users WHERE username = '".$username."'";
-			    $result = $obj->select_records($query);
+			    $result = $obj->select_records($conn, $query);
 			   
 		    	foreach ($result as $key => $value) {
 

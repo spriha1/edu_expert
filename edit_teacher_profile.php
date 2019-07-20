@@ -39,7 +39,7 @@
 							<p style="color: #ff0000;"><?php echo $email_msg;?></p>	
 						</div>
 					    <div class="form-group">
-					      <input type="text" class="form-control" id="username" data-toggle="tooltip" title="The username can contain letters, digits, @ and _" placeholder="Enter Username" name="username">
+					      <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
 					    </div>
 					     <div style="text-align: center;">
 							<p style="color: #ff0000;"><?php echo $username_msg;?></p>	

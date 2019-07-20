@@ -23,14 +23,13 @@
                     $pass = MD5($_POST['password']);
 
                     $obj = new DB_connect();
-                    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
                     $query = "SELECT id,firstname,lastname,username,email,password,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
-                    $result = $obj->select_records($query);
+                    $result = $obj->select_records($conn, $query);
                     if($result)
                     {
                         foreach ($result as $key => $value) {
                             $query2 = 'SELECT user_type FROM user_types WHERE id = '.$value["user_type_id"];
-                            $result2 = $obj->select_records($query2);
+                            $result2 = $obj->select_records($conn, $query2);
                             foreach ($result2 as $key2 => $value2) {
                                 
                                 if ($value2["user_type"] == "Student") {
@@ -57,10 +56,10 @@
                     else
                     {
                         $query = "SELECT id FROM users where username = '".$uname."' AND user_reg_status = 1";
-                        $result = $obj->select_records($query);
+                        $result = $obj->select_records($conn, $query);
 
                         $query2 = "SELECT id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
-                        $result2 = $obj->select_records($query2);
+                        $result2 = $obj->select_records($conn, $query2);
 
                         if (!$result) {
                             $username_msg = "Invalid Username";

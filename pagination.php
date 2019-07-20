@@ -27,7 +27,7 @@
 	 	if (isset($_POST['user_type']) && $check &&  isset($_POST['search']))
 	 	{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
-			$res = $obj->select_records($query);
+			$res = $obj->select_records($conn, $query);
 
 			$prev_link = $file."?page=".$previous."&s=".$_POST['search']."&u=".$_POST['user_type'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -39,7 +39,7 @@
 	 	else if(isset($_POST['search']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%' LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
+		    $res = $obj->select_records($conn, $query);
 
 		    $prev_link = $file."?page=".$previous."&s=".$_POST['search'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -50,7 +50,7 @@
 		else if(isset($_POST['user_type']) && $check)
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_POST['user_type']."' LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
+		    $res = $obj->select_records($conn, $query);
 
 		    $prev_link = $file."?page=".$previous."&u=".$_POST['user_type'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -78,7 +78,7 @@
 		if(isset($_GET['s']) && isset($_GET['u']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = ".$status." AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_GET['u']."') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
+		    $res = $obj->select_records($conn, $query);
 
 		    $prev_link = $file."?page=".$previous."&s=".$_GET['s']."&u=".$_GET['u'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -89,7 +89,7 @@
 		else if(isset($_GET['s']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_GET['s']."%' LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
+		    $res = $obj->select_records($conn, $query);
 
 		    $prev_link = $file."?page=".$previous."&s=".$_GET['s'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -100,7 +100,7 @@
 		else if(isset($_GET['u']))
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = ".$status." AND user_type = '".$_GET['u']."' LIMIT ".$offset." , ".$limit."";
-		    $res = $obj->select_records($query);
+		    $res = $obj->select_records($conn, $query);
 
 		    $prev_link = $file."?page=".$previous."&u=".$_GET['u'].$link_part3;
 			$link_part1 = $file."?page=";
@@ -112,7 +112,7 @@
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
 
-			$res = $obj->select_records($query);
+			$res = $obj->select_records($conn, $query);
 
 			$prev_link = $file."?page=".$previous.$link_part3;
 			$link_part1 = $file."?page=";
@@ -129,7 +129,7 @@
 		$next = "";
 		$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = ".$status." AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') LIMIT ".$offset." , ".$limit."";
 
-		$res = $obj->select_records($query);
+		$res = $obj->select_records($conn, $query);
 
 		$prev_link = $file."?page=".$previous.$link_part3;
 		$link_part1 = $file."?page=";

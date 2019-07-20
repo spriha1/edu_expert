@@ -39,7 +39,7 @@
 				    	    <div>
 						  		<p style="color:#ff0000;"><?php echo $password_msg; ?></p>
 						  	</div>
-						  	<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+						  	<input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?>">
 				    	    <button class="btn btn-success form-control" type="submit">Login</button>
 				    	</form>
 				    	<br>
@@ -50,6 +50,6 @@
 	    	</div>
 		</div>
     </div>
-	<script src="validate.js?v=1"></script>
+	<script src="validate.js?v=3"></script>
 </body>
 </html>

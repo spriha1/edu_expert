@@ -6,15 +6,14 @@
 	$lastname_msg = "";
 	$email_msg = "";
 	$password_msg = "";
-	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 	include_once 'validate_input.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
 
     $obj = new DB_connect();
-    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
     if(Token::check($_POST['token']))
     {
 		if(isset($_POST['fname']) && !empty($_POST['fname']))
@@ -24,7 +23,7 @@
 			if($fname_test)
 			{
 				$query = "UPDATE users SET firstname = '".$_POST['fname']."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($query);
+				$obj->update($conn, $query);
 			}
 			else
 			{
@@ -38,7 +37,7 @@
 			if($lname_test)
 			{
 				$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($query);
+				$obj->update($conn, $query);
 			}
 			else
 			{
@@ -52,7 +51,7 @@
 			if($password_test)
 			{
 				$query = "UPDATE users SET password = '".md5($_POST['password'])."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($query);
+				$obj->update($conn, $query);
 			}
 			else
 			{
@@ -66,19 +65,19 @@
 			if($email_test)
 			{
 				$query = "SELECT id FROM users WHERE email = '".$_POST['email']."'";
-				$result = $obj->select_records($query);
+				$result = $obj->select_records($conn, $query);
 				if ($result) {
 					$email_msg = "Email Id already exists";
 				}
 				else
 				{
 					$query = "SELECT email_verification_code FROM users WHERE username = '".$_SESSION['username']."'";
-					$result = $obj->select_records($query);
+					$result = $obj->select_records($conn, $query);
 					foreach ($result as $key => $value) {
 						$hash = $value['email_verification_code'];
 					}
 					$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
-					$obj->update($query);
+					$obj->update($conn, $query);
 					
 					$mail = new PHPMailer;
 					$mail->setFrom('spriha.mindfire@gmail.com');
@@ -120,14 +119,14 @@
 			if($username_test)
 			{
 				$query = "SELECT id FROM users WHERE username = '".$_POST['username']."'";
-				$result = $obj->select_records($query);
+				$result = $obj->select_records($conn, $query);
 				if ($result) {
 					$username_msg = "Username already exists";
 				}
 				else
 				{
 					$query = "UPDATE users SET username = '".$_POST['username']."' WHERE username = '".$_SESSION['username']."'";
-					$obj->update($query);
+					$obj->update($conn, $query);
 				}
 				//header("Location:logout.php");
 			}

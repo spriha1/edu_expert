@@ -8,11 +8,9 @@
 			
 			$password = $_POST["password"];
 		    $obj = new DB_connect();
-		    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
-	    
 		
 		    $query = "SELECT username FROM users WHERE token ='".$_SESSION['token']."' AND user_reg_status = 1";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	$query = "UPDATE users SET password='".md5($password)."' WHERE token ='".$_SESSION['token']."'";

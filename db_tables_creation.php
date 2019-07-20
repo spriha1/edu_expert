@@ -1,14 +1,12 @@
 <?php
 	include_once 'db_credentials.php';
-	include_once 'db_connection.php';
-	$servername = "localhost";
-    $conn = new PDO("mysql:host=$servername", $db_username, $db_password);
+    $conn = new PDO("mysql:host=$server_name", $db_username, $db_password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "CREATE DATABASE IF NOT EXISTS php_project";
     $conn->exec($sql);
-	
-    $obj = new DB_connect();
-    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
+
+    $conn = new PDO("mysql:host=$server_name;dbname=$db_name", $db_username, $db_password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	$sql = "CREATE TABLE IF NOT EXISTS user_types (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

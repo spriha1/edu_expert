@@ -1,8 +1,8 @@
 <?php 
 	session_start();
 	include_once 'header.html';
-	include_once 'db_connection.php';
 	include_once 'db_credentials.php';
+	include_once 'db_connection.php';
 	?>
 	<body>
 		<br><br>
@@ -16,9 +16,8 @@
 			{
 				echo "The link has expired";
 				$obj = new DB_connect();
-			    $conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 				$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";
-				$obj->update($query);
+				$obj->update($conn, $query);
 			}
 			else
 			{ ?>

@@ -74,9 +74,8 @@
 					        <option value="0">Select User Type</option>
 					        <?php 
 								$obj = new DB_connect();
-	            				$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 	            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
-	            				$result = $obj->select_records($query);
+	            				$result = $obj->select_records($conn, $query);
 	            				foreach ($result as $key => $value) {
 	            					echo '<option value="'.$value['user_type'].'">'.$value['user_type'].'</option>';
 	            				}

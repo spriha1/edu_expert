@@ -1,24 +1,20 @@
 <?php 
+	include_once 'db_credentials.php';
+	$conn = new PDO("mysql:host=$server_name;dbname=$db_name", $db_username, $db_password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	class DB_connect
 	{
-		public $conn;
-		function connect($servername,$dbname,$username,$password)
+		function select_records($conn, $query)
 		{
-			$this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			return $this->conn;
-		}
-		function select_records($query)
-		{
-			$sql = $this->conn->prepare($query);
+			$sql = $conn->prepare($query);
 		    $sql->execute();
 		    $result = $sql->setFetchMode(PDO::FETCH_ASSOC);
 		    $result = $sql->fetchAll();
 		    return $result;
 		}
-		function update($query)
+		function update($conn, $query)
 		{
-			$sql = $this->conn->prepare($query);
+			$sql = $conn->prepare($query);
 		    $sql->execute();
 		}
 	}

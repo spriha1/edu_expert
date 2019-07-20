@@ -5,16 +5,15 @@
 		echo '<body class="body2">';
 		include_once 'header.html';
 		include_once 'admin_sidenav.php';
-		include_once 'db_connection.php';
 		include_once 'db_credentials.php';
+		include_once 'db_connection.php';
 		require_once 'csrf_token.php';
 		
 		$token  = Token::generate();
 
 		$obj = new DB_connect();
-		$conn = $obj->connect($server_name,$db_name,$db_username,$db_password);
 		$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
-		$result = $obj->select_records($query);
+		$result = $obj->select_records($conn, $query);
 		$file = "pending_requests.php";
 		$search_value_fname = "";
 		$search_value_usertype = "";
@@ -49,7 +48,7 @@
 		{
 			$c = 0;
 			$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
-			$result = $obj->select_records($query);
+			$result = $obj->select_records($conn, $query);
 			foreach ($result as $key => $value) 
 			{
 				if($value['user_type'] === $_POST['user_type'])
@@ -85,7 +84,7 @@
 		if (isset($_POST['user_type']) && $check && isset($_POST['search'])) 
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_POST['search']."%'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -99,7 +98,7 @@
 		else if (isset($_POST['user_type']) && $check && isset($_GET['s'])) 
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users WHERE user_reg_status = 0 AND user_type_id = (SELECT id FROM user_types WHERE user_type = '".$_POST['user_type']."') AND firstname LIKE '%".$_GET['s']."%'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -113,7 +112,7 @@
 		else if (isset($_POST['user_type']) && $check) 
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type = '".$_POST['user_type']."'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -126,7 +125,7 @@
 
 		else if (isset($_POST['user_type'])) {
 		    $query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type = '".$_POST['user_type']."'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -139,7 +138,7 @@
 
 		else if (isset($_POST['search'])) {
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_POST['search']."%'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -152,7 +151,7 @@
 		
 		else if (isset($_GET['s'])) {
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type_id != (SELECT id FROM user_types WHERE user_type = 'Admin') AND firstname LIKE '%".$_GET['s']."%'";
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
@@ -167,7 +166,7 @@
 		{
 			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 0 AND user_type_id NOT IN (SELECT id FROM user_types WHERE user_type = 'Admin')";
 
-		    $result = $obj->select_records($query);
+		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
 		    	include_once 'pagination.php';
