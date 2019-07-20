@@ -13,9 +13,13 @@
 		    $query = "SELECT id FROM users WHERE email_verification_code='".$hash."' AND email_verification_status=0";
 		    $result = $obj->select_records($conn, $query);
 		    if($result){
-		    	foreach ($result as $key => $value) {
-		    		$query2 = "UPDATE users SET email_verification_status=1 ,email = '".$email ."' WHERE id=".$value['id']." AND email_verification_status=0";
-		    		$obj->update($query2);
+		    	foreach ($result as $key => $value) 
+		    	{
+		    		$table = "users";
+				    $columns = array("email_verification_status" => 1, "email" => $email);
+				    $conditions = array("id" => $value['id'], "email_verification_status" => 0);
+				    $obj->update($conn, $table, $columns, $conditions);
+		    		//$query2 = "UPDATE users SET email_verification_status=1 ,email = '".$email ."' WHERE id=".$value['id']." AND email_verification_status=0";
 			        echo '<div>Your email has been updated, you can continue <a href="edit_profile.php"> here</a></div>';
 		    	}
 		    	

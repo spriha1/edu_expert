@@ -16,8 +16,11 @@
 			{
 				echo "The link has expired";
 				$obj = new DB_connect();
-				$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";
-				$obj->update($conn, $query);
+				$table = "users";
+			    $columns = array("token" => NULL);
+			    $conditions = array("token" => $token);
+			    $obj->update($conn, $table, $columns, $conditions);
+				//$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";
 			}
 			else
 			{ ?>

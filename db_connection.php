@@ -12,10 +12,6 @@
 		    $result = $sql->fetchAll();
 		    return $result;
 		}
-		function select($conn, $columns, $table, $conditions)
-		{
-
-		}
 		function update($conn, $table, $columns, $conditions)
 		{
 			$query = "UPDATE ".$table." SET ";
@@ -25,43 +21,32 @@
 			{ 
 				foreach ($columns as $key => $value) 
 				{
-					$query .= $key[$i]." = ".$value[$i]." , ";
-				}
-			}
-			foreach ($columns as $key => $value)
-			{
-				$query .= $key[$i]." = ".$value[$i];
-			} 
-
-			$conditions_length = count($conditions);
-			if($conditions_length > 0)
-			{
-				$query .= " WHERE ";
-				for ($i=0; $i < $conditions_length-1; $i++) 
-				{ 
-					foreach ($conditions as $key => $value) 
+					if (is_string($value)) 
 					{
-						$query .= $key[$i]." = ".$value[$i]." AND ";
+						$query .= $key." = '".$value."' , ";
+					}
+					else
+					{
+						$query .= $key." = ".$value." , ";
 					}
 				}
-				foreach ($conditions as $key => $value)
-				{
-					$query .= $key[$i]." = ".$value[$i];
-				} 
 			}
-			$sql = $conn->prepare($query);
-		    $sql->execute();
-		}
+			end($columns);
+			$last_key = key($columns);
+			$last_value = $columns[$last_key];
+			if (is_string($last_value)) 
+			{
+				$query .= $last_key." = '".$last_value."'";
+			}
+			else
+			{
+				$query .= $last_key." = ".$last_value;
+			}
 
-		function delete($conn, $table, $conditions)
-		{
-			$query = "DELETE FROM ".$table;
-			
 			$conditions_length = count($conditions);
 			if ($conditions_length > 0)
 			{
 				$query .= " WHERE ";
-				$i=0;
 				for ($i=0; $i < $conditions_length-1; $i++) 
 				{ 
 					foreach ($conditions as $key => $value) 
@@ -76,24 +61,94 @@
 						}
 					}
 				}
-				foreach ($conditions as $key => $value)
+				end($conditions);
+				$last_key = key($conditions);
+				$last_value = $conditions[$last_key];
+				if (is_string($last_value)) 
 				{
-					if (is_string($value)) 
+					$query .= $last_key." = '".$last_value."'";
+				}
+				else
+				{
+					$query .= $last_key." = ".$last_value;
+				}
+				
+			}
+			$sql = $conn->prepare($query);
+		    $sql->execute();
+		}
+
+		function delete($conn, $table, $conditions)
+		{
+			$query = "DELETE FROM ".$table;
+			
+			$conditions_length = count($conditions);
+			if ($conditions_length > 0)
+			{
+				$query .= " WHERE ";
+				for ($i=0; $i < $conditions_length-1; $i++) 
+				{ 
+					foreach ($conditions as $key => $value) 
 					{
-						$query .= $key." = '".$value."'";
+						if (is_string($value)) 
+						{
+							$query .= $key." = '".$value."' AND ";
+						}
+						else
+						{
+							$query .= $key." = ".$value." AND ";
+						}
 					}
-					else
-					{
-						$query .= $key." = ".$value;
-					}
-				} 
+				}
+				end($conditions);
+				$last_key = key($conditions);
+				$last_value = $conditions[$last_key];
+				if (is_string($last_value)) 
+				{
+					$query .= $last_key." = '".$last_value."'";
+				}
+				else
+				{
+					$query .= $last_key." = ".$last_value;
+				}
+				
 			}
 		    $conn->exec($query);
 		}
 
-		function insert($conn, $table, $data)
+		function insert($conn, $table, $columns, $values)
 		{
-
+			$i = 0;
+			$query = "INSERT INTO ".$table." (";
+			$columns_length = count($columns);
+			for ($i=0; $i < $columns_length-1; $i++) 
+			{ 
+				$query .= $columns[$i].", ";
+			}
+			$query .= $columns[$i].") VALUES (";
+			$values_length = count($values);
+			for ($i=0; $i < $values_length-1; $i++) 
+			{ 
+				if (is_string($values[$i])) 
+				{
+					$query .= "'".$values[$i]."' ,";
+				}
+				else
+				{
+					$query .= $values[$i]." ,";
+				}
+			}
+			if (is_string($values[$i])) 
+			{
+				$query .= "'".$values[$i]."'";
+			}
+			else
+			{
+				$query .= $values[$i];
+			}
+			print_r($query);exit();
+			$conn->exec($query);
 		}
+
 	}
  ?>

@@ -6,7 +6,7 @@
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
 	require_once 'csrf_token.php'; 
-
+	$msg = "";
 	$username_msg = "";
 	$firstname_msg = "";
 	$lastname_msg = "";
@@ -46,10 +46,14 @@
 			    	{
 			    		$query = "SELECT id FROM user_types where user_type = '".$user_type."'";
 					    $result = $obj->select_records($conn, $query);
-					    foreach ($result as $key => $value) {
-							$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id)
-						    VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
-						    $conn->exec($sql);
+					    foreach ($result as $key => $value) 
+					    {
+					    	$table = "users";
+					    	$columns = array("firstname", "lastname", "email", "username", "password", "email_verification_code, ", "user_type_id");
+					    	$values = array($firstname, $lastname, $email, $user_name, $pass, $hash, $value['id']);
+					    	$obj->insert($conn, $table, $columns, $values);
+							//$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id) VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
+						    //$conn->exec($sql);
 					    }
 
 						$mail = new PHPMailer;

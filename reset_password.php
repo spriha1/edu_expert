@@ -13,8 +13,12 @@
 		    $result = $obj->select_records($conn, $query);
 		    if($result)
 		    {
-		    	$query = "UPDATE users SET password='".md5($password)."' WHERE token ='".$_SESSION['token']."'";
-		    	$obj->update($query);
+		    	$pass = md5($password);
+		    	$table = "users";
+			    $columns = array("password" => $pass);
+			    $conditions = array("token" => $_SESSION['token']);
+			    $obj->update($conn, $table, $columns, $conditions);
+		    	//$query = "UPDATE users SET password='".md5($password)."' WHERE token ='".$_SESSION['token']."'";
 		        echo '<div>Your password has been reset, you can now <a href="index.php"> login</a></div>';
 		    }
 		    else

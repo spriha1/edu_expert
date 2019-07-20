@@ -14,6 +14,7 @@
 	include_once 'mail_credentials.php';
 
     $obj = new DB_connect();
+	$table = "users";
     if(Token::check($_POST['token']))
     {
 		if(isset($_POST['fname']) && !empty($_POST['fname']))
@@ -22,8 +23,10 @@
 			$fname_test = Validation::validate_name($firstname);
 			if($fname_test)
 			{
-				$query = "UPDATE users SET firstname = '".$_POST['fname']."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($conn, $query);
+				$columns = array("firstname" => $_POST['fname']);
+			    $conditions = array("username" => $_SESSION['username']);
+			    $obj->update($conn, $table, $columns, $conditions);
+				//$query = "UPDATE users SET firstname = '".$_POST['fname']."' WHERE username = '".$_SESSION['username']."'";
 			}
 			else
 			{
@@ -36,8 +39,10 @@
 			$lname_test = Validation::validate_name($lastname);
 			if($lname_test)
 			{
-				$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($conn, $query);
+				$columns = array("lastname" => $_POST['lname']);
+			    $conditions = array("username" => $_SESSION['username']);
+			    $obj->update($conn, $table, $columns, $conditions);
+				//$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
 			}
 			else
 			{
@@ -50,8 +55,11 @@
 			$password_test = Validation::validate_name($password);
 			if($password_test)
 			{
-				$query = "UPDATE users SET password = '".md5($_POST['password'])."' WHERE username = '".$_SESSION['username']."'";
-				$obj->update($conn, $query);
+				$pass = md5($_POST['password']);
+				$columns = array("password" => $pass);
+			    $conditions = array("username" => $_SESSION['username']);
+			    $obj->update($conn, $table, $columns, $conditions);
+				//$query = "UPDATE users SET password = '".md5($_POST['password'])."' WHERE username = '".$_SESSION['username']."'";
 			}
 			else
 			{
@@ -73,11 +81,14 @@
 				{
 					$query = "SELECT email_verification_code FROM users WHERE username = '".$_SESSION['username']."'";
 					$result = $obj->select_records($conn, $query);
-					foreach ($result as $key => $value) {
+					foreach ($result as $key => $value) 
+					{
 						$hash = $value['email_verification_code'];
 					}
-					$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
-					$obj->update($conn, $query);
+					$columns = array("email_verification_status" => 0);
+				    $conditions = array("username" => $_SESSION['username']);
+				    $obj->update($conn, $table, $columns, $conditions);
+					//$query = "UPDATE users SET email_verification_status = 0 WHERE username = '".$_SESSION['username']."'";
 					
 					$mail = new PHPMailer;
 					$mail->setFrom('spriha.mindfire@gmail.com');
@@ -125,8 +136,10 @@
 				}
 				else
 				{
-					$query = "UPDATE users SET username = '".$_POST['username']."' WHERE username = '".$_SESSION['username']."'";
-					$obj->update($conn, $query);
+					$columns = array("username" => $_POST['username']);
+				    $conditions = array("username" => $_SESSION['username']);
+				    $obj->update($conn, $table, $columns, $conditions);
+					//$query = "UPDATE users SET username = '".$_POST['username']."' WHERE username = '".$_SESSION['username']."'";
 				}
 				//header("Location:logout.php");
 			}

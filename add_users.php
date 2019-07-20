@@ -5,7 +5,8 @@
 	include_once 'db_connection.php';
 	if(isset($_SESSION["username"]))
 	{
-		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) {
+		if (isset($_GET['username']) && !empty($_GET['username']) && Token::check($_GET['t'])) 
+		{
 			$username = $_GET['username'];
 		    $obj = new DB_connect();
 		    $table = "users";
