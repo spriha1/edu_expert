@@ -7,13 +7,11 @@
 <?php 
     $obj = new DB_connect();
     
-	if(isset($_GET['q']) && !empty($_GET['q']))
-	{
+	if (isset($_GET['q']) && !empty($_GET['q'])) {
 	    $hash = base64_decode($_GET['q']);
 	    $query = "SELECT email, email_verification_code, email_verification_status FROM users WHERE email_verification_code='".$hash."' AND email_verification_status='0'";
 	    $result = $obj->select_records($conn, $query);
-	    if($result)
-	    {
+	    if ($result) {
 	    	$table = "users";
 		    $columns = array("email_verification_status" => 1);
 		    $conditions = array("email_verification_code" => $hash, "email_verification_status" => 0);
@@ -21,14 +19,11 @@
 	    	//$query2 = "UPDATE users SET email_verification_status=1 WHERE email_verification_code='".$hash."' AND email_verification_status=0";
 	        echo '<div>Your account has been activated, you can now <a href="index.php"> login</a></div>';
 	    }
-	    else
-	    {
+	    else {
 	        echo '<div>The url is either invalid or you already have activated your account.</div>';
 	    }
-	                 
 	}
-	else
-	{
+	else {
 	    echo '<div>Invalid approach, please use the link that has been send to your email.</div>';
 	}
  ?>

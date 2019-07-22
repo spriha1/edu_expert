@@ -12,9 +12,8 @@
 
 		    $query = "SELECT id FROM users WHERE email_verification_code='".$hash."' AND email_verification_status=0";
 		    $result = $obj->select_records($conn, $query);
-		    if($result){
-		    	foreach ($result as $key => $value) 
-		    	{
+		    if ($result){
+		    	foreach ($result as $key => $value) {
 		    		$table = "users";
 				    $columns = array("email_verification_status" => 1, "email" => $email);
 				    $conditions = array("id" => $value['id'], "email_verification_status" => 0);
@@ -22,17 +21,17 @@
 		    		//$query2 = "UPDATE users SET email_verification_status=1 ,email = '".$email ."' WHERE id=".$value['id']." AND email_verification_status=0";
 			        echo '<div>Your email has been updated, you can continue <a href="edit_profile.php"> here</a></div>';
 		    	}
-		    	
-		    }else{
+		    }
+		    else {
 		        echo '<div>The url is either invalid or you already have activated your account.</div>';
 		    }
 		                 
-		}else{
+		}
+		else {
 		    echo '<div>Invalid approach, please use the link that has been send to your email.</div>';
 		}
 	}
-	else
-	{
+	else {
 		header("Location:index.php");
 	}
  ?>

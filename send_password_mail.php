@@ -6,17 +6,17 @@
 	include_once 'mail_credentials.php';
 
 	$msg = "";
-	if(isset($_POST['username']))
-	{
-		if(!empty($_POST['username']) && Token::check($_POST['token']))
-		{
+	if (isset($_POST['username'])) {
+
+		if (!empty($_POST['username']) && Token::check($_POST['token'])) {
+
 			$username = $_POST['username'];
 			$msg = "Please reset your password by clicking the link that has been sent to your email.";
 			$obj = new DB_connect();
 		    $query = "SELECT id FROM users WHERE username = '".$username."'";
 		    $result = $obj->select_records($conn, $query);
-		    if($result)
-		    {
+		    if ($result) {
+
 			    $table = "users";
 			    $unique = uniqid();
 			    $columns = array("token" => $unique);
@@ -51,13 +51,11 @@
 					}
 				}
 			}
-		    else
-		    {
+		    else {
 		    	$msg = "The username you entered is not valid";
 		    }
 		}
-		else
-		{
+		else {
 			$msg = "Please enter a username";
 		}
 	}

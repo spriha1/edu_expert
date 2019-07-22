@@ -11,8 +11,7 @@
 		
 		    $query = "SELECT username FROM users WHERE token ='".$_SESSION['token']."' AND user_reg_status = 1";
 		    $result = $obj->select_records($conn, $query);
-		    if($result)
-		    {
+		    if ($result) {
 		    	$pass = md5($password);
 		    	$table = "users";
 			    $columns = array("password" => $pass);
@@ -21,8 +20,7 @@
 		    	//$query = "UPDATE users SET password='".md5($password)."' WHERE token ='".$_SESSION['token']."'";
 		        echo '<div>Your password has been reset, you can now <a href="index.php"> login</a></div>';
 		    }
-		    else
-		    {
+		    else {
 		        echo '<div>Your request has not been accepted by the admin yet</div>';
 		    }
 		}  

@@ -6,10 +6,10 @@
 	include_once 'mail_credentials.php';
 	$msg = "";
 
-	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['usertype']))
-	{
-		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['usertype']))
-		{
+	if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['usertype'])) {
+
+		if (!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['usertype'])) {
+
 			$firstname = $_POST['fname'];
 			$lastname = $_POST['lname'];
 			$email = $_POST['email'];
@@ -22,16 +22,14 @@
 		    $obj = new DB_connect();
 		    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
 		    $result = $obj->select_records($conn, $query);
-		    if(!$result)
-		    {
+		    if (!$result) {
 		    	$query = "SELECT id FROM users WHERE username = '".$user_name."'";
 		    	$result = $obj->select_records($conn, $query);
-		    	if(!$result)
-		    	{
+
+		    	if (!$result) {
 		    		$query = "SELECT id FROM user_types where user_type = '".$user_type."'";
 				    $result = $obj->select_records($conn, $query);
-				    foreach ($result as $key => $value) 
-				    {
+				    foreach ($result as $key => $value) {
 				    	$table = "users";
 				    	$columns = array("firstname", "lastname", "email", "username", "password", "email_verification_code", "user_type_id");
 				    	$values = array($firstname, $lastname, $email, $user_name, $pass, $hash, intval($value['id']));
@@ -66,35 +64,29 @@
 
 					$mail->Username = $mail_username;
 					$mail->Password = $mail_password;
-					if(!$mail->send()) {
+					if (!$mail->send()) {
 					  $msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
 					}
-					else
-					{
+					else {
 						$msg = "Please verify it by clicking the activation link that has been send to your email.";
 					}
 		    	}
-		    	else
-		    	{
+		    	else {
 		    		$msg = "Username already exists";
 		    	}
 		    }
 
-			else
-			{
-				foreach ($result as $key => $value) 
-				{
-					if($value['block_status']==1)
-					{
+			else {
+				foreach ($result as $key => $value) {
+					if ($value['block_status']==1) {
 						$msg = "This user has been blocked by the admin";
 					}
-					else
-					{
+					else {
 						$msg = "Email already exists";
 					}
 				}
 			}
 		}			
 	}
-	print_r($msg);exit();
+	print_r($msg);
 ?>

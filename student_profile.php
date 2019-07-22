@@ -38,8 +38,7 @@
 	     	<?php
 	    } 
 	}
-	else
-	{
+	else {
 		header("Location:index.php");
 	}
 ?>	

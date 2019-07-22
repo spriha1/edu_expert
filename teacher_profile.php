@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if(isset($_SESSION["username"]))
+	if (isset($_SESSION["username"]))
 	{
 		echo '<body class="body1">';
 		include_once 'header.html';
@@ -38,8 +38,7 @@
 	     	<?php
 	    } 
 	}
-	else
-	{
+	else {
 		header("Location:index.php");
 	}
 ?>	

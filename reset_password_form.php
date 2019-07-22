@@ -6,14 +6,12 @@
 	?>
 	<body>
 		<br><br>
-		<?php if (isset($_GET["q"]) AND !empty($_GET["q"]) AND isset($_GET["t"]) AND !empty($_GET["t"])) 
-		{
+		<?php if (isset($_GET["q"]) AND !empty($_GET["q"]) AND isset($_GET["t"]) AND !empty($_GET["t"])) {
 			$token = base64_decode($_GET["q"]);
 			$_SESSION['token'] = $token;
 			$expiry_time = base64_decode($_GET["t"]);
 			$current_time = time();
-			if($current_time > $expiry_time)
-			{
+			if ($current_time > $expiry_time) {
 				echo "The link has expired";
 				$obj = new DB_connect();
 				$table = "users";
@@ -22,8 +20,7 @@
 			    $obj->update($conn, $table, $columns, $conditions);
 				//$query = "UPDATE users SET token = NULL WHERE token = '".$token."'";
 			}
-			else
-			{ ?>
+			else { ?>
 				<div class="container" style="text-align: center">
 					<div class="card bg-secondary mx-auto" style="width: 50%">
 		    			<div class="card-body">

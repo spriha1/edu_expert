@@ -1,6 +1,5 @@
 <?php
-	if($total > $limit)
-	{
+	if ($total > $limit) {
 	?>
 		<ul class="pagination justify-content-center">
 		    <li class="page-item"><a class="page-link" href="<?php echo $prev_link; ?>">Previous</a></li>

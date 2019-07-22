@@ -15,74 +15,67 @@
 
     $obj = new DB_connect();
 	$table = "users";
-    if(Token::check($_POST['token']))
-    {
-		if(isset($_POST['fname']) && !empty($_POST['fname']))
-		{
+    if (Token::check($_POST['token'])) {
+		if (isset($_POST['fname']) && !empty($_POST['fname'])) {
 			$firstname = Validation::test_input($_POST['fname']);
 			$fname_test = Validation::validate_name($firstname);
-			if($fname_test)
-			{
+			if ($fname_test) {
 				$columns = array("firstname" => $_POST['fname']);
 			    $conditions = array("username" => $_SESSION['username']);
 			    $obj->update($conn, $table, $columns, $conditions);
 				//$query = "UPDATE users SET firstname = '".$_POST['fname']."' WHERE username = '".$_SESSION['username']."'";
 			}
-			else
-			{
+
+			else {
 				$firstname_msg = "Invalid name format";
 			}
 		}
-		if(isset($_POST['lname']) && !empty($_POST['lname']))
-		{
+
+		if (isset($_POST['lname']) && !empty($_POST['lname'])) {
 			$lastname = Validation::test_input($_POST['lname']);
 			$lname_test = Validation::validate_name($lastname);
-			if($lname_test)
-			{
+			if ($lname_test) {
 				$columns = array("lastname" => $_POST['lname']);
 			    $conditions = array("username" => $_SESSION['username']);
 			    $obj->update($conn, $table, $columns, $conditions);
 				//$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
 			}
-			else
-			{
+
+			else {
 				$lastname_msg = "Invalid name format";
 			}
 		}
-		if(isset($_POST['password']) && !empty($_POST['password']))
-		{
+
+		if (isset($_POST['password']) && !empty($_POST['password'])) {
 			$password = Validation::test_input($_POST['password']);
 			$password_test = Validation::validate_name($password);
-			if($password_test)
-			{
+			if ($password_test) {
 				$pass = md5($_POST['password']);
 				$columns = array("password" => $pass);
 			    $conditions = array("username" => $_SESSION['username']);
 			    $obj->update($conn, $table, $columns, $conditions);
 				//$query = "UPDATE users SET password = '".md5($_POST['password'])."' WHERE username = '".$_SESSION['username']."'";
 			}
-			else
-			{
+
+			else {
 				$password_msg = "Invalid password format";
 			}
 		}
-		if(isset($_POST['email']) && !empty($_POST['email']))
-		{
+
+		if (isset($_POST['email']) && !empty($_POST['email'])) {
 			$email = Validation::test_input($_POST['email']);
 			$email_test = Validation::validate_name($email);
-			if($email_test)
-			{
+			if ($email_test) {
 				$query = "SELECT id FROM users WHERE email = '".$_POST['email']."'";
 				$result = $obj->select_records($conn, $query);
 				if ($result) {
 					$email_msg = "Email Id already exists";
 				}
-				else
-				{
+
+				else {
 					$query = "SELECT email_verification_code FROM users WHERE username = '".$_SESSION['username']."'";
 					$result = $obj->select_records($conn, $query);
-					foreach ($result as $key => $value) 
-					{
+					foreach ($result as $key => $value) {
 						$hash = $value['email_verification_code'];
 					}
 					$columns = array("email_verification_status" => 0);
@@ -109,33 +102,29 @@
 
 					$mail->Username = $mail_username;
 					$mail->Password = $mail_password;
-					if(!$mail->send()) {
+					if (!$mail->send()) {
 					  $email_msg = 'Email is not sent.'. 'Email error: ' . $mail->ErrorInfo;
 					}
-					else
-					{
+					else {
 						$email_msg = "Please verify it by clicking the activation link that has been send to your email.";
 					}
 				}
 			}
-			else
-			{
+			else {
 				$email_msg = "Invalid email format";
 			}
 		}
-		if(isset($_POST['username']) && !empty($_POST['username']))
-		{
+
+		if (isset($_POST['username']) && !empty($_POST['username'])) {
 			$username = Validation::test_input($_POST['username']);
 			$username_test = Validation::validate_name($username);
-			if($username_test)
-			{
+			if ($username_test) {
 				$query = "SELECT id FROM users WHERE username = '".$_POST['username']."'";
 				$result = $obj->select_records($conn, $query);
 				if ($result) {
 					$username_msg = "Username already exists";
 				}
-				else
-				{
+				else {
 					$columns = array("username" => $_POST['username']);
 				    $conditions = array("username" => $_SESSION['username']);
 				    $obj->update($conn, $table, $columns, $conditions);
@@ -143,11 +132,9 @@
 				}
 				//header("Location:logout.php");
 			}
-			else
-			{
+			else {
 				$username_msg = "Invalid username format";
 			}
-			
 		}
 	}
  ?>

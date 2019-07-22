@@ -11,14 +11,8 @@ function register()
 	var user_type = document.getElementById('user_type').value;
 
 	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() 
-	{
-	console.log("helo");
-
-		if (this.readyState == 4 && this.status == 200) 
-		{
-	console.log("hiiiiiiii");
-			
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
 			var response = this.responseText;
 			document.getElementById('alert').innerHTML = response;
 			document.getElementById("alert").style.display = "block";

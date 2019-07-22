@@ -1,8 +1,7 @@
 <?php 
 	session_start();
 
-	if(isset($_SESSION["username"]))
-	{
+	if (isset($_SESSION["username"])) {
 		$msg = "";
 		include_once 'header.html';
 		include_once 'csrf_token.php';
@@ -63,8 +62,7 @@
 </html>
 <?php
 }
-else
-{
+else {
 	header("Location:index.php");
 }
 ?>

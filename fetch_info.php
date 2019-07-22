@@ -7,10 +7,8 @@
 	$obj = new DB_connect();
 	$query = "SELECT ".$search_field." FROM users";
 	$result = $obj->select_records($conn, $query);
-	foreach ($result as $key => $value) 
-	{
-		if($value[$search_field] === $search_field_value)
-		{
+	foreach ($result as $key => $value) {
+		if ($value[$search_field] === $search_field_value) {
 			$res = 1;
 		}
 	}
