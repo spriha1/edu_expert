@@ -18,7 +18,9 @@
 			</div>
 			<div class="card-body">
 				<form method="POST" action="" id="registration" name="registration">
-					<div id="alert">
+					<div id="alert" class='alert alert-danger' style="display: none;">
+				    </div>
+				    <div id="info" class='alert alert-info' style="display: none;">
 				    </div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

@@ -6,9 +6,7 @@
     include_once 'csrf_token.php';
 
     $msg = "";
-    $username_msg = "";
-    $password_msg = "";
-
+    
     if(isset($_REQUEST['username']) && isset($_REQUEST['password']))
     {
         if(!empty($_REQUEST['username']) AND !empty($_REQUEST['password']))
@@ -49,11 +47,15 @@
                         $query2 = "SELECT id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
                         $result2 = $obj->select_records($conn, $query2);
 
-                        if (!$result) {
-                            $msg = "Invalid Username";
+                        if (!$result && !$result2) {
+                            $msg = "Incorrect Username and Password";
                         }
 
-                        if (!$result2) {
+                        else if (!$result) {
+                            $msg = "Incorrect Username";
+                        }
+
+                        else if (!$result2) {
                             $msg = "Incorrect Password";
                         }
                     }
@@ -73,16 +75,20 @@
         }
         else
         {
-            if(empty($_REQUEST['username']))
+            if(empty($_REQUEST['username']) && empty($_REQUEST['password']))
+            {
+                $msg = "Please fill in the details";
+            }
+            else if(empty($_REQUEST['username']))
             {
                 $msg = "Please enter your username";
             }
-            if(empty($_REQUEST['password']))
+            else if(empty($_REQUEST['password']))
             {
                 $msg = "Please enter your password";
             }
         }
     }
- print_r($msg);
+    print_r($msg);
 
  ?>

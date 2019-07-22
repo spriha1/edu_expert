@@ -18,7 +18,8 @@ function validate_forms(obj)
 		}
 		if(username === "" || password === "")
 		{
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Please fill in the highlighted fields</div>";
+			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
+			document.getElementById("alert").style.display = "block";
 			obj.preventDefault();
 		}
 	}
@@ -38,7 +39,8 @@ function validate_forms(obj)
 		}
 		if(c > 0)
 		{
-			document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Please fill in the highlighted fields</div>";
+			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
+			document.getElementById("alert").style.display = "block";
 			obj.preventDefault();
 		}
 	}
@@ -60,7 +62,8 @@ function validate_fields()
 					if(Number(this.responseText) === 1)
 					{
 						document.getElementById('username').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This username already exists</div>";
+						document.getElementById("alert").innerHTML = "This username already exists";
+						document.getElementById("alert").style.display = "block";
 					}
 					
 				}
@@ -76,12 +79,12 @@ function validate_fields()
 			else if(!username_pattern.test(obj.value))
 			{
 				document.getElementById('username').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid username</div>";
+				document.getElementById("alert").innerHTML = "Invalid username";
+				document.getElementById("alert").style.display = "block";
 			}
 			else
 			{
 				document.getElementById('username').style.borderColor = "green";
-				document.getElementById("alert").innerHTML = "";
 			}
 		}
 		else if (event.target.id === 'password') 
@@ -91,17 +94,16 @@ function validate_fields()
 			if(obj.value === "")
 			{
 				document.getElementById('password').style.borderColor = "rgba(0,0,0,.125)";
-				document.getElementById("alert").innerHTML = "";
 			}
 			else if(!password_pattern.test(obj.value))
 			{
 				document.getElementById('password').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid password</div>";
+				document.getElementById("alert").innerHTML = "Invalid password";
+				document.getElementById("alert").style.display = "block";
 			}
 			else
 			{
 				document.getElementById('password').style.borderColor = "green";
-				document.getElementById("alert").innerHTML = "";
 			}
 		}
 		else if(event.target.id ==="email")
@@ -116,7 +118,8 @@ function validate_fields()
 					if(Number(this.responseText) === 1)
 					{
 						document.getElementById('email').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>This email already exists</div>";
+						document.getElementById("alert").innerHTML = "This email already exists";
+						document.getElementById("alert").style.display = "block";
 					}
 					
 				}
@@ -127,17 +130,16 @@ function validate_fields()
 			if(obj.value === "")
 			{
 				document.getElementById('email').style.borderColor = "rgba(0,0,0,.125)";
-				document.getElementById("alert").innerHTML = "";
 			}
 			else if(obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0)
 			{
 				document.getElementById('email').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid email</div>";
+				document.getElementById("alert").innerHTML = "Invalid email";
+				document.getElementById("alert").style.display = "block";
 			}
 			else
 			{
 				document.getElementById('email').style.borderColor = "green";
-				document.getElementById("alert").innerHTML = "";
 			}
 		}
 		else if(event.target.id === 'fname')
@@ -147,17 +149,16 @@ function validate_fields()
 			if(obj.value === "")
 			{
 				document.getElementById('fname').style.borderColor = "rgba(0,0,0,.125)";
-				document.getElementById("alert").innerHTML = "";
 			}
 			else if(!name_pattern.test(obj.value))
 			{
 				document.getElementById('fname').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid first name</div>";
+				document.getElementById("alert").innerHTML = "Invalid first name";
+				document.getElementById("alert").style.display = "block";
 			}
 			else
 			{
 				document.getElementById('fname').style.borderColor = "green";
-				document.getElementById("alert").innerHTML = "";
 			}
 		}
 		else if(event.target.id === 'lname')
@@ -167,17 +168,16 @@ function validate_fields()
 			if(obj.value === "")
 			{
 				document.getElementById('lname').style.borderColor = "rgba(0,0,0,.125)";
-				document.getElementById("alert").innerHTML = "";
 			}
 			else if(!name_pattern.test(obj.value))
 			{
 				document.getElementById('lname').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "<div class='alert alert-danger'>Invalid last name</div>";
+				document.getElementById("alert").innerHTML = "Invalid last name";
+				document.getElementById("alert").style.display = "block";
 			}
 			else
 			{
 				document.getElementById('lname').style.borderColor = "green";
-				document.getElementById("alert").innerHTML = "";
 			}
 		}
 	}	
@@ -188,11 +188,13 @@ function display_info()
 	if(event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration')
 	{
 		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
-		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
+		document.getElementById("info").innerHTML = msg;
+		document.getElementById("info").style.display = "block";
 	}
 	if(event.target.id === 'username' && event.target.closest("form").getAttribute("id") === 'registration')
 	{
 		var msg = "The username can contain letters, digits, @ and _";
-		document.getElementById("alert").innerHTML = "<div class='alert alert-info'>"+msg+"</div>";
+		document.getElementById("info").innerHTML = msg;
+		document.getElementById("info").style.display = "block";
 	}
 }

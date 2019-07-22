@@ -3,7 +3,7 @@
 	include_once 'check_login_status.php';
 	include_once 'header.html';
 	require_once 'csrf_token.php'; 
-	include_once 'login.php';
+	//include_once 'login.php';
 	include_once 'db_tables_creation.php';
 ?>
 <body class="body1">
@@ -19,7 +19,7 @@
 					<div class="card-body">
 						<p style="color:#ff0000;"><?php echo $msg; ?></p>
 				    	<form action="" method="POST" id="login" name="login">
-				    		<div id="alert">
+				    		<div id="alert" class='alert alert-danger' style="display: none;">
 				    		</div>
 				    		<div class="input-group form-group">
 						    	<div class="input-group-prepend">
@@ -51,5 +51,7 @@
 		</div>
     </div>
 	<script src="validate.js?v=3"></script>
+	<script src="login.js"></script>
+
 </body>
 </html>
