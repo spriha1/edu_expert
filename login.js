@@ -13,7 +13,7 @@ function login()
 		if (this.readyState == 4 && this.status == 200) 
 		{
 			var response = this.responseText;
-
+			console.log(response);
 			if (response === "Admin") {
 				window.location.href = 'admin_dashboard.php';
 			}
@@ -25,6 +25,7 @@ function login()
 			}
 			else {
 				document.getElementById('alert').innerHTML = response;
+				document.getElementById("alert").style.display = "block";
 			}
 		}
 	};

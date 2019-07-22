@@ -127,6 +127,7 @@
 			}
 			$query .= $columns[$i].") VALUES (";
 			$values_length = count($values);
+
 			for ($i=0; $i < $values_length-1; $i++) 
 			{ 
 				if (is_string($values[$i])) 
@@ -140,13 +141,12 @@
 			}
 			if (is_string($values[$i])) 
 			{
-				$query .= "'".$values[$i]."'";
+				$query .= "'".$values[$i]."')";
 			}
 			else
 			{
-				$query .= $values[$i];
+				$query .= $values[$i].")";
 			}
-			print_r($query);exit();
 			$conn->exec($query);
 		}
 

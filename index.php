@@ -17,7 +17,7 @@
 						<h3>Sign In</h3>
 					</div>
 					<div class="card-body">
-						<p style="color:#ff0000;"><?php echo $msg; ?></p>
+						<p style="color:#ff0000;"><?php //echo $msg; ?></p>
 				    	<form action="" method="POST" id="login" name="login">
 				    		<div id="alert" class='alert alert-danger' style="display: none;">
 				    		</div>
@@ -28,7 +28,7 @@
 						      	<input class="form-control" id="username" name="username" type="text" placeholder="Enter Username">
 						  	</div>
 						  	<div>
-						  		<p style="color:#ff0000;"><?php echo $username_msg; ?></p>
+						  		<p style="color:#ff0000;"><?php //echo $username_msg; ?></p>
 						  	</div>
 				    	    <div class="input-group form-group">
 						    	<div class="input-group-prepend">
@@ -37,7 +37,7 @@
 						      	<input class="form-control" id="password" name="password" type="password" placeholder="Enter Password">
 						  	</div>
 				    	    <div>
-						  		<p style="color:#ff0000;"><?php echo $password_msg; ?></p>
+						  		<p style="color:#ff0000;"><?php //echo $password_msg; ?></p>
 						  	</div>
 						  	<input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?>">
 				    	    <button class="btn btn-success form-control" type="submit">Login</button>

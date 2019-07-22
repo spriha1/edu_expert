@@ -2,7 +2,7 @@ document.body.addEventListener("blur", validate_fields, true);
 document.body.addEventListener("submit", validate_forms, true);
 document.body.addEventListener("click", display_info, true);
 
-function validate_forms(obj)
+function validate_forms()
 {
 	if(event.target.id === 'login')
 	{
@@ -20,7 +20,7 @@ function validate_forms(obj)
 		{
 			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
 			document.getElementById("alert").style.display = "block";
-			obj.preventDefault();
+			event.preventDefault();
 		}
 	}
 
@@ -41,7 +41,7 @@ function validate_forms(obj)
 		{
 			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
 			document.getElementById("alert").style.display = "block";
-			obj.preventDefault();
+			event.preventDefault();
 		}
 	}
 }

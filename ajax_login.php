@@ -16,7 +16,7 @@
                 $username = Validation::test_input($_REQUEST['username']);
                 $password = Validation::test_input($_REQUEST['password']);
                 $username_test = Validation::validate_name($username);
-                $password_test = Validation::validate_name($password);
+                $password_test = Validation::validate_password($password);
                 if($username_test && $password_test)
                 {
                     $uname = $_REQUEST['username'];
