@@ -5,7 +5,6 @@
 	require_once '/usr/share/php/libphp-phpmailer/class.phpmailer.php';
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
-	require_once 'csrf_token.php'; 
 	$msg = "";
 	$username_msg = "";
 	$firstname_msg = "";
@@ -16,7 +15,7 @@
 
 	if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type']))
 	{
-		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']) AND Token::check($_POST['token']))
+		if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type']))
 		{
 			$user_name = Validation::test_input($_POST['username']);
 			$email = Validation::test_input($_POST['email']);
