@@ -6,7 +6,7 @@
 		include_once 'header.html';
 		include_once 'csrf_token.php';
 		include_once 'admin_sidenav.php';
-		include_once 'update_profile.php'; 
+		//include_once 'update_profile.php'; 
 		?>
 		<body class="body1">
 		<div class="container" style="text-align: center">
@@ -17,7 +17,8 @@
 					<h3>Edit Your Personal Information</h3>
 				</div>
     			<div class="card-body">
-    				<div id="alert"></div>
+    				<div id="alert" class='alert alert-danger' style="display: none;">
+				    </div>
 					<form method="POST" action="" name="registration" id="registration">
 					    <div class="form-group">
 					      <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
@@ -57,7 +58,7 @@
 				</div>
 			</div>
 		</div>
-	<script src="validate.js?v=1"></script>
+	<script src="edit.js"></script>
 	</body>
 </html>
 <?php

@@ -1,4 +1,13 @@
 <?php 
+	function pd($val)
+	{
+		print_r($val);
+		exit();
+	}
+	function pp($val)
+	{
+		print_r($val);
+	}
 	include_once 'db_credentials.php';
 	$conn = new PDO("mysql:host=$server_name;dbname=$db_name", $db_username, $db_password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
