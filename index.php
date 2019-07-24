@@ -5,6 +5,7 @@
 	require_once 'csrf_token.php'; 
 	//include_once 'login.php';
 	include_once 'db_tables_creation.php';
+	include_once 'static_file_version.php';
 ?>
 <body class="body1">
 	<div class="container" style="text-align: center">
@@ -50,8 +51,8 @@
 	    	</div>
 		</div>
     </div>
-	<script src="validate.js?v=3"></script>
-	<script src="login.js"></script>
+	<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
+	<script src="<?php autoVer('/scripts/login.js'); ?>"></script>
 
 </body>
 </html>

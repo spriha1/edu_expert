@@ -41,7 +41,6 @@
 	else:
 		header("Location:index.php");
 	endif;
-
 ?>	
 </body>
 </html>

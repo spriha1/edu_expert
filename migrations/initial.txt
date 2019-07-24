@@ -1,0 +1,29 @@
+//Create a database "php_project" :
+CREATE DATABASE IF NOT EXISTS php_project
+
+
+//Create a table user_types :
+CREATE TABLE IF NOT EXISTS user_types (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	user_type VARCHAR(20)
+)";
+
+
+//Create another table users :
+CREATE TABLE IF NOT EXISTS users (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	firstname VARCHAR(50),
+	lastname VARCHAR(50),
+	email VARCHAR(50) NOT NULL UNIQUE,
+	username VARCHAR(50) NOT NULL UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	token VARCHAR(50),
+	email_verification_code VARCHAR(32) ,
+	email_verification_status TINYINT(1) NOT NULL DEFAULT '0',
+	user_reg_status TINYINT(1) NOT NULL DEFAULT '0',
+	block_status TINYINT(1) NOT NULL DEFAULT '0',
+	user_type_id INT UNSIGNED,
+	CONSTRAINT test FOREIGN KEY (user_type_id)
+	REFERENCES user_types(id) ,
+	INDEX (email_verification_code,firstname,lastname,username)
+)";

@@ -7,6 +7,7 @@
 		include_once 'csrf_token.php';
 		include_once 'admin_sidenav.php';
 		//include_once 'update_profile.php'; 
+		include_once 'static_file_version.php';
 		?>
 		<body class="body1">
 		<div class="container" style="text-align: center">
@@ -58,7 +59,7 @@
 				</div>
 			</div>
 		</div>
-	<script src="edit.js"></script>
+	<script src="<?php autoVer('/scripts/edit.js'); ?>"></script>
 	</body>
 </html>
 <?php

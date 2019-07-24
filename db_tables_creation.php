@@ -11,7 +11,6 @@
 	$sql = "CREATE TABLE IF NOT EXISTS user_types (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			user_type VARCHAR(20)
-			
 		)";
 	$conn->exec($sql);
 	
