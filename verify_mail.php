@@ -26,6 +26,6 @@
 	else {
 	    echo '<div>Invalid approach, please use the link that has been send to your email.</div>';
 	}
- ?>
+?>
 </body>
 </html>

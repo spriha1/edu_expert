@@ -48,12 +48,11 @@
 					<td><?php echo $value['email']; ?></td>
 					<?php echo '<td><a href="add_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Add</button></a></td>';
 					echo '<td><a href="remove_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Remove</button></a></td>';
-					if($value['block_status']==0){
+					if ($value['block_status']==0) {
 						echo '<td><a href="block_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Block</button></a></td>
 				</tr>';
 						}
-						else if($value['block_status']==1)
-						{
+						else if ($value['block_status']==1) {
 							echo '<td><a href="unblock_users.php?username='.$value["username"].'&t='.$token.'"><button class="btn btn-success">Unblock</button></a></td>
 						</tr>';
 						}

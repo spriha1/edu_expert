@@ -6,13 +6,13 @@
 
 	    $obj = new DB_connect();
 	    
-		if(isset($_GET['q']) && !empty($_GET['q']) && isset($_GET['q1']) && !empty($_GET['q1'])){
+		if (isset($_GET['q']) && !empty($_GET['q']) && isset($_GET['q1']) && !empty($_GET['q1'])) {
 		    $hash = base64_decode($_GET['q']);
 		    $email = base64_decode($_GET['q1']);
 
 		    $query = "SELECT id FROM users WHERE email_verification_code='".$hash."' AND email_verification_status=0";
 		    $result = $obj->select_records($conn, $query);
-		    if ($result){
+		    if ($result) {
 		    	foreach ($result as $key => $value) {
 		    		$table = "users";
 				    $columns = array("email_verification_status" => 1, "email" => $email);

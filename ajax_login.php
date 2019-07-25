@@ -63,5 +63,8 @@
             }
         }
     }
-    print_r($msg);
+    $new = Token::generate();
+    $response = array("token"=>$new,"msg"=>$msg);
+
+    print_r(json_encode($response));
 ?>

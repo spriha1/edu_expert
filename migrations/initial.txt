@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS user_types (
 )";
 
 
-//Create another table users :
+//Create a table users :
 CREATE TABLE IF NOT EXISTS users (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	firstname VARCHAR(50),

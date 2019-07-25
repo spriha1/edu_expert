@@ -5,11 +5,14 @@ function login() {
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
 	var token = document.getElementById('token').value;
-
+	console.log(token)
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var response = this.responseText;
+			var response = JSON.parse(this.responseText)["msg"];
+			var newToken = JSON.parse(this.responseText)["token"];
+			document.getElementById('token').value = newToken;
+			console.log(newToken);
 			if (response === "Admin") {
 				window.location.href = 'admin_dashboard.php';
 			}

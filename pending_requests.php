@@ -60,7 +60,7 @@
 
 		if (isset($_POST['record'])) {
 			$c = 0;
-			if($_POST['record'] > 0) {
+			if ($_POST['record'] > 0) {
 				$c++;
 			}
 			if ($c > 0) {
