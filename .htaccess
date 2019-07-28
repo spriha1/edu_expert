@@ -1,3 +1,5 @@
+Options -Indexes
+
 #Rules for Versioned Static FilesRewriteEngine on
 RewriteEngine on
 RewriteRule ^(scripts|css|images)/(.+)\.(.+)\.(js|css|jpg|gif|png)$ $1/$2.$4 [L]
