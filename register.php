@@ -100,6 +100,5 @@
 		</div>
 	</div>
 	<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
-	<script src="<?php autoVer('/scripts/register.js'); ?>"></script>
 </body>
 </html>

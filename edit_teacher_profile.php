@@ -52,7 +52,7 @@
 							<p style="color: #ff0000;"><?php //echo $password_msg;?></p>	
 						</div>
 					    <div class="form-group">
-					    	<input type="hidden" name="token" value="<?php Token::generate(); ?>">
+					    	<input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?>">
 					    	<button type="submit" class="btn btn-success">Update</button>
 					    </div>
 					</form>

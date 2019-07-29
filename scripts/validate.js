@@ -1,183 +1,190 @@
-document.body.addEventListener("blur", validate_fields, true);
-document.body.addEventListener("submit", validate_forms, true);
-document.body.addEventListener("click", display_info, true);
-
-function validate_forms()
-{
-	if (event.target.id === 'login') {
-		var username = document.forms.login.username.value.trim();
-		var password = document.forms.login.password.value.trim();
-		if (username === "") {
-			document.getElementById('username').style.borderColor = "red";
-		}
-
-		if (password === "") {
-			document.getElementById('password').style.borderColor = "red";
-		}
-
-		if (username === "" || password === "") {
-			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
-			document.getElementById("alert").style.display = "block";
-			event.preventDefault();
-		}
-	}
-
-	if (event.target.id === 'registration') {
-		var i,check,c = 0;
-		var length = document.getElementById("registration").elements.length;
-		for (i = 0 ; i < length-1 ; i++) {
-			check = document.getElementById("registration").elements[i].value.trim();
-			if (check === "") {
-				document.getElementById("registration").elements[i].style.borderColor = "red";
-				c++;
+$(document).ready(function() {
+	$('body').submit(function(event) {
+		event.preventDefault();
+		if (event.target.id === 'login') {
+			var username = $('#username').val().trim();
+			var password = $('#password').val().trim();
+			if (username === "") {
+				$('#username').css("borderColor" , "red");
 			}
-		}
-		if (c > 0) {
-			document.getElementById("alert").innerHTML = "Please fill in the highlighted fields";
-			document.getElementById("alert").style.display = "block";
-			event.preventDefault();
-		}
-	}
-}
 
-function validate_fields()
-{
-	if (event.target.closest("form").getAttribute("id") === 'registration') {
-		if (event.target.id === 'username') {
-			var obj = document.forms.registration.username;
-			var username_pattern = /^([a-zA-Z0-9@_]+)$/;
-			var username = obj.value;
+			if (password === "") {
+				$('#password').css("borderColor" , "red");
+			}
 
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					if (Number(this.responseText) === 1) {
-						document.getElementById('username').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "This username already exists";
-						document.getElementById("alert").style.display = "block";
+			if (username === "" || password === "") {
+				$("#alert").text("Please fill in the highlighted fields");
+				$("#alert").css("display" , "block");
+			}
+			else {
+				$.post('ajax_login.php', $('#login').serialize(), function(result) {
+					var response = JSON.parse(result)["msg"];
+					var newToken = JSON.parse(result)["token"];
+					$('#token').val(newToken);
+					console.log(response);
+					if (response === "Admin") {
+						window.location.href = 'admin_dashboard.php';
 					}
-					
-				}
-			};
-			xhttp.open("GET", "fetch_info.php?q1=username&q2="+username, true);
-			xhttp.send();
-
-			if (obj.value === "") {
-				document.getElementById('username').style.borderColor = "rgba(0,0,0,.125)";
-				document.getElementById("alert").innerHTML = "";
-			}
-
-			else if (!username_pattern.test(obj.value)) {
-				document.getElementById('username').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "Invalid username";
-				document.getElementById("alert").style.display = "block";
-			}
-
-			else {
-				document.getElementById('username').style.borderColor = "green";
-			}
-		}
-
-		else if (event.target.id === 'password') {
-			var obj = document.forms.registration.password;
-			var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
-			if (obj.value === "") {
-				document.getElementById('password').style.borderColor = "rgba(0,0,0,.125)";
-			}
-
-			else if (!password_pattern.test(obj.value)) {
-				document.getElementById('password').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "Invalid password";
-				document.getElementById("alert").style.display = "block";
-			}
-
-			else {
-				document.getElementById('password').style.borderColor = "green";
-			}
-		}
-
-		else if (event.target.id ==="email") {
-			var obj = document.forms.registration.email;
-			var email = obj.value;
-
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					if (Number(this.responseText) === 1) {
-						document.getElementById('email').style.borderColor = "red";
-						document.getElementById("alert").innerHTML = "This email already exists";
-						document.getElementById("alert").style.display = "block";
+					else if (response === "Student") {
+						window.location.href = 'student_dashboard.php';
 					}
-					
+					else if (response === "Teacher") {
+						window.location.href = 'teacher_dashboard.php';
+					}
+					else {
+						$('#alert').text(response);
+						$("#alert").css("display" , "block");
+					}
+				});
+			}
+		}
+
+		if (event.target.id === 'registration') {
+			var check,c = 0;
+			$('#registration input').each(function(){
+			    check = $(this).val().trim();
+				if (check === "") {
+					$(this).css("borderColor" , "red");
+					c++;
 				}
-			};
-			xhttp.open("GET", "fetch_info.php?q1=email&q2="+email, true);
-			xhttp.send();
-
-			if (obj.value === "") {
-				document.getElementById('email').style.borderColor = "rgba(0,0,0,.125)";
+			});
+			if (c > 0) {
+				$("#alert").text("Please fill in the highlighted fields");
+				$("#alert").css("display" , "block");
+				event.preventDefault();
 			}
-
-			else if (obj.value.indexOf("@") < 0 || obj.value.indexOf(".") < 0) {
-				document.getElementById('email').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "Invalid email";
-				document.getElementById("alert").style.display = "block";
-			}
-
 			else {
-				document.getElementById('email').style.borderColor = "green";
+				event.preventDefault();
+				$.post('ajax_register.php' , $('#registration').serialize() , function(result){
+					$('#alert').text(result);
+					$("#alert").css("display" , "block");
+				})
 			}
 		}
+	});
 
-		else if (event.target.id === 'fname') {
-			var obj = document.forms.registration.fname;
-			var name_pattern = /^([a-zA-Z]+)$/;
-			if (obj.value === "") {
-				document.getElementById('fname').style.borderColor = "rgba(0,0,0,.125)";
-			}
-
-			else if (!name_pattern.test(obj.value)) {
-				document.getElementById('fname').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "Invalid first name";
-				document.getElementById("alert").style.display = "block";
-			}
-
-			else {
-				document.getElementById('fname').style.borderColor = "green";
-			}
+	$('body').click(function() {
+		event.preventDefault();
+		if (event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration') {
+			var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
+			$("#info").text(msg);
+			$("#info").css("display" , "block");
 		}
 
-		else if (event.target.id === 'lname') {
-			var obj = document.forms.registration.lname;
-			var name_pattern = /^([a-zA-Z]+)$/;
-			if (obj.value === "") {
-				document.getElementById('lname').style.borderColor = "rgba(0,0,0,.125)";
+		if (event.target.id === 'username' && event.target.closest("form").getAttribute("id") === 'registration') {
+			var msg = "The username can contain letters, digits, @ and _";
+			$("#info").text(msg);
+			$("#info").css("display" , "block");
+		}
+	});
+
+
+	$('input').blur(function() {
+		event.preventDefault();
+		if (event.target.closest("form").getAttribute("id") === 'registration') {
+
+			if (event.target.id === 'username') {
+				var username_pattern = /^([a-zA-Z0-9@_]+)$/;
+				var username = $('#username').val();
+				$.get("fetch_info.php" , {q1: "username", q2: username} , function(data) {
+					if (Number(data) === 1) {
+						$('#username').css("borderColor" , "red");
+						$("#alert").text("This username already exists");
+						$("#alert").css("display" , "block");
+					}
+				})
+
+				if ($('#username').val() === "") {
+					$('#username').css("borderColor" , "rgba(0,0,0,.125)");
+				}
+
+				else if (!username_pattern.test($('#username').val())) {
+					$('#username').css("borderColor" , "red");
+					$("#alert").text("Invalid username");
+					$("#alert").css("display" , "block");
+				}
+
+				else {
+					$('#username').css("borderColor" , "green");
+				}
 			}
 
-			else if (!name_pattern.test(obj.value)) {
-				document.getElementById('lname').style.borderColor = "red";
-				document.getElementById("alert").innerHTML = "Invalid last name";
-				document.getElementById("alert").style.display = "block";
+			else if (event.target.id === 'password') {
+				var password_pattern = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
+				if ($('#password').val() === "") {
+					$('#password').css("borderColor" , "rgba(0,0,0,.125)");
+				}
+
+				else if (!password_pattern.test($('#password').val())) {
+					$('#password').css("borderColor" , "red");
+					$("#alert").text("Invalid password");
+					$("#alert").css("display" , "block");
+				}
+
+				else {
+					$('#password').css("borderColor" , "green");
+				}
 			}
 
-			else {
-				document.getElementById('lname').style.borderColor = "green";
+			else if (event.target.id ==="email") {
+				var email = $('#email').val();
+				$.get("fetch_info.php", {q1: "email", q2: email}, function(data) {
+					if (Number(data) === 1) {
+						$('#email').css("borderColor" , "red");
+						$("#alert").text("This email already exists");
+						$("#alert").css("display" , "block");
+					}
+				})
+
+				if ($('#email').val() === "") {
+					$('#email').css("borderColor" , "rgba(0,0,0,.125)");
+				}
+
+				else if ($('#email').val().indexOf("@") < 0 || $('#email').val().indexOf(".") < 0) {
+					$('#email').css("borderColor" , "red");
+					$("#alert").text("Invalid email");
+					$("#alert").css("display" , "block");
+				}
+
+				else {
+					$('#email').css("borderColor" , "green");
+				}
+			}
+
+			else if (event.target.id === 'fname') {
+				var name_pattern = /^([a-zA-Z]+)$/;
+				if ($('#fname').val() === "") {
+					$('#fname').css("borderColor" , "rgba(0,0,0,.125)");
+				}
+
+				else if (!name_pattern.test($('#fname').val())) {
+					$('#fname').css("borderColor" , "red");
+					$("#alert").text("Invalid first name");
+					$("#alert").css("display" , "block");
+				}
+
+				else {
+					$('#fname').css("borderColor" , "green");
+				}
+			}
+
+			else if (event.target.id === 'lname') {
+				var name_pattern = /^([a-zA-Z]+)$/;
+				if ($('#lname').val() === "") {
+					$('#lname').css("borderColor" , "rgba(0,0,0,.125)");
+				}
+
+				else if (!name_pattern.test($('#lname').val())) {
+					$('#lname').css("borderColor" , "red");
+					$("#alert").text("Invalid last name");
+					$("#alert").css("display" , "block");
+				}
+
+				else {
+					$('#lname').css("borderColor" , "green");
+				}
 			}
 		}
-	}	
-}
+	});
 
-function display_info()
-{
-	if (event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration') {
-		var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
-		document.getElementById("info").innerHTML = msg;
-		document.getElementById("info").style.display = "block";
-	}
-
-	if (event.target.id === 'username' && event.target.closest("form").getAttribute("id") === 'registration') {
-		var msg = "The username can contain letters, digits, @ and _";
-		document.getElementById("info").innerHTML = msg;
-		document.getElementById("info").style.display = "block";
-	}
-}
+})
