@@ -64,7 +64,6 @@ $(document).ready(function() {
 	});
 
 	$('body').click(function() {
-		event.preventDefault();
 		if (event.target.id === 'password' && event.target.closest("form").getAttribute("id") === 'registration') {
 			var msg = "The password :<br> Must be a minimum of 8 characters<br>Must contain at least 1 number<br>Must contain at least one uppercase character<br>Must contain at least one lowercase character";
 			$("#info").text(msg);
@@ -80,7 +79,6 @@ $(document).ready(function() {
 
 
 	$('input').blur(function() {
-		event.preventDefault();
 		if (event.target.closest("form").getAttribute("id") === 'registration') {
 
 			if (event.target.id === 'username') {
