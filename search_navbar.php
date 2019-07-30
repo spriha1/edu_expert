@@ -1,3 +1,5 @@
+<div class="content-wrapper">
+<br><br>
 <nav class="navbar navbar-transparent justify-content-center">
 	<form class="form-inline" method="POST" action="">
 	  	<div class="form-group mx-auto">

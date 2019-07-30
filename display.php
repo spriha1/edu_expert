@@ -1,7 +1,7 @@
 <br><br>
 <div class='container'>
 	<div class="table-responsive">
-		<table class="table table-bordered" align="center" style="width:90%">
+		<table class="table table-bordered table-hover" align="center" style="width:90%">
 			<?php if ($file === "regd_users.php") { ?>
 			<tr>
 				<th>First Name</th>

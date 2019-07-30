@@ -12,4 +12,3 @@
 		<li class="page-item"><a class="page-link" href="<?php echo $next_link; ?>">Next</a></li>
 		</ul>
 	<?php } ?>
-?>

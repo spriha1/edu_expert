@@ -1,7 +1,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<header class="main-header">
-			<a href="index2.html" class="logo">
+			<a href="#" class="logo">
 				<span class="logo-mini">Edu<b>X</b></span>
 				<span class="logo-lg">Edu<b>Xpert</b></span>
 			</a>
