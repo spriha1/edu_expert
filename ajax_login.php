@@ -48,7 +48,6 @@
                         $msg = "Incorrect Password";
                     }
                 }
-                
             }
         }
         else {
