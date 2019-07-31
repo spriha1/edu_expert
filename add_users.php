@@ -11,7 +11,7 @@
 		    $columns = array("user_reg_status" => 1);
 		    $conditions = array("username" => $username);
 		    //$query = "UPDATE users SET user_reg_status = 1 WHERE username = '".$username."'";
-		    $obj->update($conn, $table, $columns, $condition);
+		    $obj->update($conn, $table, $columns, $conditions);
 		    header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	}

@@ -99,35 +99,34 @@
 			
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu" data-widget="tree">
-				
+				<li>
+					<a href="admin_dashboard.php">
+						<i class="fa fa-address-card"></i> <span>Dashboard</span>
+					</a>
+				</li>
 				
 				<li>
-					<a href="student_profile.php">
+					<a href="admin_profile.php">
 						<i class="fa fa-address-card"></i> <span>My Profile</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
-						<i class="fa fa-bullseye"></i> <span>Goal Plan</span>
-					</a>
-				</li>
-				<li>
-					<a href="student_profile.php">
+					<a href="pending_requests.php">
 						<i class="fa fa-th"></i> <span>New Requests</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="regd_users.php">
 						<i class="fa fa-users"></i> <span>Registered Users</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-th"></i> <span>Teacher Timesheet</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-th"></i> <span>Student Feedback</span>
 					</a>
 				</li>

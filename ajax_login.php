@@ -25,7 +25,13 @@
                             session_start();
                             $_SESSION['firstname'] = $value['firstname'];
                             $_SESSION['username'] = $uname;
+                            $_SESSION['id'] = $value['id'];
                             $msg = $value2["user_type"];
+                            //for online/offlne status in chat
+                            $table = "users";
+                            $columns = array("login_status" => 1);
+                            $conditions = array("username" => $value['username']);
+                            $obj->update($conn, $table, $columns, $conditions);
                         }
                     }
                 }

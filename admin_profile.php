@@ -1,46 +1,101 @@
-<?php 
+<?php
 	session_start();
-	if(isset($_SESSION["username"])):
-		echo '<body class="body1">';
-		include_once 'header.html';
+	if (isset($_SESSION["username"])) {
+		require_once 'header_dashboard.html';
 		include_once 'admin_sidenav.php';
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
+		include_once 'static_file_version.php';
+		include_once 'csrf_token.php';
 
-	    $obj = new DB_connect();
-	    $query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
-	    $result = $obj->select_records($conn, $query);
-	    ?>
-	    
-	    <br><br>
-	    <div class='container'>
-	    <div class='card responsive mx-auto'>
-	    <?php foreach ($result as $key => $value):?>
+		$obj = new DB_connect();
+		$query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
+		$result = $obj->select_records($conn, $query);
+?>
+<div class="content-wrapper">
+	<br><br>
+	<div class="col-md-6">
+		<!-- Horizontal Form -->
+		<div class="box box-info">
+			<form class="form-horizontal" id="registration" name="registration" method="POST">
+				<div id="alert" class='alert alert-danger' style="display: none;">
+				    </div>
+				<div class="box-body">
+					<?php foreach ($result as $key => $value) { ?>
+					<div class="form-group">
+						<label for="fname" class="col-sm-3 control-label">First Name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="fname" name="fname" readonly value="<?php echo $value['firstname'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="lname" class="col-sm-3 control-label">Last Name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="lname" name="lname" readonly value="<?php echo $value['lastname'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username" class="col-sm-3 control-label">Username</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" name="username" id="username" readonly value="<?php echo $value['username'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-9">
+							<input type="email" class="form-control" name="email" id="email" readonly value="<?php echo $value['email'];?>">
+						</div>
+					</div>
+					<div class="form-group" id="pass" style="display: none">
+						<label for="password" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="password" name="password">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?>">
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<button type="submit" id="change" class="btn btn-default">Change password</button>
+					<button type="submit" id="edit" class="btn btn-info pull-right">Edit</button>
+					<button type="submit" id="update" style="display:none;" class="btn btn-info pull-right">Update</button>
+				</div>
+				<!-- /.box-footer -->
+			</form>
+		</div>
+	</div>
+</div>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script>
+$.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#edit').click(function(){
+			event.preventDefault();
+			$(":input").attr("readonly", false);
+			$("#edit").css('display', 'none');
+			$("#update").css('display', 'block');
+		});
+		$('#change').click(function(){
+			event.preventDefault();
+			$("#pass").css('display', 'block');
+			$("#edit").css('display', 'none');
+			$("#update").css('display', 'block');
+		});
+	});
+</script>
+<script src="<?php autoVer('/scripts/edit.js'); ?>"></script>
 
-	     	<div class='card bg-light'>
-		     	<div class='card-body text-center'>
-			     	<form>
-					    <div class="form-group">
-					      First Name :<input type="text" readonly class="form-control" value="<?php echo $value['firstname'];?>">
-					    </div>
-					    <div class="form-group">
-					      Last Name :<input type="text" readonly class="form-control" value="<?php echo $value['lastname'];?>">
-					    </div>
-					    <div class="form-group">
-					      Username :<input type="text" readonly class="form-control" value="<?php echo $value['username'];?>">
-					    </div>
-					    <div class="form-group">
-					      Email:<input type="text" readonly class="form-control" value="<?php echo $value['email'];?>">
-					    </div>
-					</form>
-					<a href="edit_admin_profile.php?username='<?php echo $value['username'];?>'"><button class="btn btn-success">Edit</button></a>
-		     	</div>
-	     	</div>
-	     	<?php
-	    endforeach; 
-	else:
-		header("Location:index.php");
-	endif;
-?>	
 </body>
 </html>
+<?php
+}
+}
+else {
+	header("Location:index.php");
+}
+?>

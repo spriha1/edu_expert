@@ -6,6 +6,8 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		require_once 'csrf_token.php';
+		include_once 'static_file_version.php';
+
 		
 		$token  = Token::generate();
 

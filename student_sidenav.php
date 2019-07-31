@@ -99,7 +99,11 @@
 			
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu" data-widget="tree">
-				
+				<li>
+					<a href="student_dashboard.php">
+						<i class="fa fa-address-card"></i> <span>Dashboard</span>
+					</a>
+				</li>
 				
 				<li>
 					<a href="student_profile.php">
@@ -107,27 +111,22 @@
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
-						<i class="fa fa-bullseye"></i> <span>Goal Plan</span>
-					</a>
-				</li>
-				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-th"></i> <span>Time Table</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-users"></i> <span>Attendance</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-th"></i> <span>Dues</span>
 					</a>
 				</li>
 				<li>
-					<a href="student_profile.php">
+					<a href="#">
 						<i class="fa fa-th"></i> <span>Feedback</span>
 					</a>
 				</li>
