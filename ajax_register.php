@@ -5,10 +5,9 @@
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
 	$msg = "";
-
-	if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['usertype'])) {
-
-		if (!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['usertype'])) {
+	print_r($_POST);
+	if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type'])) {
+		if (!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type'])) {
 
 			$firstname = $_POST['fname'];
 			$lastname = $_POST['lname'];
@@ -16,7 +15,7 @@
 			$user_name = $_POST['username'];
 			$password = $_POST['password'];
 			$pass = MD5($password);
-			$user_type = $_POST['usertype'];
+			$user_type = $_POST['user_type'];
 			$hash = md5(uniqid());
 
 		    $obj = new DB_connect();

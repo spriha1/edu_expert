@@ -115,6 +115,7 @@
 		}
 	}
 	else {
+
 		$offset = 0;
 		$previous = "";
 		$next = "";
@@ -130,6 +131,7 @@
 	}
 	
 	if ($res) {
+		
 	    include_once 'display.php';
 	}
 ?>

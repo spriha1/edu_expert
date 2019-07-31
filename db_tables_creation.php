@@ -39,7 +39,17 @@
 			to_user_id INT,
 			from_user_id INT,
 			chat_message TEXT,
-			chat_time timestamp
+			chat_time timestamp DEFAULT CURRENT_TIMESTAMP
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS goal_plan (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			user_id INT,
+			goal TEXT,
+			from_time timestamp DEFAULT CURRENT_TIMESTAMP,
+			to_time timestamp DEFAULT CURRENT_TIMESTAMP,
+			check_status TINYINT(1) NOT NULL DEFAULT '0'
 		)";
 	$conn->exec($sql);
 ?>

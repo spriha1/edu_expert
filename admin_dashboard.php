@@ -5,11 +5,16 @@
 		require_once 'admin_sidenav.php';
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
+		include_once 'static_file_version.php';
+
 		$obj = new DB_connect();
 		$query1 = "SELECT count(*) as total FROM users WHERE user_reg_status = 1";
 		$result1 = $obj->select_records($conn, $query1);
 		$query2 = "SELECT count(*) as total FROM users WHERE user_reg_status = 0";
 		$result2 = $obj->select_records($conn, $query2);
+
+		$query = "SELECT id,goal,check_status FROM goal_plan WHERE user_id = '".$_SESSION['id']."' AND from_time LIKE '%".date("Y-m-d")."%'";
+		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -96,7 +101,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
-						<div class="box-tools pull-right">
+						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
 								<li><a href="#">1</a></li>
@@ -104,30 +109,40 @@
 								<li><a href="#">3</a></li>
 								<li><a href="#">&raquo;</a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list">
+							<?php foreach ($result as $key => $value) { ?>
 							<li>
-								<span class="handle">
+								<!-- <span class="handle">
 									<i class="fa fa-ellipsis-v"></i>
 									<i class="fa fa-ellipsis-v"></i>
-								</span>
-								<input type="checkbox" value="">
-								<span class="text">Design a nice theme</span>
-								<small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+								</span> -->
+								<?php if($value['check_status'] == 1) { ?>
+								<input type="checkbox" checked class="check_goal" value="<?php echo $value['id']; ?>">
+								<?php } else { ?>
+									<input type="checkbox" class="check_goal" value="<?php echo $value['id']; ?>">
+								<?php } ?>
+								<span class="text"><?php echo $value['goal']; ?></span>
+								<!-- <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
 								<div class="tools">
 									<i class="fa fa-edit"></i>
 									<i class="fa fa-trash-o"></i>
-								</div>
+								</div> -->
+							</li>
+							<?php } ?>
+							<li name="goal" id="goal" style="display:none;">
+								<textarea style="width: 100%"></textarea>
 							</li>
 						</ul>
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer clearfix no-border">
-						<button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+						<button type="button" style="display: none" class="btn btn-success pull-right add" user_id="<?php echo $_SESSION['id'];?>">Add</button>
+						<button type="button" class="btn btn-default add_item pull-right"><i class="fa fa-plus"></i> Add item</button>
 					</div>
 				</div>
 				<!-- /.box -->
@@ -154,21 +169,11 @@
 $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+
 <script src="dist/js/adminlte.min.js"></script>
 <script src="dist/js/pages/dashboard.js"></script>
-<script src="dist/js/demo.js"></script>
+
+<script src="<?php autoVer('/scripts/goals.js'); ?>"></script>
 </body>
 </html>
 <?php
