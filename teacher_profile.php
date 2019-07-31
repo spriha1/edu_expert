@@ -5,6 +5,9 @@
 		include_once 'teacher_sidenav.php';
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
+		include_once 'static_file_version.php';
+		include_once 'csrf_token.php';
+
 		$obj = new DB_connect();
 		$query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
 		$result = $obj->select_records($conn, $query);
@@ -14,37 +17,47 @@
 	<div class="col-md-6">
 		<!-- Horizontal Form -->
 		<div class="box box-info">
-			<form class="form-horizontal">
+			<form class="form-horizontal" id="registration" name="registration" method="POST">
+				<div id="alert" class='alert alert-danger' style="display: none;">
+				</div>
 				<div class="box-body">
 					<?php foreach ($result as $key => $value) { ?>
 					<div class="form-group">
 						<label for="fname" class="col-sm-3 control-label">First Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="fname" readonly value="<?php echo $value['firstname'];?>">
+							<input type="text" class="form-control" id="fname" name="fname" readonly value="<?php echo $value['firstname'];?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="lname" class="col-sm-3 control-label">Last Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="lname" readonly value="<?php echo $value['lastname'];?>">
+							<input type="text" class="form-control" id="lname" name="lname" readonly value="<?php echo $value['lastname'];?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="username" class="col-sm-3 control-label">Username</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="username" readonly value="<?php echo $value['username'];?>">
+							<input type="text" class="form-control" id="username" name="username" readonly value="<?php echo $value['username'];?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="email" class="col-sm-3 control-label">Email</label>
 						<div class="col-sm-9">
-							<input type="email" class="form-control" id="email" readonly value="<?php echo $value['email'];?>">
+							<input type="email" class="form-control" id="email" name="email" readonly value="<?php echo $value['email'];?>">
 						</div>
 					</div>
 				</div>
+				<div class="form-group" id="pass" style="display: none">
+						<label for="password" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="password" name="password">
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="token" name="token" value="<?php echo Token::generate(); ?>">
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<button type="submit" class="btn btn-default">Change password</button>
+					<button type="submit" id="change" class="btn btn-default">Change password</button>
 					<button type="submit" id="edit" class="btn btn-info pull-right">Edit</button>
 					<button type="submit" id="update" style="display:none;" class="btn btn-info pull-right">Update</button>
 				</div>
@@ -59,30 +72,24 @@
 $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/pages/dashboard.js"></script>
-<script src="dist/js/demo.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#edit').click(function(){
+			event.preventDefault();
 			$(":input").attr("readonly", false);
-			$("#edit").css('display', 'none');;
-			$("#update").css('display', 'block');;
+			$("#edit").css('display', 'none');
+			$("#update").css('display', 'block');
+		});
+		$('#change').click(function(){
+			event.preventDefault();
+			$("#pass").css('display', 'block');
+			$("#edit").css('display', 'none');
+			$("#update").css('display', 'block');
 		});
 	});
 </script>
+<script src="<?php autoVer('/scripts/edit.js'); ?>"></script>
 </body>
 </html>
 <?php

@@ -19,7 +19,7 @@
 		<div class="box box-info">
 			<form class="form-horizontal" id="registration" name="registration" method="POST">
 				<div id="alert" class='alert alert-danger' style="display: none;">
-				    </div>
+				</div>
 				<div class="box-body">
 					<?php foreach ($result as $key => $value) { ?>
 					<div class="form-group">
