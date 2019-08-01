@@ -91,7 +91,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-						<ul class="todo-list">
+						<ul class="todo-list todo">
 							<?php foreach ($result as $key => $value) { ?>
 							<li>
 								<!-- drag handle -->
@@ -110,12 +110,14 @@
 								<!-- Emphasis label -->
 								<!-- <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small> -->
 								<!-- General tools such as edit or delete-->
-								<!-- <div class="tools">
-									<i class="fa fa-edit"></i>
-									<i class="fa fa-trash-o"></i>
-								</div> -->
+								<div class="tools">
+									<!-- <i class="fa fa-edit"></i> -->
+									<i class="fa fa-trash-o remove" goal_id="<?php echo $value['id']; ?>"></i>
+								</div>
 							</li>
 							<?php } ?>
+						</ul>
+						<ul class="todo-list">
 							<li name="goal" id="goal" style="display:none;">
 								<textarea style="width: 100%"></textarea>
 							</li>

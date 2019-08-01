@@ -16,13 +16,19 @@ $(document).ready(function() {
 			if(result == 1)
 			{
 				var html = '<li><input type="checkbox" value=""><span class="text">'+goal+'</span>';
-				$('.todo-list').append(html);
+				$('.todo').append(html);
 			}
 		});
 	});
 	$(".check_goal").click(function(event) {
-		event.preventDefault();
+		//event.preventDefault();
 		var goal_id = $(this).val();
 		$.post('update_goals.php', {goal_id: goal_id});
+	});
+	$(".remove").click(function(event) {
+		//event.preventDefault();
+		var goal_id = $(this).attr('goal_id');
+		console.log(goal_id);
+		$.post('remove_goals.php', {goal_id: goal_id});
 	});
 })
