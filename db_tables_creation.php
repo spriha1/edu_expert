@@ -54,6 +54,9 @@
 		)";
 	$conn->exec($sql);
 
+	$sql = "DROP TRIGGER IF EXISTS before_goal_plan_update;";
+	$conn->exec($sql);
+
 	$sql = "CREATE TRIGGER before_goal_plan_update BEFORE UPDATE ON goal_plan FOR EACH ROW BEGIN SET new.total_time = new.to_time - new.from_time; END;";
 	$conn->exec($sql);
 
