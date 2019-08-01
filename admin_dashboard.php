@@ -101,6 +101,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
+						<input class="pull-right" type="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
@@ -115,17 +116,9 @@
 					<div class="box-body">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
-							<li id="goal_item" style="display:none">
-								<input type="checkbox" value="">
-								<span class="text">'+goal+'</span>
-							</li>
 							<?php foreach ($result as $key => $value) { 
 								?>
 							<li>
-								<!-- <span class="handle">
-									<i class="fa fa-ellipsis-v"></i>
-									<i class="fa fa-ellipsis-v"></i>
-								</span> -->
 								<?php if($value['check_status'] == 1) { ?>
 
 								<input type="checkbox" checked class="check_goal" value="<?php echo $value['id']; ?>">
@@ -152,7 +145,14 @@
 								</div>
 							</li>
 							<?php } ?>
-							
+							<li class="editable" style="display:none">
+								<input type="checkbox" class="check_goal">			
+								<span class="text"></span>
+								<div class="tools">
+									<!-- <i class="fa fa-edit"></i> -->
+									<i class="fa fa-trash-o remove" goal_id=""></i>
+								</div>
+							</li>
 						</ul>
 
 						<ul class="todo-list">
