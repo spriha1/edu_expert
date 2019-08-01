@@ -14,6 +14,7 @@
 					</option>
 			<?php } ?>
       	</select>
+      	
       	</div>
       	<div class="form-group mx-auto">
 		    <select class="form-control mb-2 mr-sm-2" id="record" name="record">
