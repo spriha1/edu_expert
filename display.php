@@ -71,7 +71,4 @@
 			</div>
 		</div>
 	</section>
-	    <div id="user_modal_details"></div>
-<script src="<?php autoVer('/scripts/chat.js'); ?>"></script>
-
-</script>
+	

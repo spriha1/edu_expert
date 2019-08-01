@@ -49,7 +49,12 @@
 			goal TEXT,
 			from_time timestamp DEFAULT CURRENT_TIMESTAMP,
 			to_time timestamp DEFAULT CURRENT_TIMESTAMP,
+			total_time INT DEFAULT '0',
 			check_status TINYINT(1) NOT NULL DEFAULT '0'
 		)";
 	$conn->exec($sql);
+
+	$sql = "CREATE TRIGGER before_goal_plan_update BEFORE UPDATE ON goal_plan FOR EACH ROW BEGIN SET new.total_time = new.to_time - new.from_time; END;";
+	$conn->exec($sql);
+
 ?>

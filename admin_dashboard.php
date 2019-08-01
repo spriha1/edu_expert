@@ -13,7 +13,7 @@
 		$query2 = "SELECT count(*) as total FROM users WHERE user_reg_status = 0";
 		$result2 = $obj->select_records($conn, $query2);
 
-		$query = "SELECT id,goal,check_status FROM goal_plan WHERE user_id = '".$_SESSION['id']."' AND from_time LIKE '%".date("Y-m-d")."%'";
+		$query = "SELECT id,goal,check_status,total_time FROM goal_plan WHERE user_id = '".$_SESSION['id']."' AND from_time LIKE '%".date("Y-m-d")."%'";
 		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
@@ -115,19 +115,37 @@
 					<div class="box-body">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
-							<?php foreach ($result as $key => $value) { ?>
+							<li id="goal_item" style="display:none">
+								<input type="checkbox" value="">
+								<span class="text">'+goal+'</span>
+							</li>
+							<?php foreach ($result as $key => $value) { 
+								?>
 							<li>
 								<!-- <span class="handle">
 									<i class="fa fa-ellipsis-v"></i>
 									<i class="fa fa-ellipsis-v"></i>
 								</span> -->
 								<?php if($value['check_status'] == 1) { ?>
+
 								<input type="checkbox" checked class="check_goal" value="<?php echo $value['id']; ?>">
+
 								<?php } else { ?>
+
 									<input type="checkbox" class="check_goal" value="<?php echo $value['id']; ?>">
+
 								<?php } ?>
+
 								<span class="text"><?php echo $value['goal']; ?></span>
-								<!-- <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small> -->
+
+								<?php if($value['total_time'] > 0) {
+								$total_time = gmdate('H:i:s', $value['total_time']);
+									 ?>
+
+								<small class="label label-danger"><i class="fa fa-clock-o"></i><?php echo $total_time; ?></small>
+
+							<?php } ?>
+
 								<div class="tools">
 									<!-- <i class="fa fa-edit"></i> -->
 									<i class="fa fa-trash-o remove" goal_id="<?php echo $value['id']; ?>"></i>

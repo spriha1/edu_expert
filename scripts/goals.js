@@ -15,8 +15,9 @@ $(document).ready(function() {
 		$.post('add_goals.php', {goal: goal, user_id: user_id}, function(result) {
 			if(result == 1)
 			{
-				var html = '<li><input type="checkbox" value=""><span class="text">'+goal+'</span>';
-				$('.todo').append(html);
+				$("#goal_item").clone(true).appendTo('.todo')
+				// var html = '<li><input type="checkbox" value=""><span class="text">'+goal+'</span>';
+				// $('.todo').append(html);
 			}
 		});
 	});
