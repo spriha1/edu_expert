@@ -19,7 +19,7 @@
 							</tr>
 						</thead>
 			<?php if ($file === "regd_users.php") { 
-				    foreach ($res as $key => $value) { ?>
+				    foreach ($result as $key => $value) { ?>
 				     	<tr>
 							<td><?php echo $value['firstname']; ?></td>
 							<td><?php echo $value['lastname']; ?></td>
@@ -45,7 +45,7 @@
 
 				    }
 				    } else if ($file === "pending_requests.php") { 
-					    foreach ($res as $key => $value) { ?>
+					    foreach ($result as $key => $value) { ?>
 					     	<tr>
 								<td><?php echo $value['firstname']; ?></td>
 								<td><?php echo $value['lastname']; ?></td>

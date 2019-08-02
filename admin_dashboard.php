@@ -23,7 +23,7 @@
 		<h1>
 		Dashboard
 		</h1>
-		
+	<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id']; ?>">
 	</section>
 	<!-- Main content -->
 	<section class="content">
@@ -101,7 +101,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
-						<input class="pull-right" type="date">
+						<input class="pull-right date" type="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
@@ -116,38 +116,20 @@
 					<div class="box-body">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
-							<?php foreach ($result as $key => $value) { 
-								?>
-							<li>
-								<?php if($value['check_status'] == 1) { ?>
-
-								<input type="checkbox" checked class="check_goal" value="<?php echo $value['id']; ?>">
-
-								<?php } else { ?>
-
-									<input type="checkbox" class="check_goal" value="<?php echo $value['id']; ?>">
-
-								<?php } ?>
-
-								<span class="text"><?php echo $value['goal']; ?></span>
-
-								<?php if($value['total_time'] > 0) {
-								$total_time = gmdate('H:i:s', $value['total_time']);
-									 ?>
-
-								<small class="label label-danger"><i class="fa fa-clock-o"></i><?php echo $total_time; ?></small>
-
-							<?php } ?>
-
-								<div class="tools">
-									<!-- <i class="fa fa-edit"></i> -->
-									<i class="fa fa-trash-o remove" goal_id="<?php echo $value['id']; ?>"></i>
-								</div>
-							</li>
-							<?php } ?>
-							<li class="editable" style="display:none">
+							
+							<li class="editable" goal_id="" style="display:none">
 								<input type="checkbox" class="check_goal">			
 								<span class="text"></span>
+								<small class="label label-danger time" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
+								<div class="tools">
+									<!-- <i class="fa fa-edit"></i> -->
+									<i class="fa fa-trash-o remove" goal_id=""></i>
+								</div>
+							</li>
+							<li class="goal_item" style="display:none">
+								<input type="checkbox" class="check_goal">			
+								<span class="text"></span>
+								<small class="label label-danger time" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
 								<div class="tools">
 									<!-- <i class="fa fa-edit"></i> -->
 									<i class="fa fa-trash-o remove" goal_id=""></i>
