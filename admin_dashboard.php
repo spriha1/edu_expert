@@ -101,7 +101,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
-						<input class="pull-right date" type="date">
+						<input class="pull-right date" id="dateField" type="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
@@ -113,23 +113,14 @@
 						</div> -->
 					</div>
 					<!-- /.box-header -->
-					<div class="box-body">
+					<div class="box-body" id="dataArea">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
 							
 							<li class="editable" goal_id="" style="display:none">
 								<input type="checkbox" class="check_goal">			
 								<span class="text"></span>
-								<small class="label label-danger time" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
-								<div class="tools">
-									<!-- <i class="fa fa-edit"></i> -->
-									<i class="fa fa-trash-o remove" goal_id=""></i>
-								</div>
-							</li>
-							<li class="goal_item" style="display:none">
-								<input type="checkbox" class="check_goal">			
-								<span class="text"></span>
-								<small class="label label-danger time" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
+								<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
 								<div class="tools">
 									<!-- <i class="fa fa-edit"></i> -->
 									<i class="fa fa-trash-o remove" goal_id=""></i>

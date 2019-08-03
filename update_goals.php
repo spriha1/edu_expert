@@ -12,7 +12,6 @@
 		    $conditions = array("id" => $_REQUEST['goal_id']);
 		    $obj->update($conn, $table, $columns, $conditions);
 		    $query = "SELECT total_time FROM goal_plan WHERE id = ".$_REQUEST['goal_id'];
-		    print_r($query);
 			$result = $obj->select_records($conn, $query);
 			// //$result = 1;
 			print_r(json_encode($result));
