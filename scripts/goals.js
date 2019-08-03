@@ -50,18 +50,18 @@ $(document).ready(function() {
 
 	$(".check_goal").change(function(event) {
 		event.preventDefault();
-			var goal_id = $(this).closest('[goal_id]').attr("goal_id");
-			$.post('update_goals.php', {goal_id: goal_id}, function(result) {
-				var response = JSON.parse(result);
-				console.log(response);
-				var total_time = response[0].total_time;
-				var time = new Date(null);
-				time.setSeconds(response[0].total_time);
-				var total_time = time.toISOString().substr(11, 8);
-				$("ul li[goal_id=" + goal_id + "]").find('.time').css('visibility', 'visible');
-				$("ul li[goal_id=" + goal_id + "]").find('.total_time').text(total_time);
+		var goal_id = $(this).closest('[goal_id]').attr("goal_id");
+		$.post('update_goals.php', {goal_id: goal_id}, function(result) {
+			var response = JSON.parse(result);
+			console.log(response);
+			var total_time = response[0].total_time;
+			var time = new Date(null);
+			time.setSeconds(response[0].total_time);
+			var total_time = time.toISOString().substr(11, 8);
+			$("ul li[goal_id=" + goal_id + "]").find('.time').css('visibility', 'visible');
+			$("ul li[goal_id=" + goal_id + "]").find('.total_time').text(total_time);
 
-			});
+		});
 		
 	});
 

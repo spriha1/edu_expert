@@ -40,12 +40,12 @@
 		}
 
 		if (isset($_POST['user_type']) && $check) {
-			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 1 AND user_type = '".$_POST['user_type']."'";
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_reg_status = 0 AND user_type = '".$_POST['user_type']."'";
 		    $result = $obj->select_records($conn, $query);
 		}
 
 		else {
-			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 1 AND user_type_id NOT IN (SELECT id FROM user_types WHERE user_type = 'Admin')";
+			$query = "SELECT firstname, lastname, email, username, block_status FROM users where user_reg_status = 0 AND user_type_id NOT IN (SELECT id FROM user_types WHERE user_type = 'Admin')";
 
 		    $result = $obj->select_records($conn, $query);
 		}
@@ -83,6 +83,18 @@ $.widget.bridge('uibutton', $.ui.button);
       'autoWidth'   : false
     })
   })
+</script>
+<script>
+	$(document).ready(function(){
+		$('#class').change(function(event){
+			event.preventDefault();
+			var value = $(this).val();
+			var username = $(this).attr('username');
+			$.post('update_class.php', {username: username, value: value}, function(result) {
+				console.log(result);
+			});
+		})
+	})
 </script>
 </body>
 </html>

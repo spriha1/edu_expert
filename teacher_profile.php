@@ -46,8 +46,7 @@
 							<input type="email" class="form-control" id="email" name="email" readonly value="<?php echo $value['email'];?>">
 						</div>
 					</div>
-				</div>
-				<div class="form-group" id="pass" style="display: none">
+					<div class="form-group" id="pass" style="display: none">
 						<label for="password" class="col-sm-3 control-label">Password</label>
 						<div class="col-sm-9">
 							<input type="password" class="form-control" id="password" name="password">
