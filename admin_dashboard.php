@@ -12,9 +12,6 @@
 		$result1 = $obj->select_records($conn, $query1);
 		$query2 = "SELECT count(*) as total FROM users WHERE user_reg_status = 0";
 		$result2 = $obj->select_records($conn, $query2);
-
-		$query = "SELECT id,goal,check_status,total_time FROM goal_plan WHERE user_id = '".$_SESSION['id']."' AND from_time LIKE '%".date("Y-m-d")."%'";
-		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -101,7 +98,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
-						<input class="pull-right date" id="dateField" type="date">
+						<input class="pull-right date" id="date" type="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
@@ -113,7 +110,7 @@
 						</div> -->
 					</div>
 					<!-- /.box-header -->
-					<div class="box-body" id="dataArea">
+					<div class="box-body" id="plan">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
 							

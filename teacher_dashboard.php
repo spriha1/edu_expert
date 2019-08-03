@@ -6,10 +6,6 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
-		$obj = new DB_connect();
-		
-		$query = "SELECT id,goal,check_status FROM goal_plan WHERE user_id = '".$_SESSION['id']."' AND from_time LIKE '%".date("Y-m-d")."%'";
-		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -18,7 +14,7 @@
 		<h1>
 		Dashboard
 		</h1>
-		
+		<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id']; ?>">
 	</section>
 	<!-- Main content -->
 	<section class="content">
@@ -78,6 +74,7 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
+						<input class="pull-right date" id="date" type="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
@@ -89,34 +86,21 @@
 						</div> -->
 					</div>
 					<!-- /.box-header -->
-					<div class="box-body">
+					<div class="box-body" id="plan">
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
-							<?php foreach ($result as $key => $value) { ?>
-							<li>
-								<!-- drag handle -->
-								<!-- <span class="handle">
-									<i class="fa fa-ellipsis-v"></i>
-									<i class="fa fa-ellipsis-v"></i>
-								</span> -->
-								<!-- checkbox -->
-								<?php if($value['check_status'] == 1) { ?>
-								<input type="checkbox" checked class="check_goal" value="<?php echo $value['id']; ?>">
-								<?php } else { ?>
-									<input type="checkbox" class="check_goal" value="<?php echo $value['id']; ?>">
-								<?php } ?>
-								<!-- todo text -->
-								<span class="text"><?php echo $value['goal']; ?></span>
-								<!-- Emphasis label -->
-								<!-- <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small> -->
-								<!-- General tools such as edit or delete-->
+							
+							<li class="editable" goal_id="" style="display:none">
+								<input type="checkbox" class="check_goal">			
+								<span class="text"></span>
+								<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
 								<div class="tools">
 									<!-- <i class="fa fa-edit"></i> -->
-									<i class="fa fa-trash-o remove" goal_id="<?php echo $value['id']; ?>"></i>
+									<i class="fa fa-trash-o remove" goal_id=""></i>
 								</div>
 							</li>
-							<?php } ?>
 						</ul>
+
 						<ul class="todo-list">
 							<li name="goal" id="goal" style="display:none;">
 								<textarea style="width: 100%"></textarea>
