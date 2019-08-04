@@ -55,6 +55,14 @@
 		)";
 	$conn->exec($sql);
 
+	$sql = "CREATE TABLE IF NOT EXISTS shared_timesheets (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			from_id INT,
+			to_id INT,
+			of_date VARCHAR(15)
+		)";
+	$conn->exec($sql);
+
 	$sql = "DROP TRIGGER IF EXISTS before_goal_plan_update;";
 	$conn->exec($sql);
 

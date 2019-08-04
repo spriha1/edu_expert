@@ -90,9 +90,7 @@ $.widget.bridge('uibutton', $.ui.button);
 			event.preventDefault();
 			var value = $(this).val();
 			var username = $(this).attr('username');
-			$.post('update_class.php', {username: username, value: value}, function(result) {
-				console.log(result);
-			});
+			$.post('update_class.php', {username: username, value: value});
 		})
 	})
 </script>

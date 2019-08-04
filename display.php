@@ -36,7 +36,6 @@
 							<?php 
 							if ($value['block_status']==0) { ?>
 								<td><a href="block_users.php?username=<?php echo $value["username"]; ?>&t=<?php echo $token; ?>"><button class="btn btn-success">Block</button></a></td>
-						</tr>
 						<?php
 								}
 								else if($value['block_status']==1)

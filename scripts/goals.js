@@ -79,11 +79,15 @@ $(document).ready(function() {
 		$('#plan').html(resetData());
 		load_display_data(date,user_id);
 	});
+
+	$('#share').click(function(event) {
+		event.preventDefault();
+		var user_id = $("#user_id").val();
+		var date = $("#date").val();
+		$.post('add_shared_timesheets.php', {user_id: user_id, date: date});
+	});
 })
 function resetData() {
-	// body...
-	//let element = $(".edit").clone(true).removeClass('edit');
-
 	var defaultValues = '<ul class="todo-list todo">'+
 					'<li class="editable" goal_id="" style="display:none">'+
 					'<input type="checkbox" class="check_goal">'+

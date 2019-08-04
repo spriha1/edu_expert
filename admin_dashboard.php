@@ -12,6 +12,8 @@
 		$result1 = $obj->select_records($conn, $query1);
 		$query2 = "SELECT count(*) as total FROM users WHERE user_reg_status = 0";
 		$result2 = $obj->select_records($conn, $query2);
+		$query3 = "SELECT count(*) as total FROM shared_timesheets WHERE to_id =".$_SESSION['id'];
+		$result3 = $obj->select_records($conn, $query3);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -62,13 +64,15 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3>0</h3>
+						<?php foreach ($result3 as $key => $value) { ?>
+						<h3><?php echo $value['total']; ?></h3>
+						<?php }?>
 						<p>Teacher Timesheets</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="teacher_timesheets.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->

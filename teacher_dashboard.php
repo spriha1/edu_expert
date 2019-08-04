@@ -74,7 +74,9 @@
 					<div class="box-header">
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
-						<input class="pull-right date" id="date" type="date">
+						<input class="date" id="date" type="date">
+						<button type="button" id="share" class="btn btn-success pull-right">Share</button>
+
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>

@@ -10,7 +10,6 @@
 		    $columns = array("class" => $_REQUEST['value']);
 		    $conditions = array("username" => $_REQUEST['username']);
 		    $obj->update($conn, $table, $columns, $conditions);
-		    print_r('hi');
 		}
 	}
 ?>
