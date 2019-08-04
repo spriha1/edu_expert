@@ -133,15 +133,7 @@
 
 </div>
 <!-- ./wrapper -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script>
-$.widget.bridge('uibutton', $.ui.button);
-</script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/pages/dashboard.js"></script>
+<?php include_once 'dashboard_footer.html'; ?>
 
 <script src="<?php autoVer('/scripts/goals.js'); ?>"></script>
 </body>

@@ -62,37 +62,9 @@
 		header("Location:index.php");
 	}
 ?>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script>
-$.widget.bridge('uibutton', $.ui.button);
-</script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/pages/dashboard.js"></script>
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script>
-  $(function () {
-    $('#regd_users').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
-<script>
-	$(document).ready(function(){
-		$('#class').change(function(event){
-			event.preventDefault();
-			var value = $(this).val();
-			var username = $(this).attr('username');
-			$.post('update_class.php', {username: username, value: value});
-		})
-	})
-</script>
+<?php include_once 'timesheet_footer.html'; ?>
+
+<script src="<?php autoVer('/scripts/users_list.js'); ?>"></script>
+
 </body>
 </html>
