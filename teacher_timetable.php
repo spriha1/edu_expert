@@ -48,7 +48,10 @@
 		</div>
 	</section>
 </div>
-<?php include_once 'profile_footer.html'; ?>
+<?php 
+	$file = 'profile_footer';
+	include_once 'footer.php'; 
+?>
 
 <script>
 	$('#timetable').DataTable();

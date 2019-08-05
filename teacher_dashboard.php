@@ -6,6 +6,11 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
+
+		$obj = new DB_connect();
+
+		$query = "SELECT count(*) as total FROM shared_timesheets WHERE to_id =".$_SESSION['id'];
+		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -52,13 +57,15 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3>0</h3>
+						<?php foreach ($result as $key => $value) { ?>
+						<h3><?php echo $value['total']; ?></h3>
+						<?php }?>
 						<p>Student Timesheet</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-person"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="student_timesheets.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -92,16 +99,17 @@
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
 							
-							<li class="editable" goal_id="" style="display:none">
-								<input type="checkbox" class="check_goal">			
-								<span class="text"></span>
-								<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
-								<div class="tools">
-									<!-- <i class="fa fa-edit"></i> -->
-									<i class="fa fa-trash-o remove" goal_id=""></i>
-								</div>
-							</li>
 						</ul>
+
+						<li class="editable" goal_id="" style="display:none">
+							<input type="checkbox" class="check_goal">			
+							<span class="text"></span>
+							<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
+							<div class="tools">
+								<!-- <i class="fa fa-edit"></i> -->
+								<i class="fa fa-trash-o remove" goal_id=""></i>
+							</div>
+						</li>
 
 						<ul class="todo-list">
 							<li name="goal" id="goal" style="display:none;">

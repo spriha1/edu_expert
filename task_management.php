@@ -70,7 +70,10 @@
 		</div>
 	</div>
 </div>
-<?php include_once 'profile_footer.html'; ?>
+<?php 
+	$file = 'profile_footer';
+	include_once 'footer.php'; 
+?>
 
 <script src="<?php autoVer('/scripts/task.js'); ?>"></script>
 

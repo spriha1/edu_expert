@@ -121,7 +121,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="student_timesheets.php">
 						<i class="fa fa-th"></i> <span>Student Timesheet</span>
 					</a>
 				</li>
