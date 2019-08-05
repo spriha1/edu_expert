@@ -130,6 +130,11 @@
 						<i class="fa fa-th"></i> <span>Student Feedback</span>
 					</a>
 				</li>
+				<li>
+					<a href="task_management.php">
+						<i class="fa fa-th"></i> <span>Task Management</span>
+					</a>
+				</li>
 			</ul>
 		</section>
 		<!-- /.sidebar -->

@@ -111,7 +111,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="student_timetable.php">
 						<i class="fa fa-th"></i> <span>Time Table</span>
 					</a>
 				</li>

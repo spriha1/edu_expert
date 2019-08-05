@@ -63,6 +63,41 @@
 		)";
 	$conn->exec($sql);
 
+	$sql = "CREATE TABLE IF NOT EXISTS tasks (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			of_date DATE,
+			subject_id INT,
+			class INT
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS teacher_tasks (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			task_id INT UNSIGNED,
+			teacher_id INT,
+			total_time INT DEFAULT '0',
+			CONSTRAINT test1 FOREIGN KEY (task_id)
+   			REFERENCES tasks(id)
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS student_tasks (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			task_id INT UNSIGNED,
+			student_id INT,
+			total_time INT DEFAULT '0',
+			CONSTRAINT test2 FOREIGN KEY (task_id)
+   			REFERENCES tasks(id)
+		)";
+	$conn->exec($sql);
+
+
+	$sql = "CREATE TABLE IF NOT EXISTS subjects (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			name VARCHAR(30)
+		)";
+	$conn->exec($sql);
+
 	$sql = "DROP TRIGGER IF EXISTS before_goal_plan_update;";
 	$conn->exec($sql);
 

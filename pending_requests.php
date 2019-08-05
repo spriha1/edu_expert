@@ -62,7 +62,10 @@
 		header("Location:index.php");
 	}
 ?>
-<?php include_once 'timesheet_footer.html'; ?>
+<?php 
+	$file = 'timesheet_footer';
+	include_once 'footer.php'; 
+?>
 
 <script src="<?php autoVer('/scripts/users_list.js'); ?>"></script>
 

@@ -118,16 +118,16 @@
 						<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 						<ul class="todo-list todo">
 							
-							<li class="editable" goal_id="" style="display:none">
-								<input type="checkbox" class="check_goal">			
-								<span class="text"></span>
-								<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
-								<div class="tools">
-									<!-- <i class="fa fa-edit"></i> -->
-									<i class="fa fa-trash-o remove" goal_id=""></i>
-								</div>
-							</li>
 						</ul>
+						<li class="editable" goal_id="" style="display:none">
+							<input type="checkbox" class="check_goal">			
+							<span class="text"></span>
+							<small class="label label-danger time" id="" style="visibility: hidden"><i class="fa fa-clock-o total_time"></i></small>
+							<div class="tools">
+								<!-- <i class="fa fa-edit"></i> -->
+								<i class="fa fa-trash-o remove" goal_id=""></i>
+							</div>
+						</li>
 
 						<ul class="todo-list">
 							<li name="goal" id="goal" style="display:none;">
@@ -159,7 +159,10 @@
 
 </div>
 <!-- ./wrapper -->
-<?php include_once 'dashboard_footer.html'; ?>
+<?php 
+	$file = 'dashboard_footer';
+	include_once 'footer.php'; 
+?>
 
 <script src="<?php autoVer('/scripts/goals.js'); ?>"></script>
 </body>

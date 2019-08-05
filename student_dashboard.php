@@ -30,7 +30,7 @@
 					<div class="icon">
 						<i class="ion ion-person"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="student_timetable.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -146,7 +146,10 @@
 
 </div>
 <!-- ./wrapper -->
-<?php include_once 'dashboard_footer.html'; ?>
+<?php 
+	$file = 'dashboard_footer';
+	include_once 'footer.php'; 
+?>
 
 <script src="<?php autoVer('/scripts/goals.js'); ?>"></script>
 </body>

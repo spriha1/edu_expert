@@ -10,13 +10,11 @@
 		$obj = new DB_connect();
 		$query = "SELECT from_id,of_date FROM shared_timesheets WHERE to_id =".$_SESSION['id'];
 		$result = $obj->select_records($conn, $query);
-		foreach ($result as $key => $value) {
-			$query2 = "SELECT firstname, username FROM users WHERE id =".$value['from_id'];
-			$result2 = $obj->select_records($conn, $query2);
+		
 		?>
 		
-		<br><br>
-
+		
+		<div class="content-wrapper">
 		<section class="content">
 			<div class="row">
 				<div class="col-xs-12">
@@ -34,70 +32,77 @@
 								</tr>
 							</thead>
 							<?php
-						    foreach ($result2 as $key2 => $value2) { ?>
-						     	<tr>
-									<td><?php echo $value2['firstname']; ?></td>
-									<td><?php echo $value2['username']; ?></td>
-									<td><?php echo $value['of_date']; ?></td>
-									
-									<td>
-										<button type="button" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
-									</td>
-								</tr>
-								<?php
-								}
-						    }
-						?>
+							foreach ($result as $key => $value) {
+								$query2 = "SELECT firstname, username FROM users WHERE id =".$value['from_id'];
+								$result2 = $obj->select_records($conn, $query2);
+							    foreach ($result2 as $key2 => $value2) { ?>
+							     	<tr>
+										<td><?php echo $value2['firstname']; ?></td>
+										<td><?php echo $value2['username']; ?></td>
+										<td><?php echo $value['of_date']; ?></td>
+										
+										<td>
+											<button type="button" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
+										</td>
+									</tr>
+									<?php
+									}
+							    }
+							?>
 						    </table></div>
 						</div>
 					</div>
 				</div>
 			</section>
+		</div>
+		<div class="modal" id="view_timesheets">
+			<div class="modal-dialog">
+				<div class="modal-content">
 
-			<div class="modal" id="view_timesheets">
-				<div class="modal-dialog">
-					<div class="modal-content">
-
-					<!-- Modal Header -->
-						<div class="modal-header">
-							<h4 class="modal-title">Timesheet</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-
-						<!-- Modal body -->
-						<div class="modal-body">
-							<table id="view_timesheet" class="table table-bordered table-striped">
-								
-								<thead>
-									<tr>
-										<th></th>
-										<th>Goal</th>
-										<th>From time</th>
-										<th>To time</th>
-										<th>Total time taken</th>
-									</tr>
-								</thead>
-								<tbody class="timesheet_body">
-									<tr id="">
-										<td class="number"></td>
-										<td class="goal"></td>
-										<td class="from_time"></td>
-										<td class="to_time"></td>
-										<td class="total_time"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-						</div>
-
+				<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Timesheet</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<table class="table table-bordered table-striped">
+							
+							<thead>
+								<tr>
+									<th></th>
+									<th>Goal</th>
+									<th>From time</th>
+									<th>To time</th>
+									<th>Total time taken</th>
+								</tr>
+							</thead>
+							<tbody id="view_timesheet">
+								
+							</tbody>
+							<tr id="" class="timesheet_body">
+								<td class="number"></td>
+								<td class="goal"></td>
+								<td class="from_time"></td>
+								<td class="to_time"></td>
+								<td class="total_time"></td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+
 				</div>
 			</div>
-<?php include_once 'timesheet_footer.html'; ?>
+		</div>
+<?php 
+	$file = 'timesheet_footer';
+	include_once 'footer.php'; 
+?>
 
 <script src="<?php autoVer('/scripts/timesheet.js'); ?>"></script>
 

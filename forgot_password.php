@@ -39,7 +39,10 @@
 	</div>
 </div>
 
-<?php include_once 'footer.html'; ?>
+<?php 
+	$file = 'footer';
+	include_once 'footer.php'; 
+?>
 </body>
 </html>
 	<!--<body class="body1">

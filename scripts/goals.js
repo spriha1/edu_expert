@@ -76,7 +76,7 @@ $(document).ready(function() {
 	$("#date").change(function(event) {
 		var date = $(this).val();
 		var user_id = $('#user_id').val();
-		$('#plan').html(resetData());
+		$('.todo').html("");
 		load_display_data(date,user_id);
 	});
 
@@ -87,23 +87,7 @@ $(document).ready(function() {
 		$.post('add_shared_timesheets.php', {user_id: user_id, date: date});
 	});
 })
-function resetData() {
-	var defaultValues = '<ul class="todo-list todo">'+
-					'<li class="editable" goal_id="" style="display:none">'+
-					'<input type="checkbox" class="check_goal">'+
-					'<span class="text"></span>'+
-					'<small class="label label-danger time" id="" style="visibility: hidden">'+
-					'<i class="fa fa-clock-o total_time"></i>'+
-					'</small>'+
-					'<div class="tools">'+
-					'<i class="fa fa-trash-o remove" goal_id=""></i>'+
-					'</div></li></ul>'+
-					'<ul class="todo-list">'+
-					'<li name="goal" id="goal" style="display:none;">'+
-					'<textarea style="width: 100%"></textarea>'+
-					'</li></ul>';
-	return defaultValues;
-}
+
 function load_display_data(date,user_id) {
 	$.post('display_goals.php', {date: date, user_id: user_id}, function(result) {
 			var response = JSON.parse(result);

@@ -48,7 +48,10 @@
 </div>
 
 <script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
-<?php include_once 'footer.html'; ?>
+<?php 
+	$file = 'footer';
+	include_once 'footer.php'; 
+?>
 </body>
 </html>
 <!--<body class="body1">
