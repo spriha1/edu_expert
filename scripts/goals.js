@@ -84,7 +84,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var user_id = $("#user_id").val();
 		var date = $("#date").val();
-		$.post('add_shared_timesheets.php', {user_id: user_id, date: date});
+		$.post('add_shared_timesheets.php', {user_id: user_id, date: date, timesheet_check: 0});
 	});
 })
 

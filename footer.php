@@ -51,6 +51,31 @@ else if ($file === 'profile_footer') {
 			});
 		});
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/timer.jquery/0.7.0/timer.jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.start').click(function() {
+				$('.timer').timer({
+					seconds: 0,
+					hidden: false
+				});
+			})
+			$('.stop').click(function() {
+				var time = $('.timer').data('seconds');
+				$('.timer').timer('remove');
+				var task_id = $(this).attr('task_id');
+				var user_id = $('#user_id').val();
+				$.post('add_completion_time.php', {task_id: task_id, user_id: user_id, time: time})
+			})
+			$('.resume').click(function() {
+				$('.timer').timer('resume');
+			})
+			$('.pause').click(function() {
+				$('.timer').timer('pause');
+			})
+			
+		})
+	</script>
 <?php } 
 
 else if ($file === 'timesheet_footer') {

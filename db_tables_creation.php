@@ -59,8 +59,10 @@
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			from_id INT,
 			to_id INT,
-			of_date VARCHAR(15)
-		)";
+			of_date VARCHAR(15),
+			timesheet_check INT DEFAULT '0' 
+		)"; 
+	// timesheet_check = 1 for timesheets and 0 for goal_plans
 	$conn->exec($sql);
 
 	$sql = "CREATE TABLE IF NOT EXISTS tasks (
@@ -97,6 +99,27 @@
 			name VARCHAR(30)
 		)";
 	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS feedback_parameters (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			parameter TEXT
+		)";
+	$conn->exec($sql);	
+
+	$sql = "CREATE TABLE IF NOT EXISTS feedback_ratings (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			rating VARCHAR(20)
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS feedback (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			from_id INT,
+			for_id INT,
+			parameter_id INT,
+			rating_id INT
+		)";
+	$conn->exec($sql);	
 
 	$sql = "DROP TRIGGER IF EXISTS before_goal_plan_update;";
 	$conn->exec($sql);

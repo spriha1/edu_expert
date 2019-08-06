@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$('.view').click(function() {
 		var from_id = $(this).attr('from_id');
 		var of_date = $(this).attr('of_date');
-		$.post('fetch_timesheet.php', {from_id: from_id, of_date: of_date, timesheet_check: 1}, function(result) {
+		$.post('fetch_timesheet.php', {from_id: from_id, of_date: of_date, timesheet_check: 0}, function(result) {
 			var response = JSON.parse(result);
 			var length = response.length;
 			$('#view_timesheet').html("");
@@ -23,8 +23,9 @@ $(document).ready(function() {
 			{
 				var element = $('.timesheet_body').clone(true).removeClass('timesheet_body');
 				element.find('.number').text(i+1);
-				element.find('.subject').text(response[i].name);
-				element.find('.class').text(response[i].class);
+				element.find('.goal').text(response[i].goal);
+				element.find('.from_time').text(response[i].from_time);
+				element.find('.to_time').text(response[i].to_time);
 				var time = new Date(null);
 				time.setSeconds(response[i].total_time);
 				var total_time = time.toISOString().substr(11, 8);

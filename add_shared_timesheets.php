@@ -1,8 +1,8 @@
 <?php 
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
-	if (isset($_REQUEST['user_id']) && isset($_REQUEST['date'])) {
-        if (!empty($_REQUEST['user_id']) && !empty($_REQUEST['date'])) {
+	if (isset($_REQUEST['user_id']) && isset($_REQUEST['date']) && isset($_REQUEST['timesheet_check'])) {
+        if (!empty($_REQUEST['user_id']) && !empty($_REQUEST['date']) && !empty($_REQUEST['timesheet_check'])) {
 
 			$obj = new DB_connect();
 
@@ -34,8 +34,8 @@
 		    	}		    	
 		    }
 		    $table = "shared_timesheets";
-	    	$columns = array("from_id", "to_id", "of_date");
-	    	$values = array($_REQUEST['user_id'], $to_id, $_REQUEST['date']);
+	    	$columns = array("from_id", "to_id", "of_date", "timesheet_check");
+	    	$values = array($_REQUEST['user_id'], $to_id, $_REQUEST['date'], $_REQUEST['timesheet_check']);
 	    	$obj->insert($conn, $table, $columns, $values);
 		}
 	}

@@ -8,7 +8,7 @@
 		include_once 'static_file_version.php';
 
 		$obj = new DB_connect();
-		$query = "SELECT from_id, of_date FROM shared_timesheets WHERE timesheet_check = 1 AND to_id =".$_SESSION['id'];
+		$query = "SELECT from_id, of_date FROM shared_timesheets WHERE timesheet_check = 0 AND to_id =".$_SESSION['id'];
 		$result = $obj->select_records($conn, $query);
 		
 		?>
@@ -72,8 +72,9 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th>Subject</th>
-									<th>Class</th>
+									<th>Goal</th>
+									<th>From time</th>
+									<th>To time</th>
 									<th>Total time taken</th>
 								</tr>
 							</thead>
@@ -82,8 +83,9 @@
 							</tbody>
 							<tr id="" class="timesheet_body">
 								<td class="number"></td>
-								<td class="subject"></td>
-								<td class="class"></td>
+								<td class="goal"></td>
+								<td class="from_time"></td>
+								<td class="to_time"></td>
 								<td class="total_time"></td>
 							</tr>
 						</table>
@@ -102,7 +104,7 @@
 	include_once 'footer.php'; 
 ?>
 
-<script src="<?php autoVer('/scripts/timesheet.js'); ?>"></script>
+<script src="<?php autoVer('/scripts/goalplan.js'); ?>"></script>
 
 </body>
 </html>
