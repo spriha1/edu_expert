@@ -2,7 +2,7 @@
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
 	if (isset($_REQUEST['user_id']) && isset($_REQUEST['date']) && isset($_REQUEST['timesheet_check'])) {
-        if (!empty($_REQUEST['user_id']) && !empty($_REQUEST['date']) && !empty($_REQUEST['timesheet_check'])) {
+        if (!empty($_REQUEST['user_id']) && !empty($_REQUEST['date'])) {
 
 			$obj = new DB_connect();
 
@@ -24,7 +24,7 @@
 		    		$result1 = $obj->select_records($conn, $query1);
 		    		foreach ($result1 as $key1 => $value1) 
 		    		{
-		    			$query2 = "SELECT id FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_types.user_type = 'Teacher' AND users.class = ".$value1['class'];
+		    			$query2 = "SELECT users.id FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE user_types.user_type = 'Teacher' AND users.class = ".$value1['class'];
 		    			$result2 = $obj->select_records($conn, $query2);
 		    			foreach ($result2 as $key2 => $value2) 
 		    			{

@@ -41,7 +41,7 @@
 									$result2 = $obj->select_records($conn, $query2);
 									foreach ($result2 as $key => $value2) { 
 									$count = 1; ?>
-									<tr>
+									<tr task_id="<?php echo $value['task_id']; ?>">
 										<td><?php echo $count; ?></td>
 										<td><?php echo $value2['name']; ?></td>
 										<td><?php echo $value2['class']; ?></td>

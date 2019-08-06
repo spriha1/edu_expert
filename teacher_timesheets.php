@@ -42,7 +42,7 @@
 										<td><?php echo $value['of_date']; ?></td>
 										
 										<td>
-											<button type="button" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
+											<button type="button" user_type="teacher" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
 										</td>
 									</tr>
 									<?php

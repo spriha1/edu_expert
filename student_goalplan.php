@@ -2,13 +2,13 @@
 	session_start();
 	if (isset($_SESSION["username"])) {
 		include_once 'header_dashboard.html';
-		include_once 'admin_sidenav.php';
+		include_once 'teacher_sidenav.php';
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
 
 		$obj = new DB_connect();
-		$query = "SELECT from_id, of_date FROM shared_timesheets WHERE timesheet_check = 1 AND to_id =".$_SESSION['id'];
+		$query = "SELECT from_id,of_date FROM shared_timesheets WHERE to_id =".$_SESSION['id'];
 		$result = $obj->select_records($conn, $query);
 		
 		?>
@@ -42,7 +42,7 @@
 										<td><?php echo $value['of_date']; ?></td>
 										
 										<td>
-											<button type="button" user_type="student" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
+											<button type="button" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
 										</td>
 									</tr>
 									<?php
@@ -72,7 +72,9 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th>Subject</th>
+									<th>Goal</th>
+									<th>From time</th>
+									<th>To time</th>
 									<th>Total time taken</th>
 								</tr>
 							</thead>
@@ -81,7 +83,9 @@
 							</tbody>
 							<tr id="" class="timesheet_body">
 								<td class="number"></td>
-								<td class="subject"></td>
+								<td class="goal"></td>
+								<td class="from_time"></td>
+								<td class="to_time"></td>
 								<td class="total_time"></td>
 							</tr>
 						</table>
@@ -100,7 +104,7 @@
 	include_once 'footer.php'; 
 ?>
 
-<script src="<?php autoVer('/scripts/timesheet.js'); ?>"></script>
+<script src="<?php autoVer('/scripts/goalplan.js'); ?>"></script>
 
 </body>
 </html>

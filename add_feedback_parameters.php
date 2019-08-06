@@ -20,7 +20,7 @@
 	            </div>
 				<div class="box-body">
 					<div class="form-group">
-						<div class="col-sm-9">
+						<div class="col-sm-12">
 							<textarea style="width: 100%"></textarea>
 						</div>
 					</div>

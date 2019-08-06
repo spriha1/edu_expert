@@ -125,6 +125,11 @@
 						<i class="fa fa-th"></i> <span>Student Timesheet</span>
 					</a>
 				</li>
+				<li>
+					<a href="student_goalplan.php">
+						<i class="fa fa-th"></i> <span>Student Goal Plan</span>
+					</a>
+				</li>
 			</ul>
 		</section>
 		<!-- /.sidebar -->
