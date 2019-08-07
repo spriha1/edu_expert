@@ -2,7 +2,7 @@
 	session_start();
 	if (isset($_SESSION["username"])) {
 		include_once 'header_dashboard.html';
-		include_once 'admin_sidenav.php';
+		include_once 'teacher_sidenav.php';
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';

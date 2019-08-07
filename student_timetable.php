@@ -25,10 +25,11 @@
 					</div>
 					<div class="box-body">
 						<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']; ?>">
+						<input type="hidden" id="user_type" value="student">
+
 						<table id="timetable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th></th>
 									<th>Subject</th>
 									<th>Teacher</th>
 									<th></th>
@@ -40,10 +41,8 @@
 									$query2 = "SELECT firstname, name FROM subjects INNER JOIN tasks ON (tasks.subject_id = subjects.id) INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN users ON (users.id = teacher_tasks.teacher_id) WHERE tasks.id = ".$value['task_id'];
 									$result2 = $obj->select_records($conn, $query2);
 
-									foreach ($result2 as $key => $value2) { 
-									$count = 1; ?>
+									foreach ($result2 as $key => $value2) { ?>
 									<tr task_id="<?php echo $value['task_id']; ?>">
-										<td><?php echo $count; ?></td>
 										<td><?php echo $value2['name']; ?></td>
 										<td><?php echo $value2['firstname']; ?></td>
 										<td class="timer"></td>
@@ -54,7 +53,7 @@
 											<button class="btn btn-info resume">Resume</button>
 										</td>
 									</tr>
-								<?php $count++; } } ?>
+								<?php } } ?>
 							</tbody>
 						</table>
 					</div>

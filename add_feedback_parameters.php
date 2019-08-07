@@ -12,7 +12,7 @@
 	<div class="col-md-6">
 		<!-- Horizontal Form -->
 		<div class="box box-info">
-			<form class="form-horizontal" id="registration" name="registration" method="POST">
+			<form class="form-horizontal" method="POST">
 				<div id="alert" class='alert alert-danger' style="display: none;">
 				</div>
 				<div class="box-header with-border">
@@ -39,7 +39,7 @@
 	include_once 'footer.php'; 
 ?>
 
-<script src="<?php autoVer('/scripts/edit.js'); ?>"></script>
+<script src="<?php autoVer('/scripts/.js'); ?>"></script>
 
 </body>
 </html>

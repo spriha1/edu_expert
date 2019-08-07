@@ -55,23 +55,25 @@ else if ($file === 'profile_footer') {
 	<script>
 		$(document).ready(function() {
 			$('.start').click(function() {
-				$('.timer').timer({
+				$(this).closest('tr').find('.timer').timer({
 					seconds: 0,
 					hidden: false
 				});
 			})
 			$('.stop').click(function() {
-				var time = $('.timer').data('seconds');
+				var time = $(this).closest('tr').find('.timer').data('seconds');
 				$('.timer').timer('remove');
 				var task_id = $(this).attr('task_id');
 				var user_id = $('#user_id').val();
-				$.post('add_completion_time.php', {task_id: task_id, user_id: user_id, time: time})
+				var user_type = $('#user_type').val();
+
+				$.post('add_completion_time.php', {task_id: task_id, user_id: user_id, time: time, user_type: user_type})
 			})
 			$('.resume').click(function() {
-				$('.timer').timer('resume');
+				$(this).closest('tr').find('.timer').timer('resume');
 			})
 			$('.pause').click(function() {
-				$('.timer').timer('pause');
+				$(this).closest('tr').find('.timer').timer('pause');
 			})
 			
 		})
