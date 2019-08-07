@@ -16,7 +16,9 @@ $(document).ready(function() {
 			var date = year+'-'+month+'-0'+date;
 		}
 		console.log(date);
-		$('#date').attr('value',date);
+		// $('#date').attr('value',date);
+		$('.datepicker').datepicker('setDate', date);
+
 		//var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 		var user_id = $('#user_id').val();
 		console.log(user_id);
@@ -73,12 +75,19 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#date").change(function(event) {
-		var date = $(this).val();
+	// $("#date").change(function(event) {
+	// 	var date = $(this).val();
+	// 	var user_id = $('#user_id').val();
+	// 	$('.todo').html("");
+	// 	load_display_data(date,user_id);
+	// });
+
+	$('.datepicker').datepicker().on('changeDate', function(e) {
+		var date = e.format();
 		var user_id = $('#user_id').val();
 		$('.todo').html("");
 		load_display_data(date,user_id);
-	});
+	})
 
 	$('#share').click(function(event) {
 		event.preventDefault();
