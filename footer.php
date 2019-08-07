@@ -35,6 +35,9 @@ else if ($file === 'profile_footer') {
 	</script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="dist/js/adminlte.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/timer.jquery/0.7.0/timer.jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 	<script>
 		$(document).ready(function(){
 			$('#edit').click(function(){
@@ -49,11 +52,6 @@ else if ($file === 'profile_footer') {
 				$("#edit").css('display', 'none');
 				$("#update").css('display', 'block');
 			});
-		});
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/timer.jquery/0.7.0/timer.jquery.js"></script>
-	<script>
-		$(document).ready(function() {
 			$('.start').click(function() {
 				$(this).closest('tr').find('.timer').timer({
 					seconds: 0,
@@ -75,8 +73,11 @@ else if ($file === 'profile_footer') {
 			$('.pause').click(function() {
 				$(this).closest('tr').find('.timer').timer('pause');
 			})
-			
-		})
+
+			$('.datepicker').datepicker({
+				format: 'yyyy-mm-dd'
+			});
+		});
 	</script>
 <?php } 
 

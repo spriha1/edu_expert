@@ -6,13 +6,6 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
-        
-        $date = strval(date("Y-m-d"));
-
-		$obj = new DB_connect();
-
-		$query = "SELECT task_id FROM teacher_tasks JOIN tasks ON (tasks.id = teacher_tasks.task_id) WHERE teacher_id = ".$_SESSION['id']." AND of_date LIKE '%".$date."%'";
-		$result = $obj->select_records($conn, $query);
 ?>
 <div class="content-wrapper">
 	<section class="content">
@@ -20,7 +13,8 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<input class="date" id="date" type="date">
+						<!-- <input class="date" id="date" type="date"> -->
+						<input class="datepicker">
 						<button type="button" id="share" class="btn btn-success pull-right">Share</button>
 					</div>
 					<div class="box-body">
@@ -36,25 +30,23 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
-								<?php foreach ($result as $key => $value) {
-									$query2 = "SELECT class, name FROM subjects INNER JOIN tasks ON (tasks.subject_id = subjects.id) WHERE tasks.id = ".$value['task_id'];
-									$result2 = $obj->select_records($conn, $query2);
-									foreach ($result2 as $key => $value2) { ?>
-									<tr task_id="<?php echo $value['task_id']; ?>">
-										<td><?php echo $value2['name']; ?></td>
-										<td><?php echo $value2['class']; ?></td>
-										<td class="timer"></td>
-										<td>
-											<button class="btn btn-info start">Start</button>
-											<button class="btn btn-info stop" task_id=<?php echo $value['task_id'] ?>>Stop</button>
-											<button class="btn btn-info pause">Pause</button>
-											<button class="btn btn-info resume">Resume</button>
-										</td>
-									</tr>
-								<?php } } ?>
+							<tbody class="timetable">
 							</tbody>
+							
 						</table>
+						<table style="display:none">
+						<tr class="editable" task_id="" style="display:none;">
+							<td class="name"></td>
+							<td class="class"></td>
+							<td class="timer"></td>
+							<td>
+								<button class="btn btn-info start">Start</button>
+								<button class="btn btn-info stop" task_id="">Stop</button>
+								<button class="btn btn-info pause">Pause</button>
+								<button class="btn btn-info resume">Resume</button>
+							</td>
+						</tr>
+					</table>
 					</div>
 				</div>
 			</div>
