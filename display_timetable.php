@@ -11,7 +11,12 @@
 			}
 
 			else if ($_REQUEST['user_type'] === 'student') {
-				$query = "SELECT task_id, firstname, name FROM student_tasks INNER JOIN tasks ON (tasks.id = student_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE student_id = ".$_REQUEST['user_id']." AND of_date LIKE '%".$_REQUEST['date']."%'";
+				$query = "SELECT teacher_tasks.task_id, teacher.firstname, name 
+				FROM student_tasks 
+				INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
+				INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
+				INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
+				INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND of_date LIKE '%".$_REQUEST['date']."%'";
 				$result = $obj->select_records($conn, $query);
 			}
 			
