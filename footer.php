@@ -2,12 +2,16 @@
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="plugins/iCheck/icheck.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 	<script>
 		$(function () {
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_square-blue',
 				radioClass: 'iradio_square-blue',
 				increaseArea: '20%' /* optional */
+			});
+			$('.subject').select2({
+				width: 'resolve'
 			});
 		});
 	</script>
@@ -25,11 +29,18 @@ else if ($file === 'dashboard_footer') {
 	<script src="dist/js/adminlte.min.js"></script>
 	<script src="dist/js/pages/dashboard.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 	
 	<script>
 		$(document).ready(function() {
 			$('.datepicker').datepicker({
 				format: 'yyyy-mm-dd'
+			});
+			$('.subject').select2({
+				width: 'resolve'
+			});
+			$('._subject').select2({
+				width: 'resolve'
 			});
 		})
 	</script>

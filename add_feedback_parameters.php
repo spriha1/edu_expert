@@ -13,7 +13,7 @@
 		<!-- Horizontal Form -->
 		<div class="box box-info">
 			<form class="form-horizontal" method="POST">
-				<div id="alert" class='alert alert-danger' style="display: none;">
+				<div id="alert" class='alert alert-success' style="display: none;">
 				</div>
 				<div class="box-header with-border">
 	            	<h3 class="box-title">Add criteria for feedback</h3>
@@ -38,8 +38,18 @@
 	$file = 'profile_footer';
 	include_once 'footer.php'; 
 ?>
-
-<script src="<?php autoVer('/scripts/.js'); ?>"></script>
+<script>
+	$('form').submit(function(event) {
+		event.preventDefault()
+		var value = $('textarea').val();
+		$.post('add_feedback.php', {value: value}, function(result) {
+			if (result == 1) {
+				$('#alert').text('Added successfully');
+			}
+		})
+	})
+</script>
+<!-- <script src="<?php //autoVer('/scripts/.js'); ?>"></script> -->
 
 </body>
 </html>

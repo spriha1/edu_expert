@@ -135,17 +135,17 @@
 						<i class="fa fa-th"></i> <span>Student Feedback</span>
 					</a>
 				</li>
-				<li>
-					<a href="add_feedback_parameters.php">
-						<i class="fa fa-th"></i> <span>Add Feedback Parameters</span>
-					</a>
-				</li>
+				
 				<li>
 					<a href="task_management.php">
 						<i class="fa fa-th"></i> <span>Task Management</span>
 					</a>
 				</li>
+				<li>
+					<a href="system_management.php">
+						<i class="fa fa-th"></i> <span>System Management</span>
+					</a>
+				</li>
 			</ul>
 		</section>
-		<!-- /.sidebar -->
 	</aside>

@@ -5,7 +5,7 @@
 	require_once '/usr/share/php/libphp-phpmailer/class.smtp.php';
 	include_once 'mail_credentials.php';
 	$msg = "";
-	print_r($_POST);
+	//print_r($_POST);
 	if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['password']) && isset($_POST['user_type'])) {
 		if (!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['fname']) AND !empty($_POST['lname']) AND !empty($_POST['password']) AND !empty($_POST['user_type'])) {
 
@@ -17,6 +17,7 @@
 			$pass = MD5($password);
 			$user_type = $_POST['user_type'];
 			$hash = md5(uniqid());
+			
 
 		    $obj = new DB_connect();
 		    $query = "SELECT id,block_status FROM users WHERE email = '".$email."'";
@@ -33,6 +34,25 @@
 				    	$columns = array("firstname", "lastname", "email", "username", "password", "email_verification_code", "user_type_id");
 				    	$values = array($firstname, $lastname, $email, $user_name, $pass, $hash, intval($value['id']));
 				    	$obj->insert($conn, $table, $columns, $values);
+
+				    	$query = "SELECT id FROM users WHERE username = '".$user_name."'";
+		    			$result = $obj->select_records($conn, $query);
+		    			foreach ($result as $key => $value) {
+		    				if (isset($_POST['subject']) && !empty($_POST['subject'])) {
+								$subject = $_POST['subject'];
+								$length = count($subject);
+					    		$table = "teacher_subject";
+								for($i = 0; $i < $length; $i++)
+								{
+									$columns = array("teacher_id", "subject_id");
+							    	$values = array(intval($value['id']), $subject[$i]);
+							    	$obj->insert($conn, $table, $columns, $values);
+								}
+
+							}
+		    			}
+
+				    	
 						//$sql = "INSERT INTO users (firstname, lastname, email, username, password, email_verification_code,user_type_id) VALUES ('".$firstname."','".$lastname."','".$email."','".$user_name."','".$pass."','".$hash."','".$value['id']."')";
 					    //$conn->exec($sql);
 				    }

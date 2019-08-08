@@ -40,13 +40,24 @@ $(document).ready(function() {
 		}
 
 		if (event.target.id === 'registration') {
-			var check,c = 0;
-			$('#registration input').each(function(){
+			console.log('hi');
+			var check,c = 0,size = 0;
+			$('#registration input').not('.select2-search__field').each(function(){
 			    check = $(this).val().trim();
 				if (check === "") {
 					$(this).css("borderColor" , "red");
 					c++;
+					console.log(this);
 				}
+			});
+			$('#registration').find('select').each(function(){
+			    check = $(this).val();
+			    console.log(check);
+				// if (check === "") {
+				// 	$(this).css("borderColor" , "red");
+				// 	c++;
+				// 	console.log(this);
+				// }
 			});
 			if (c > 0) {
 				$("#alert").text("Please fill in the highlighted fields");
@@ -55,6 +66,7 @@ $(document).ready(function() {
 			}
 			else {
 				event.preventDefault();
+
 				$.post('ajax_register.php' , $('#registration').serialize() , function(result){
 					$('#alert').text(result);
 					$("#alert").css("display" , "block");
@@ -186,5 +198,13 @@ $(document).ready(function() {
 			}
 		}
 	});
+	$('#user_type').change(function(event) {
+		if ($('#user_type').val() === 'Teacher') {
+			$('.subject').closest('div').css('display', 'block');
+		}
+	});
 
+	$('.subject').change(function() {
+		console.log($('.subject').val());
+	})
 })

@@ -6,6 +6,11 @@
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
 	include_once 'static_file_version.php';
+	$obj = new DB_connect();
+	$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
+    $result = $obj->select_records($conn, $query);
+    $query2 = "SELECT * FROM subjects";
+    $result2 = $obj->select_records($conn, $query2);
 ?>
 
 <body class="hold-transition register-page">
@@ -47,12 +52,20 @@
 				<div class="form-group has-feedback">
 					<select class="form-control" id="user_type" name="user_type">
 				        <option value="0">Select User Type</option>
-				        <?php 
-							$obj = new DB_connect();
-            				$query = "SELECT user_type FROM user_types WHERE user_type != 'Admin'";
-            				$result = $obj->select_records($conn, $query);
+				        <?php
             				foreach ($result as $key => $value) {
             					echo '<option value="'.$value['user_type'].'">'.$value['user_type'].'</option>';
+            				}
+						?>
+			      	</select>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback" style="display:none;">
+					<select class="form-control subject" id="subject" name="subject[]" multiple="multiple" style="width:100%">
+				        <option value="0">Select Subjects</option>
+				        <?php
+            				foreach ($result2 as $key => $value) {
+            					echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
             				}
 						?>
 			      	</select>
@@ -74,11 +87,14 @@
 		</div>
 	</div>
 	
-	<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
+
 <?php 
 	$file = 'footer';
 	include_once 'footer.php'; 
 ?>
+
+	<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
+
 </body>
 </html>
 

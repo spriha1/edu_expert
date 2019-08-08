@@ -73,6 +73,12 @@
 		)";
 	$conn->exec($sql);
 
+	// $sql = "CREATE TABLE IF NOT EXISTS class (
+	// 		id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	// 		subject_id INT
+	// 	)";
+	// $conn->exec($sql);
+
 	$sql = "CREATE TABLE IF NOT EXISTS teacher_tasks (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			task_id INT UNSIGNED,
@@ -97,6 +103,29 @@
 	$sql = "CREATE TABLE IF NOT EXISTS subjects (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			name VARCHAR(30)
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS teacher_subject (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			teacher_id INT UNSIGNED,
+			subject_id INT UNSIGNED,
+			CONSTRAINT test3 FOREIGN KEY (teacher_id)
+			REFERENCES users(id),
+			CONSTRAINT test4 FOREIGN KEY (subject_id)
+			REFERENCES subjects(id)
+		)";
+	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS class (
+			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			class INT UNSIGNED,
+			subject_id INT UNSIGNED,
+			teacher_id INT UNSIGNED,
+			CONSTRAINT test5 FOREIGN KEY (teacher_id)
+			REFERENCES users(id),
+			CONSTRAINT test6 FOREIGN KEY (subject_id)
+			REFERENCES subjects(id)
 		)";
 	$conn->exec($sql);
 
