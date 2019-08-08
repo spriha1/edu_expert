@@ -82,6 +82,36 @@
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
+							<div class="box box-info _add_class" style="display:none">
+								<form class="form-horizontal" id="_add_class" name="_add_class" method="POST">
+									<input type="hidden" name="class" value="">
+									<div class="box-body _append_teacher">
+										<div class="form-group">
+											<label for="subjects" class="col-sm-3 control-label">Subject</label>
+											<div class="col-sm-9">
+												<select class="_subject" id="subjects" name="subjects[]" multiple="multiple" style="width:100%">
+													<?php foreach ($result as $key => $value) { ?>
+													<option value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+										<div class="form-group _editable" style="display:none;">
+											<label for="" class="col-sm-3 control-label"></label>
+											<div class="col-sm-9">
+												<select class="_teacher form-control" name="">
+													<option value=""></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<!-- /.box-body -->
+									<div class="box-footer">
+										<button type="submit" id="_add" class="btn btn-info pull-right">Add</button>
+									</div>
+									<!-- /.box-footer -->
+								</form>
+							</div>
 							<button class="btn btn-success add_subject">Add subject</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
