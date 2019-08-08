@@ -11,7 +11,7 @@ $(document).ready(function(){
 		})
 	})
 	
-	$('#class').change(function(event){
+	$('.class').change(function(event){
 		event.preventDefault();
 		var value = $(this).val();
 		var username = $(this).attr('username');

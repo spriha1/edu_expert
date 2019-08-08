@@ -9,8 +9,8 @@
 
 		$obj = new DB_connect();
 		$query = "SELECT from_id, of_date FROM shared_timesheets WHERE timesheet_check = 1 AND to_id =".$_SESSION['id'];
+
 		$result = $obj->select_records($conn, $query);
-		
 		?>
 		
 		
