@@ -40,12 +40,14 @@
 					<div class="form-group">
 						<label for="class" class="col-sm-3 control-label">Class</label>
 						<div class="col-sm-9">
-							<select class="form-control" id="class" name="class">
-						        <option value="1">1</option>
-						        <option value="2">2</option>
-						        <option value="3">3</option>
-						        <option value="4">4</option>
-						        <option value="5">5</option>
+							<select class="form-control mb-2 mr-sm-2 class" username="<?php echo $value["username"]; ?>" name="class" id="class">
+						    	<?php 
+						    		$query = "SELECT DISTINCT class FROM class";
+						    		$result = $obj->select_records($conn, $query);
+						    		foreach ($result as $key => $value) {
+						    	?>
+						        <option value=<?php echo $value['class']; ?>><?php echo $value['class']; ?></option>
+						        <?php } ?>
 					      	</select>
 						</div>
 					</div>

@@ -89,12 +89,14 @@
 										<div class="form-group">
 											<label for="subjects" class="col-sm-3 control-label">Subject</label>
 											<div class="col-sm-9">
-												<select class="_subject" id="subjects" name="subjects[]" multiple="multiple" style="width:100%">
+												<select class="_subject" name="subjects[]" multiple="multiple" style="width:100%">
 													<?php foreach ($result as $key => $value) { ?>
 													<option value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
 													<?php } ?>
 												</select>
 											</div>
+										</div>
+										<div id="_append_teacher">
 										</div>
 										<div class="form-group _editable" style="display:none;">
 											<label for="" class="col-sm-3 control-label"></label>
@@ -146,6 +148,9 @@
 								<?php } ?>
 							</select>
 						</div>
+					</div>
+					<div id="append_teacher">
+						
 					</div>
 					<div class="form-group editable" style="display:none;">
 						<label for="" class="col-sm-3 control-label"></label>

@@ -13,6 +13,10 @@ $(document).ready(function() {
 		
 	$(".add_item").click(function(event) {
 		event.preventDefault();
+		$('#append_teacher').html("");
+		$('.append_teacher #class').val("");
+		$('.append_teacher .subject').val('');
+		$('.append_teacher .subject').select2('destroy').select2();
 		$(".add_class").css("display", "block");
 	});
 
@@ -20,6 +24,7 @@ $(document).ready(function() {
 	    var data = e.params.data;
 	    var id = data.id; //value of options
 	    var text = data.text;
+
 	    $.post('fetch_teachers.php', {subject_id: id}, function(result) {
 	    	var response = JSON.parse(result);
 	    	let element = $(".editable").clone(true).css('display', 'block').removeClass('editable');
@@ -36,7 +41,8 @@ $(document).ready(function() {
 				element2.html(response[i].firstname);
 				element2.appendTo(element.find('select'))
 	    	}
-			element.appendTo('.append_teacher');
+
+			element.appendTo('#append_teacher');
 
 	    });
 	});
@@ -74,6 +80,7 @@ $(document).ready(function() {
 
 	$('.edit').click(function(event) {
 		var class_id = $(this).closest('li').attr('class_id');
+		$('._add_class').css('display', 'none');
 		$("._add_class").find('form input').val(class_id);
 		$.post('fetch_class_details.php', {class: class_id}, function(result) {
 			var response = JSON.parse(result);
@@ -106,6 +113,9 @@ $(document).ready(function() {
 
 	$(".add_subject").click(function(event) {
 		event.preventDefault();
+		$('#_append_teacher').html("");
+		$('._append_teacher ._subject').val('');
+		$('._append_teacher ._subject').select2('destroy').select2();
 		$("._add_class").css("display", "block");
 	});
 
@@ -129,7 +139,7 @@ $(document).ready(function() {
 				element2.html(response[i].firstname);
 				element2.appendTo(element.find('select'))
 	    	}
-			element.appendTo('._append_teacher');
+			element.appendTo('#_append_teacher');
 
 	    });
 	});
