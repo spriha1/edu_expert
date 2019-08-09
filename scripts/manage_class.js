@@ -81,6 +81,8 @@ $(document).ready(function() {
 	$('.edit').click(function(event) {
 		var class_id = $(this).closest('li').attr('class_id');
 		$('._add_class').css('display', 'none');
+		$('#edit_subject').css('display', 'none');
+		$('#edit_subject select').val("");
 		$("._add_class").find('form input').val(class_id);
 		$.post('fetch_class_details.php', {class: class_id}, function(result) {
 			var response = JSON.parse(result);
@@ -169,6 +171,42 @@ $(document).ready(function() {
 		// $('.subject').text("");
 		// $('#class').val("");
 	});
+
+	$('.edit_subject').click(function() {
+		$('#edit_subject').css('display', 'block');
+		var subject_id = $(this).closest('tr').attr('subject_id');
+		var class_id = $(this).closest('tr').attr('class_id');
+		$('#edit_subject select').attr('subject_id', subject_id);
+		$('#edit_subject select').attr('class_id', class_id);
+		$('#edit_subject select').html("");
+
+		$.post('fetch_teachers.php', {subject_id: subject_id}, function(result) {
+			var response = JSON.parse(result);
+	    	for(var i = 0; i < response.length; i++)
+	    	{
+	    		let element = $("#edit_subject ._clone").clone(true).removeClass('_clone');
+	    		// element.closest('select').removeClass('teacher');
+	    		console.log(element);
+				element.attr('value', response[i].id);
+				element.html(response[i].firstname);
+				element.appendTo('.teacher_')
+	    	}
+
+		});
+
+	});
+
+	$('#edit_subject button').click(function(){
+		$('#edit_subject').css('display', 'none');
+		var subject_id = $('#edit_subject select').attr('subject_id');
+		var class_id = $('#edit_subject select').attr('class_id');
+		var teacher_id = $('#edit_subject select').val();
+		$.post('update_teacher.php', {subject_id: subject_id, class_id: class_id, teacher_id: teacher_id}, function(result) {
+			var response = JSON.parse(result);
+			$('.modal-body tr[subject_id='+subject_id+'] .teacher').text(response[0].firstname);
+		});
+
+	})
 })
 
 	

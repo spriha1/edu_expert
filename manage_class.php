@@ -67,6 +67,7 @@
 										<th>Subject</th>
 										<th>Teacher</th>
 										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody id="view_subjects">
@@ -76,6 +77,7 @@
 									<td class="subject_name"></td>
 									<td class="teacher"></td>
 									<td><a><i class="fa fa-trash-o remove_subject"></i></a></td>
+									<td><a class="edit_subject">Edit</a></td>
 								</tr>
 							</table>
 						</div>
@@ -113,6 +115,19 @@
 									</div>
 									<!-- /.box-footer -->
 								</form>
+							</div>
+							<div id="edit_subject" style="display:none;">
+								<div class="col-sm-4">
+
+									<select class="teacher_ form-control pull-left" subject_id="" class_id="" name="">
+									</select>
+										<option class="_clone" value=""></option>
+
+
+								</div>
+								<div class="col-sm-2">
+									<button class="btn btn-success">Update</button>
+								</div>
 							</div>
 							<button class="btn btn-success add_subject">Add subject</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
