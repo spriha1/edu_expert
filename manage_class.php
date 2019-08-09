@@ -116,6 +116,7 @@
 									<!-- /.box-footer -->
 								</form>
 							</div>
+							
 							<div id="edit_subject" style="display:none;">
 								<div class="col-sm-4">
 

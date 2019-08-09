@@ -16,6 +16,8 @@ $(document).ready(function() {
 		$('#append_teacher').html("");
 		$('.append_teacher #class').val("");
 		$('.append_teacher .subject').val('');
+		$('.append_teacher .subject').html('');
+
 		$('.append_teacher .subject').select2('destroy').select2();
 		$(".add_class").css("display", "block");
 	});
@@ -117,6 +119,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		$('#_append_teacher').html("");
 		$('._append_teacher ._subject').val('');
+		$('._append_teacher ._subject').html('');
 		$('._append_teacher ._subject').select2('destroy').select2();
 		$("._add_class").css("display", "block");
 	});

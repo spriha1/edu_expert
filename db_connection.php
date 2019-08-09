@@ -133,6 +133,5 @@
 			}
 			$conn->exec($query);
 		}
-
 	}
  ?>

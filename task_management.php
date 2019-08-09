@@ -8,11 +8,9 @@
 		include_once 'static_file_version.php';
 
 		$obj = new DB_connect();
-		$query = "SELECT * FROM subjects";
+		$query = "SELECT DISTINCT class FROM class";
 		$result = $obj->select_records($conn, $query);
-
-		$query1 = "SELECT users.id, firstname FROM users INNER JOIN user_types ON (users.user_type_id = user_types.id) WHERE  user_type = 'Teacher'";
-		$result1 = $obj->select_records($conn, $query1);
+		
 ?>
 <div class="content-wrapper">
 	<br><br>
@@ -27,23 +25,10 @@
 	            </div>
 				<div class="box-body">
 					<div class="form-group">
-						<label for="subject" class="col-sm-3 control-label">Subject</label>
-						<div class="col-sm-9">
-							<select class="form-control" id="subject" name="subject">
-							<?php
-	            				foreach ($result as $key => $value) { ?>
-	            					<option value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
-	            			<?php }?>
-					      	</select>
-						</div>
-					</div>
-					<div class="form-group">
 						<label for="class" class="col-sm-3 control-label">Class</label>
 						<div class="col-sm-9">
-							<select class="form-control mb-2 mr-sm-2 class" username="<?php echo $value["username"]; ?>" name="class" id="class">
-						    	<?php 
-						    		$query = "SELECT DISTINCT class FROM class";
-						    		$result = $obj->select_records($conn, $query);
+							<select class="form-control mb-2 mr-sm-2 class" name="class" id="class">
+						    	<?php
 						    		foreach ($result as $key => $value) {
 						    	?>
 						        <option value=<?php echo $value['class']; ?>><?php echo $value['class']; ?></option>
@@ -52,16 +37,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="teacher" class="col-sm-3 control-label">Teacher</label>
+						<label for="subject" class="col-sm-3 control-label">Subject</label>
 						<div class="col-sm-9">
-							<select class="form-control" id="teacher" name="teacher">
-							<?php
-	            				foreach ($result1 as $key => $value) { ?>
-	            					<option value="<?php echo $value['id'] ?>"><?php echo $value['firstname']; ?></option>
-	            			<?php }?>
+							<select multiple="multiple" class="form-control subject" id="subject" name="subject[]">
+	            					
 					      	</select>
+					      	<option class="clone" value=""></option>
 						</div>
 					</div>
+					
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">

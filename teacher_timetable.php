@@ -14,7 +14,7 @@
 				<div class="box">
 					<div class="box-header">
 						<!-- <input class="date" id="date" type="date"> -->
-						<input class="datepicker">
+						<input id="date" class="datepicker">
 						<button type="button" id="share" class="btn btn-success pull-right">Share</button>
 					</div>
 					<div class="box-body">
