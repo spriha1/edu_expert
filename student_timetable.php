@@ -6,6 +6,9 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
+		$obj = new DB_connect();
+		$query = "SELECT date_format FROM users WHERE username = '".$_SESSION['username']."'";
+		$result = $obj->select_records($conn, $query);
 ?>
 <div class="content-wrapper">
 	<section class="content">
@@ -17,6 +20,9 @@
 						<input id="date" class="datepicker">
 						<button type="button" id="share" class="btn btn-success pull-right">Share</button>
 					</div>
+					<?php foreach ($result as $key => $value) { ?>
+						<input type="hidden" name="date_format" id="date_format" value="<?php echo $value['date_format'] ?>">
+					<?php } ?>
 					<div class="box-body">
 						<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']; ?>">
 						<input type="hidden" id="user_type" value="student">

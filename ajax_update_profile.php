@@ -31,6 +31,14 @@
 			$msg->success = 1;
 		}
 
+		if (isset($_POST['date_format']) && !empty($_POST['date_format'])) {
+			$columns = array("date_format" => $_POST['date_format']);
+		    $conditions = array("username" => $_SESSION['username']);
+		    $obj->update($conn, $table, $columns, $conditions);
+			//$query = "UPDATE users SET lastname = '".$_POST['lname']."' WHERE username = '".$_SESSION['username']."'";
+			$msg->success = 1;
+		}
+
 		if (isset($_POST['password']) && !empty($_POST['password'])) {
 			$pass = md5($_POST['password']);
 			$columns = array("password" => $pass);

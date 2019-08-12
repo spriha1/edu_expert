@@ -10,7 +10,10 @@
 		$obj = new DB_connect();
 		$query = "SELECT DISTINCT class FROM class";
 		$result = $obj->select_records($conn, $query);
-		
+
+		$query2 = "SELECT date_format FROM users WHERE username = '".$_SESSION['username']."'";
+		$result2 = $obj->select_records($conn, $query2);
+
 ?>
 <div class="content-wrapper">
 	<br><br>
@@ -20,6 +23,11 @@
 			<form class="form-horizontal" id="task" name="task" method="POST">
 				<div id="alert" class='alert alert-success' style="display: none;">
 				</div>
+				<img src="load.gif" id="spinner" style="display:none; width:20%; height:20%">
+				<?php foreach ($result2 as $key => $value) { ?>
+					<input type="hidden" name="date_format" id="date_format" value="<?php echo $value['date_format'] ?>">
+				<?php } ?>
+				
 				<div class="box-header with-border">
 	            	<h3 class="box-title">Add tasks</h3>
 	            </div>

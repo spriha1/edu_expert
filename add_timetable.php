@@ -1,8 +1,7 @@
 <?php 
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
-	//$result = 0;
-	//pd(gettype($_REQUEST['start_date']));
+	
 	if (isset($_REQUEST['class']) && isset($_REQUEST['subject']) && isset($_REQUEST['start_date']) && isset($_REQUEST['end_date'])) {
         if (!empty($_REQUEST['class']) && !empty($_REQUEST['subject']) && !empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])) {
         	//$date = date("Y-m-d");

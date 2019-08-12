@@ -58,6 +58,7 @@ else if ($file === 'profile_footer') {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/timer.jquery/0.7.0/timer.jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 
 	<script>
@@ -65,6 +66,7 @@ else if ($file === 'profile_footer') {
 			$('#edit').click(function(){
 				event.preventDefault();
 				$(":input").attr("readonly", false);
+				$("#date_format").attr("disabled", false);
 				$("#edit").css('display', 'none');
 				$("#update").css('display', 'block');
 			});
@@ -97,7 +99,7 @@ else if ($file === 'profile_footer') {
 			})
 
 			$('.datepicker').datepicker({
-				format: 'yyyy-mm-dd'
+				format: $('#date_format').val()
 			});
 
 			$('.subject').select2({

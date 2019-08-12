@@ -5,7 +5,13 @@ $(document).ready(function() {
 		// var subject_id = $('#subject').val();
 		// var class_id= $('#class').val();
 		// end_date = $('#end_date').val();
-		$.post('add_timetable.php', $("#task").serialize(), function(result) {
+		//$("#spinner").css('display','block');
+		var start_date = format_date($('#start_date').val());
+		var end_date = format_date($('#end_date').val());
+		var _class = $('#class').val();
+		var subject = $('#subject').val();
+		$.post('add_timetable.php', {class: _class, subject: subject, start_date: start_date, end_date: end_date}, function(result) {
+			//$('#spinner').css('display', 'none');
 			$('#alert').text(result).css('display', 'block');
 			$('.datepicker').val('');
 			$('.subject').val('');
@@ -39,3 +45,22 @@ $(document).ready(function() {
 		});
 	})
 })
+function format_date(date) {
+	var today = new Date(date);
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var date = today.getDate();
+	if (month < 10 && date < 10)
+	{
+		var date = year+'-0'+month+'-0'+date;
+	}
+	else if (month < 10)
+	{
+		var date = year+'-0'+month+'-'+date;
+	}
+	else if (date < 10)
+	{
+		var date = year+'-'+month+'-0'+date;
+	}
+	return date;
+}

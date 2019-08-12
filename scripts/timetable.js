@@ -41,6 +41,24 @@ $(document).ready(function() {
 
 	$('.datepicker').datepicker().on('changeDate', function(e) {
 		var date = e.format();
+		console.log(date)
+		var today = new Date(date);
+		var year = today.getFullYear();
+		var month = today.getMonth()+1;
+		var date = today.getDate();
+		if (month < 10 && date < 10)
+		{
+			var date = year+'-0'+month+'-0'+date;
+		}
+		else if (month < 10)
+		{
+			var date = year+'-0'+month+'-'+date;
+		}
+		else if (date < 10)
+		{
+			var date = year+'-'+month+'-0'+date;
+		}
+		console.log(date);
 		var user_id = $('#user_id').val();
 		var user_type = $('#user_type').val();
 

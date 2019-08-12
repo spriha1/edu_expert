@@ -9,7 +9,7 @@
 		include_once 'csrf_token.php';
 
 		$obj = new DB_connect();
-		$query = "SELECT firstname, lastname, email, username, password FROM users WHERE username = '".$_SESSION['username']."'";
+		$query = "SELECT firstname, lastname, email, username, password, date_format FROM users WHERE username = '".$_SESSION['username']."'";
 		$result = $obj->select_records($conn, $query);
 ?>
 <div class="content-wrapper">
@@ -44,6 +44,19 @@
 						<label for="email" class="col-sm-3 control-label">Email</label>
 						<div class="col-sm-9">
 							<input type="email" class="form-control" name="email" id="email" readonly value="<?php echo $value['email'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="date_format" class="col-sm-3 control-label">Date Format</label>
+						<div class="col-sm-9">
+							<select name="date_format" id="date_format" class="form-control" disabled>
+								<option value="yyyy-mm-dd" <?php echo $value['date_format'] === 'yyyy-mm-dd' ? 'selected="selected"' : ''; ?>>yyyy-mm-dd</option>
+								<option value="yyyy/mm/dd" <?php echo $value['date_format'] === 'yyyy/mm/dd' ? 'selected="selected"' : ''; ?>>yyyy/mm/dd</option>
+								<option value="yyyy.mm.dd" <?php echo $value['date_format'] === 'yyyy.mm.dd' ? 'selected="selected"' : ''; ?>>yyyy.mm.dd</option>
+								<option value="dd-mm-yyyy" <?php echo $value['date_format'] === 'dd-mm-yyyy' ? 'selected="selected"' : ''; ?>>dd-mm-yyyy</option>
+								<option value="dd/mm/yyyy" <?php echo $value['date_format'] === 'dd/mm/yyyy' ? 'selected="selected"' : ''; ?>>dd/mm/yyyy</option>
+								<option value="dd.mm.yyyy" <?php echo $value['date_format'] === 'dd.mm.yyyy' ? 'selected="selected"' : ''; ?>>dd.mm.yyyy</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group" id="pass" style="display: none">
