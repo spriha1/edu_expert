@@ -67,9 +67,10 @@
 
 	$sql = "CREATE TABLE IF NOT EXISTS tasks (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			of_date DATE,
 			subject_id INT,
-			class INT
+			class INT,
+			start_date INT,
+			end_date INT
 		)";
 	$conn->exec($sql);
 

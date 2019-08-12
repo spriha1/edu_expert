@@ -45,6 +45,20 @@
 					      	<option class="clone" value=""></option>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="start_date" class="col-sm-3 control-label">Start Date</label>
+						<div class="col-sm-9">
+							<input id="start_date" name="start_date" class="datepicker">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="end_date" class="col-sm-3 control-label">End Date</label>
+						<div class="col-sm-9">
+							<input id="end_date" name="end_date" class="datepicker">
+						</div>
+					</div>
 					
 				</div>
 				<!-- /.box-body -->

@@ -2,19 +2,22 @@
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
 	//$result = 0;
-	if (isset($_REQUEST['class']) && isset($_REQUEST['subject'])) {
-        if (!empty($_REQUEST['class']) && !empty($_REQUEST['subject'])) {
-        	$date = date("Y-m-d");
+	//pd(gettype($_REQUEST['start_date']));
+	if (isset($_REQUEST['class']) && isset($_REQUEST['subject']) && isset($_REQUEST['start_date']) && isset($_REQUEST['end_date'])) {
+        if (!empty($_REQUEST['class']) && !empty($_REQUEST['subject']) && !empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])) {
+        	//$date = date("Y-m-d");
 			$obj = new DB_connect();
+			$start_date  = strtotime($_REQUEST['start_date']);
+			$end_date  = strtotime($_REQUEST['end_date']);
 
 			$length = count($_REQUEST['subject']);
 			for($i = 0; $i < $length; $i++)
 			{
 				$table = "tasks";
-				$columns = array("of_date", "subject_id", "class");
+				$columns = array("subject_id", "class", "start_date", "end_date");
 
 				$subject_id = $_REQUEST['subject'][$i];
-				$values = array($date, $subject_id, $_REQUEST['class']);
+				$values = array($subject_id, $_REQUEST['class'], $start_date, $end_date);
 				$obj->insert($conn, $table, $columns, $values);
 
 				$task_id = $conn->lastInsertId();

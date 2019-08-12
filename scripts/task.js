@@ -4,8 +4,14 @@ $(document).ready(function() {
 		// var teacher_id = $('#teacher').val();
 		// var subject_id = $('#subject').val();
 		// var class_id= $('#class').val();
+		// end_date = $('#end_date').val();
 		$.post('add_timetable.php', $("#task").serialize(), function(result) {
 			$('#alert').text(result).css('display', 'block');
+			$('.datepicker').val('');
+			$('.subject').val('');
+			$('.subject').html('');
+			$('.subject').select2('destroy').select2();
+			$('#class').val('');
 		});
 	})
 

@@ -7,9 +7,8 @@
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
 		$obj = new DB_connect();
-		$query = "SELECT * from subjects";
+		$query = "SELECT * FROM subjects";
 		$result = $obj->select_records($conn, $query);
-
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

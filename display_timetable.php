@@ -5,8 +5,9 @@
 	if (isset($_REQUEST['date']) && isset($_REQUEST['user_id']) && isset($_REQUEST['user_type'])) {
         if (!empty($_REQUEST['date']) AND !empty($_REQUEST['user_id']) AND !empty($_REQUEST['user_type'])) {
 			$obj = new DB_connect();
+			$date = strtotime($_REQUEST['date']);
 			if ($_REQUEST['user_type'] === 'teacher') {
-				$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND of_date LIKE '%".$_REQUEST['date']."%'";
+				$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 				$result = $obj->select_records($conn, $query);
 			}
 
@@ -16,7 +17,7 @@
 				INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
 				INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
 				INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
-				INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND of_date LIKE '%".$_REQUEST['date']."%'";
+				INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 				$result = $obj->select_records($conn, $query);
 			}
 			
