@@ -39,7 +39,7 @@
 							     	<tr>
 										<td><?php echo $value2['firstname']; ?></td>
 										<td><?php echo $value2['username']; ?></td>
-										<td><?php echo $value['of_date']; ?></td>
+										<td><?php echo date('d/m/Y', $value['of_date']); ?></td>
 										
 										<td>
 											<button type="button" user_type="teacher" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>

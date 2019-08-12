@@ -5,13 +5,13 @@ $(document).ready(function() {
 		// var subject_id = $('#subject').val();
 		// var class_id= $('#class').val();
 		// end_date = $('#end_date').val();
-		//$("#spinner").css('display','block');
-		var start_date = format_date($('#start_date').val());
-		var end_date = format_date($('#end_date').val());
-		var _class = $('#class').val();
-		var subject = $('#subject').val();
-		$.post('add_timetable.php', {class: _class, subject: subject, start_date: start_date, end_date: end_date}, function(result) {
-			//$('#spinner').css('display', 'none');
+		$("#spinner").css('display','block');
+		// var start_date = format_date($('#start_date').val());
+		// var end_date = format_date($('#end_date').val());
+		// var _class = $('#class').val();
+		// var subject = $('#subject').val();
+		$.post('add_timetable.php', $('#task').serialize(), function(result) {
+			$('#spinner').css('display', 'none');
 			$('#alert').text(result).css('display', 'block');
 			$('.datepicker').val('');
 			$('.subject').val('');

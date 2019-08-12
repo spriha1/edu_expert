@@ -1,14 +1,44 @@
 <?php 
 	include_once 'db_credentials.php';
 	include_once 'db_connection.php';
-	
 	if (isset($_REQUEST['class']) && isset($_REQUEST['subject']) && isset($_REQUEST['start_date']) && isset($_REQUEST['end_date'])) {
         if (!empty($_REQUEST['class']) && !empty($_REQUEST['subject']) && !empty($_REQUEST['start_date']) && !empty($_REQUEST['end_date'])) {
         	//$date = date("Y-m-d");
-			$obj = new DB_connect();
-			$start_date  = strtotime($_REQUEST['start_date']);
-			$end_date  = strtotime($_REQUEST['end_date']);
+        	$date_format = $_REQUEST['date_format'];
+        	$start_date = $_REQUEST['start_date'];
+        	$end_date = $_REQUEST['end_date'];
+        	if ($date_format === "yyyy/mm/dd") {
+        		$start_date = DateTime::createFromFormat("Y/m/d" , $start_date);
+        		$end_date = DateTime::createFromFormat("Y/m/d" , $end_date);
+        	}
+        	else if ($date_format === "yyyy.mm.dd") {
+        		$start_date = DateTime::createFromFormat("Y.m.d" , $start_date);
+        		$end_date = DateTime::createFromFormat("Y.m.d" , $end_date);
+        	}
+        	else if ($date_format === "yyyy-mm-dd") {
+        		$start_date = DateTime::createFromFormat("Y-m-d" , $start_date);
+        		$end_date = DateTime::createFromFormat("Y-m-d" , $end_date);
+        	}
+        	else if ($date_format === "dd/mm/yyyy") {
+        		$start_date = DateTime::createFromFormat("d/m/Y" , $start_date);
+        		$end_date = DateTime::createFromFormat("d/m/Y" , $end_date);
+        	}
+        	else if ($date_format === "dd-mm-yyyy") {
+        		$start_date = DateTime::createFromFormat("d-m-Y" , $start_date);
+        		$end_date = DateTime::createFromFormat("d-m-Y" , $end_date);
+        	}
+        	else if ($date_format === "dd.mm.yyyy") {
+        		$start_date = DateTime::createFromFormat("d.m.Y" , $start_date);
+        		$end_date = DateTime::createFromFormat("d.m.Y" , $end_date);
+        	}
+        	$start_date = $start_date->format('Y-m-d');
+        	$end_date = $end_date->format('Y-m-d');
+        	
 
+			$obj = new DB_connect();
+			$start_date  = strtotime($start_date);
+			$end_date  = strtotime($end_date);
+			
 			$length = count($_REQUEST['subject']);
 			for($i = 0; $i < $length; $i++)
 			{

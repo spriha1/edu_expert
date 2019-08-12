@@ -1,33 +1,36 @@
 $(document).ready(function() {
-	var today = new Date();
-	var year = today.getFullYear();
-	var month = today.getMonth()+1;
-	var date = today.getDate();
-	if (month < 10 && date < 10)
-	{
-		var date = year+'-0'+month+'-0'+date;
-	}
-	else if (month < 10)
-	{
-		var date = year+'-0'+month+'-'+date;
-	}
-	else if (date < 10)
-	{
-		var date = year+'-'+month+'-0'+date;
-	}
-	console.log(date);
+	var date = new Date();
+	// var year = today.getFullYear();
+	// var month = today.getMonth()+1;
+	// var date = today.getDate();
+	// if (month < 10 && date < 10)
+	// {
+	// 	var date = year+'-0'+month+'-0'+date;
+	// }
+	// else if (month < 10)
+	// {
+	// 	var date = year+'-0'+month+'-'+date;
+	// }
+	// else if (date < 10)
+	// {
+	// 	var date = year+'-'+month+'-0'+date;
+	// }
 	//$('#date').attr('value',date);
 	$('.datepicker').datepicker('setDate', date);
 
 	var user_id = $('#user_id').val();
 	var user_type = $('#user_type').val();
-	load_display_data(date,user_id,user_type);
+	var date_format = $('#date_format').val();
+
+	load_display_data(date,user_id,user_type,date_format);
 
 	$('#share').click(function(event) {
 		event.preventDefault();
 		var user_id = $("#user_id").val();
 		var date = $("#date").val();
-		$.post('add_shared_timesheets.php', {user_id: user_id, date: date, timesheet_check: 1});
+		var date_format = $('#date_format').val();
+
+		$.post('add_shared_timesheets.php', {user_id: user_id, date: date, timesheet_check: 1, date_format: date_format});
 	});
 
 	// $("#date").change(function(event) {
@@ -41,34 +44,34 @@ $(document).ready(function() {
 
 	$('.datepicker').datepicker().on('changeDate', function(e) {
 		var date = e.format();
-		console.log(date)
-		var today = new Date(date);
-		var year = today.getFullYear();
-		var month = today.getMonth()+1;
-		var date = today.getDate();
-		if (month < 10 && date < 10)
-		{
-			var date = year+'-0'+month+'-0'+date;
-		}
-		else if (month < 10)
-		{
-			var date = year+'-0'+month+'-'+date;
-		}
-		else if (date < 10)
-		{
-			var date = year+'-'+month+'-0'+date;
-		}
-		console.log(date);
+		// var today = new Date(date);
+		// var year = today.getFullYear();
+		// var month = today.getMonth()+1;
+		// var date = today.getDate();
+		// if (month < 10 && date < 10)
+		// {
+		// 	var date = year+'-0'+month+'-0'+date;
+		// }
+		// else if (month < 10)
+		// {
+		// 	var date = year+'-0'+month+'-'+date;
+		// }
+		// else if (date < 10)
+		// {
+		// 	var date = year+'-'+month+'-0'+date;
+		// }
 		var user_id = $('#user_id').val();
 		var user_type = $('#user_type').val();
+		var date_format = $('#date_format').val();
 
 		$('.timetable').html("");
-		load_display_data(date,user_id,user_type);
+		load_display_data(date,user_id,user_type,date_format);
 	})
 })
 
-function load_display_data(date,user_id,user_type) {
-	$.post('display_timetable.php', {date: date, user_id: user_id, user_type: user_type}, function(result) {
+function load_display_data(date,user_id,user_type,date_format) {
+	//console.log(date);
+	$.post('display_timetable.php', {date: date, user_id: user_id, user_type: user_type, date_format: date_format}, function(result) {
 		var response = JSON.parse(result);
 		var length = response.length;
 		if (user_type === 'teacher') {

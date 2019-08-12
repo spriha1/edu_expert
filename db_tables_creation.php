@@ -29,7 +29,7 @@
 			login_status TINYINT(1) NOT NULL DEFAULT '0',
 			user_type_id INT UNSIGNED,
 			class TINYINT(1) NOT NULL DEFAULT '1',
-			date_format VARCHAR(20) DEFAULT 'Y-m-d',
+			date_format VARCHAR(20) DEFAULT 'yyyy-mm-dd',
 			CONSTRAINT test FOREIGN KEY (user_type_id)
    			REFERENCES user_types(id) ,
    			INDEX (email_verification_code,firstname,lastname,username)
@@ -60,7 +60,7 @@
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			from_id INT,
 			to_id INT,
-			of_date VARCHAR(15),
+			of_date INT,
 			timesheet_check INT DEFAULT '0' 
 		)"; 
 	// timesheet_check = 1 for timesheets and 0 for goal_plans
