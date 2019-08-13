@@ -1,29 +1,14 @@
 $(document).ready(function() {
-		var today = new Date();
-		var year = today.getFullYear();
-		var month = today.getMonth()+1;
-		var date = today.getDate();
-		if (month < 10 && date < 10)
-		{
-			var date = year+'-0'+month+'-0'+date;
-		}
-		else if (month < 10)
-		{
-			var date = year+'-0'+month+'-'+date;
-		}
-		else if (date < 10)
-		{
-			var date = year+'-'+month+'-0'+date;
-		}
-		console.log(date);
-		// $('#date').attr('value',date);
-		$('.datepicker').datepicker('setDate', date);
-
-		//var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-		var user_id = $('#user_id').val();
-		console.log(user_id);
-		var total_time = 0;
-		load_display_data(date,user_id);
+	var date = new Date();
+	
+	$('.datepicker').datepicker('setDate', date);
+	date = $('#date').val(); 
+	date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
+	console.log(date);
+	//var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	var user_id = $('#user_id').val();
+	var total_time = 0;
+	load_display_data(date,user_id);
 
 	$(".add_item").click(function(event) {
 		event.preventDefault();
@@ -84,6 +69,7 @@ $(document).ready(function() {
 
 	$('.datepicker').datepicker().on('changeDate', function(e) {
 		var date = e.format();
+		date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
 		var user_id = $('#user_id').val();
 		$('.todo').html("");
 		load_display_data(date,user_id);

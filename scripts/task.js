@@ -10,27 +10,28 @@ $(document).ready(function() {
 		// var end_date = format_date($('#end_date').val());
 		// var _class = $('#class').val();
 		// var subject = $('#subject').val();
-		var start_date = $('#start_date').val();
-		var date_format = $('#date_format').val();
-		if (date_format === 'yyyy.mm.dd') {
-			start_date = start_date.split(".").join("-")
-		}
-		else if (date_format === 'yyyy/mm/dd') {
-			start_date = start_date.split("/").join("-")
-		}
-		else if (date_format === 'yyyy-mm-dd') {
-			start_date = start_date
-		}
-		else if (date_format === 'dd.mm.yyyy') {
-			start_date = start_date.split(".").reverse().join("-")
-		}
-		else if (date_format === 'dd/mm/yyyy') {
-			start_date = start_date.split("/").reverse().join("-")
-		}
-		else if (date_format === 'dd-mm-yyyy') {
-			start_date = start_date.split("-").reverse().join("-")
-		}
-		console.log(start_date);
+		//conversion of date format using js
+		// var start_date = $('#start_date').val();
+		// var date_format = $('#date_format').val();
+		// if (date_format === 'yyyy.mm.dd') {
+		// 	start_date = start_date.split(".").join("-")
+		// }
+		// else if (date_format === 'yyyy/mm/dd') {
+		// 	start_date = start_date.split("/").join("-")
+		// }
+		// else if (date_format === 'yyyy-mm-dd') {
+		// 	start_date = start_date
+		// }
+		// else if (date_format === 'dd.mm.yyyy') {
+		// 	start_date = start_date.split(".").reverse().join("-")
+		// }
+		// else if (date_format === 'dd/mm/yyyy') {
+		// 	start_date = start_date.split("/").reverse().join("-")
+		// }
+		// else if (date_format === 'dd-mm-yyyy') {
+		// 	start_date = start_date.split("-").reverse().join("-")
+		// }
+		// console.log(start_date);
 		$.post('add_timetable.php', $('#task').serialize(), function(result) {
 			$('#spinner').css('display', 'none');
 			$('#alert').text(result).css('display', 'block');

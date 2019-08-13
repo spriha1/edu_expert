@@ -11,6 +11,9 @@
 		$query = "SELECT from_id, of_date FROM shared_timesheets WHERE timesheet_check = 1 AND to_id =".$_SESSION['id'];
 
 		$result = $obj->select_records($conn, $query);
+
+		$query3 = "SELECT date_format FROM users WHERE username = '".$_SESSION['username']."'";
+		$result3 = $obj->select_records($conn, $query3);
 		?>
 		
 		
@@ -39,8 +42,9 @@
 							     	<tr>
 										<td><?php echo $value2['firstname']; ?></td>
 										<td><?php echo $value2['username']; ?></td>
-										<td><?php echo date('d/m/Y', $value['of_date']); ?></td>
-										
+										<?php foreach ($result3 as $key => $value3) { ?>
+										<td><?php echo format_date($value['of_date'], $value3['date_format']); ?></td>
+										<?php } ?>
 										<td>
 											<button type="button" user_type="teacher" class="btn btn-success view" from_id="<?php echo $value['from_id']; ?>" of_date="<?php echo $value['of_date']; ?>" data-toggle="modal" data-target="#view_timesheets">View</button>
 										</td>

@@ -14,6 +14,8 @@
 		$result2 = $obj->select_records($conn, $query2);
 		$query3 = "SELECT count(*) as total FROM shared_timesheets WHERE to_id =".$_SESSION['id'];
 		$result3 = $obj->select_records($conn, $query3);
+		$query4 = "SELECT date_format FROM users WHERE username = '".$_SESSION['username']."'";
+		$result4 = $obj->select_records($conn, $query4);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -22,7 +24,10 @@
 		<h1>
 		Dashboard
 		</h1>
-	<input type="hidden" id="user_id" name="user_id" xyz="sd" value="<?php echo $_SESSION['id']; ?>">
+	<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+	<?php foreach ($result4 as $key => $value) { ?>
+		<input type="hidden" name="date_format" id="date_format" value="<?php echo $value['date_format'] ?>">
+	<?php } ?>
 	</section>
 	<!-- Main content -->
 	<section class="content">

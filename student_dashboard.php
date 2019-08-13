@@ -6,6 +6,10 @@
 		include_once 'db_credentials.php';
 		include_once 'db_connection.php';
 		include_once 'static_file_version.php';
+		$obj = new DB_connect();
+
+		$query = "SELECT date_format FROM users WHERE username = '".$_SESSION['username']."'";
+		$result = $obj->select_records($conn, $query);
 		?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -15,6 +19,9 @@
 		Dashboard
 		</h1>
 		<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+		<?php foreach ($result as $key => $value) { ?>
+			<input type="hidden" name="date_format" id="date_format" value="<?php echo $value['date_format'] ?>">
+		<?php } ?>
 	</section>
 	<!-- Main content -->
 	<section class="content">

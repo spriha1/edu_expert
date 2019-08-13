@@ -9,6 +9,28 @@
 	{
 		print_r($val);
 	}
+	function format_date($date, $date_format)
+	{
+		if ($date_format === "yyyy/mm/dd") {
+    		$date = date('Y/m/d', $date);
+    	}
+    	else if ($date_format === "yyyy.mm.dd") {
+    		$date = date('Y.m.d', $date);
+    	}
+    	else if ($date_format === "yyyy-mm-dd") {
+    		$date = date('Y-m-d', $date);
+    	}
+    	else if ($date_format === "dd/mm/yyyy") {
+    		$date = date('d/m/Y', $date);
+    	}
+    	else if ($date_format === "dd-mm-yyyy") {
+    		$date = date('d-m-Y', $date);
+    	}
+    	else if ($date_format === "dd.mm.yyyy") {
+    		$date = date('d.m.Y', $date);
+    	}
+    	return $date;
+	}
 	$conn = new PDO("mysql:host=$server_name;dbname=$db_name", $db_username, $db_password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	class DB_connect

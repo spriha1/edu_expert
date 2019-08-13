@@ -16,7 +16,7 @@ $(document).ready(function() {
 	else if (footer === "dashboard_footer") {
 		$.widget.bridge('uibutton', $.ui.button);
 		$('.datepicker').datepicker({
-			format: 'yyyy-mm-dd'
+			format: $('#date_format').val()
 		});
 		$('.subject').select2({
 			width: 'resolve'

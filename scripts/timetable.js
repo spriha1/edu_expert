@@ -30,7 +30,7 @@ $(document).ready(function() {
 		var user_id = $("#user_id").val();
 
 		var date_format = $('#date_format').val();
-
+		var date = $("#date").val();
 		$.post('add_shared_timesheets.php', {user_id: user_id, date: date, timesheet_check: 1, date_format: date_format});
 	});
 
