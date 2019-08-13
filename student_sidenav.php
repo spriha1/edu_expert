@@ -120,7 +120,7 @@
 						<i class="fa fa-users"></i> <span>Attendance</span>
 					</a>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#">
 						<i class="fa fa-th"></i> <span>Dues</span>
 					</a>
@@ -129,7 +129,7 @@
 					<a href="#">
 						<i class="fa fa-th"></i> <span>Feedback</span>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 		</section>
 		<!-- /.sidebar -->
