@@ -17,7 +17,8 @@ $(document).ready(function() {
 	// }
 	//$('#date').attr('value',date);
 	$('.datepicker').datepicker('setDate', date);
-
+	//date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
+	var date = $('#date').val(); 
 	var user_id = $('#user_id').val();
 	var user_type = $('#user_type').val();
 	var date_format = $('#date_format').val();
@@ -27,7 +28,7 @@ $(document).ready(function() {
 	$('#share').click(function(event) {
 		event.preventDefault();
 		var user_id = $("#user_id").val();
-		var date = $("#date").val();
+
 		var date_format = $('#date_format').val();
 
 		$.post('add_shared_timesheets.php', {user_id: user_id, date: date, timesheet_check: 1, date_format: date_format});
@@ -70,7 +71,6 @@ $(document).ready(function() {
 })
 
 function load_display_data(date,user_id,user_type,date_format) {
-	//console.log(date);
 	$.post('display_timetable.php', {date: date, user_id: user_id, user_type: user_type, date_format: date_format}, function(result) {
 		var response = JSON.parse(result);
 		var length = response.length;
@@ -79,7 +79,6 @@ function load_display_data(date,user_id,user_type,date_format) {
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
 				element.attr('task_id', response[i].task_id);
 				element.appendTo('.timetable');
-				console.log($(".editable"))
 				task_id = response[i].task_id;
 				$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
 				$("tbody tr[task_id=" + task_id + "] .class").html(response[i].class);
@@ -91,7 +90,6 @@ function load_display_data(date,user_id,user_type,date_format) {
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
 				element.attr('task_id', response[i].task_id);
 				element.appendTo('.timetable');
-				console.log($(".editable"))
 				task_id = response[i].task_id;
 				$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
 				$("tbody tr[task_id=" + task_id + "] .teacher").html(response[i].firstname);

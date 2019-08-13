@@ -15,7 +15,7 @@
                 $pass = MD5($_REQUEST['password']);
 
                 $obj = new DB_connect();
-                $query = "SELECT id,firstname,lastname,username,email,password,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
+                $query = "SELECT id,firstname,lastname,username,email,password,user_type_id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1 AND block_status = 0";
                 $result = $obj->select_records($conn, $query);
                 if ($result) {
                     foreach ($result as $key => $value) {
@@ -42,6 +42,9 @@
                     $query2 = "SELECT id FROM users where username = '".$uname."' AND password = '".$pass."' AND user_reg_status = 1";
                     $result2 = $obj->select_records($conn, $query2);
 
+                    $query3 = "SELECT block_status FROM users where username = '".$uname;
+                    $result3 = $obj->select_records($conn, $query3);
+
                     if (!$result && !$result2) {
                         $msg = "Incorrect Username and Password";
                     }
@@ -52,6 +55,12 @@
 
                     else if (!$result2) {
                         $msg = "Incorrect Password";
+                    }
+
+                    foreach ($result3 as $key => $value) {
+                        if ($value['block_status'] == 1) {
+                            $msg = "You have been blocked";
+                        }
                     }
                 }
             }
