@@ -22,7 +22,7 @@
 		<h1>
 		Dashboard
 		</h1>
-	<input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+	<input type="hidden" id="user_id" name="user_id" xyz="sd" value="<?php echo $_SESSION['id']; ?>">
 	</section>
 	<!-- Main content -->
 	<section class="content">
