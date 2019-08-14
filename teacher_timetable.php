@@ -31,10 +31,14 @@
 						<table id="timetable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th width="25%">Subject</th>
-									<th width="25%">Class</th>
-									<th width="25%"></th>
-									<th width="25%"></th>
+									<th width="16%">Task</th>
+									<th width="12%">Sunday</th>
+									<th width="12%">Monday</th>
+									<th width="12%">Tuesday</th>
+									<th width="12%">Wednesday</th>
+									<th width="12%">Thursday</th>
+									<th width="12%">Friday</th>
+									<th width="12%">Saturday</th>
 								</tr>
 							</thead>
 							<tbody class="timetable">
@@ -43,9 +47,19 @@
 						</table>
 						<table style="display:none">
 						<tr class="editable" width="25%" task_id="" style="display:none;">
+
+							<td width="16%" class="task"></td>
+							<td width="12%" dow="0"></td>
+							<td width="12%" dow="1"></td>
+							<td width="12%" dow="2"></td>
+							<td width="12%" dow="3"></td>
+							<td width="12%" dow="4"></td>
+							<td width="12%" dow="5"></td>
+							<td width="12%" dow="6"></td>
+
 							<td class="name" width="25%"></td>
 							<td class="class" width="25%"></td>
-							<td class="timer" width="25%"></td>
+							<td width="25%"><input class="timer" type="text" value=""></td>
 							<td>
 								<button class="btn btn-info start">Start</button>
 								<button class="btn btn-info stop" style="display:none" task_id="">Stop</button>

@@ -79,7 +79,19 @@ function load_display_data(date,user_id,user_type,date_format) {
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
 				element.attr('task_id', response[i].task_id);
 				element.appendTo('.timetable');
-				task_id = response[i].task_id;
+				var task_id = response[i].task_id;
+
+				var seconds = response[i].total_time;
+				if (seconds > 0) {
+					var hours = Math.floor(seconds / 3600);
+					seconds = seconds - (hours * 3600);
+					var minutes = Math.floor(seconds / 60);
+					seconds = seconds - (minutes * 60);
+					var time = hours + ':' + minutes + ':' + seconds;
+					$("tbody tr[task_id=" + task_id + "] .timer").val(time);
+
+				}
+				
 				$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
 				$("tbody tr[task_id=" + task_id + "] .class").html(response[i].class);
 				$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);

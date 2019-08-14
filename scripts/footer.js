@@ -54,7 +54,7 @@ $(document).ready(function() {
 		$('.stop').click(function() {
 			var task_id = $(this).closest('tr').attr('task_id');
 
-			$('tbody tr[task_id=' + task_id + '] .start').css('display', 'table-row');
+			$('tbody tr[task_id=' + task_id + '] .start').css('display', 'none');
 			$('tbody tr[task_id=' + task_id + '] .stop').css('display', 'none');
 			$('tbody tr[task_id=' + task_id + '] .pause').css('display', 'none');
 
@@ -76,9 +76,9 @@ $(document).ready(function() {
 		})
 		$('.pause').click(function() {
 			var task_id = $(this).closest('tr').attr('task_id');
-			
+
 			$('tbody tr[task_id=' + task_id + '] .pause').css('display', 'none');
-			$('tbody tr[task_id=' + task_id + '] .stop').css('display', 'none');
+			$('tbody tr[task_id=' + task_id + '] .stop').css('display', 'table-row');
 			$('tbody tr[task_id=' + task_id + '] .resume').css('display', 'table-row');
 
 			$(this).closest('tr').find('.timer').timer('pause');

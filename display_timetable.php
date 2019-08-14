@@ -28,22 +28,33 @@
 
 			$obj = new DB_connect();
 			$date = strtotime($date);
-			if ($_REQUEST['user_type'] === 'teacher') {
-				$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
-				$result = $obj->select_records($conn, $query);
+
+			$dates = array();
+			$results = array();
+			for ($i = 0; $i < 7; $i++) { 
+				$dates[$i] = $date + ($i * 86400);
 			}
 
-			else if ($_REQUEST['user_type'] === 'student') {
-				$query = "SELECT teacher_tasks.task_id, teacher.firstname, name 
-				FROM student_tasks 
-				INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
-				INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
-				INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
-				INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
-				$result = $obj->select_records($conn, $query);
+			foreach ($dates as $date) {
+				if ($_REQUEST['user_type'] === 'teacher') {
+					$query = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+					$result = $obj->select_records($conn, $query);
+					array_push($results, $result);
+				}
+
+				else if ($_REQUEST['user_type'] === 'student') {
+					$query = "SELECT teacher_tasks.task_id, student_tasks.total_time teacher.firstname, name 
+					FROM student_tasks 
+					INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
+					INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
+					INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
+					INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+					$result = $obj->select_records($conn, $query);
+					array_push($results, $result);
+				}
 			}
 			
-			print_r(json_encode($result));
+			print_r(json_encode($results));
 		}
 	}
 ?>
