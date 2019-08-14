@@ -31,10 +31,10 @@
 						<table id="timetable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Subject</th>
-									<th>Class</th>
-									<th></th>
-									<th></th>
+									<th width="25%">Subject</th>
+									<th width="25%">Class</th>
+									<th width="25%"></th>
+									<th width="25%"></th>
 								</tr>
 							</thead>
 							<tbody class="timetable">
@@ -42,15 +42,15 @@
 							
 						</table>
 						<table style="display:none">
-						<tr class="editable" task_id="" style="display:none;">
-							<td class="name"></td>
-							<td class="class"></td>
-							<td class="timer"></td>
+						<tr class="editable" width="25%" task_id="" style="display:none;">
+							<td class="name" width="25%"></td>
+							<td class="class" width="25%"></td>
+							<td class="timer" width="25%"></td>
 							<td>
 								<button class="btn btn-info start">Start</button>
-								<button class="btn btn-info stop" task_id="">Stop</button>
-								<button class="btn btn-info pause">Pause</button>
-								<button class="btn btn-info resume">Resume</button>
+								<button class="btn btn-info stop" style="display:none" task_id="">Stop</button>
+								<button class="btn btn-info pause" style="display:none">Pause</button>
+								<button class="btn btn-info resume" style="display:none">Resume</button>
 							</td>
 						</tr>
 					</table>
