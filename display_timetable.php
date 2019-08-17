@@ -25,21 +25,44 @@
         		$date = DateTime::createFromFormat("d.m.Y" , $date);
         	}
         	$date = $date->format('Y-m-d');
-
 			$obj = new DB_connect();
 			$date = strtotime($date);
-
-			$dates = array();
-			$results = array();
-			for ($i = 0; $i < 7; $i++) { 
-				$dates[$i] = $date + ($i * 86400);
+			$ts = $date;
+			// calculate the number of days since Monday
+			$dow = date('w', $ts);
+			$offset = $dow - 1;
+			if ($offset < 0) {
+			    $offset = 6;
 			}
+			// calculate timestamp for the Monday
+			$ts = $ts - $offset*86400;
+			$week_dates = array();
+			// loop from Monday till Sunday 
+			for ($i = 0; $i < 7; $i++, $ts += 86400){
+				array_push($week_dates, $ts);
 
-			foreach ($dates as $date) {
+			    //print date("m/d/Y l", $ts) . "\n";
+			}
+			// $dates = array();
+			// $results = array();
+			// for ($i = 0; $i < 7; $i++) { 
+			// 	$dates[$i] = $date + ($i * 86400);
+			// }
+			$results = array();
+			//foreach ($dates as $date) {
 				if ($_REQUEST['user_type'] === 'teacher') {
-					$query = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+					$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 					$result = $obj->select_records($conn, $query);
 					array_push($results, $result);
+					foreach ($result as $key => $value) {
+						foreach ($week_dates as $date) {
+							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$value['task_id']." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+							$result2 = $obj->select_records($conn, $query2);
+							array_push($results, $result2);
+						}
+					}
+					//pd($results);
+					
 				}
 
 				else if ($_REQUEST['user_type'] === 'student') {
@@ -52,7 +75,7 @@
 					$result = $obj->select_records($conn, $query);
 					array_push($results, $result);
 				}
-			}
+			//}
 			
 			print_r(json_encode($results));
 		}

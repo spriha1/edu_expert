@@ -73,43 +73,28 @@ $(document).ready(function() {
 function load_display_data(date,user_id,user_type,date_format) {
 	$.post('display_timetable.php', {date: date, user_id: user_id, user_type: user_type, date_format: date_format}, function(result) {
 		var response = JSON.parse(result);
-		var tasks = response[0];
-		var length = tasks.length;
+		var length = response.length;
 		if (user_type === 'teacher') {
 			for (var i = 0; i < length; i++) {
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
-				element.attr('task_id', tasks[i].task_id);
+				element.attr('task_id', response[i].task_id);
 				element.appendTo('.timetable');
-				var task_id = tasks[i].task_id;
+				var task_id = response[i].task_id;
 
-				// var seconds = response[i].total_time;
-				// if (seconds > 0) {
-				// 	var hours = Math.floor(seconds / 3600);
-				// 	seconds = seconds - (hours * 3600);
-				// 	var minutes = Math.floor(seconds / 60);
-				// 	seconds = seconds - (minutes * 60);
-				// 	var time = hours + ':' + minutes + ':' + seconds;
-				// 	$("tbody tr[task_id=" + task_id + "] .timer").val(time);
-
-				// }
-				
-				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i].name);
-				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i].class);
-				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
-			}
-
-			var len = response.length - 1;
-			for (var i = 1; i <= len; i++)
-			{
-				if(response[i] && response[i].length) 
-				{
-				console.log(response[i][0]);
-
-					var task_id = response[i][0].task_id;
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").val(response[i][0].total_time);
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").css('display', 'table-row');
+				var seconds = response[i].total_time;
+				if (seconds > 0) {
+					var hours = Math.floor(seconds / 3600);
+					seconds = seconds - (hours * 3600);
+					var minutes = Math.floor(seconds / 60);
+					seconds = seconds - (minutes * 60);
+					var time = hours + ':' + minutes + ':' + seconds;
+					$("tbody tr[task_id=" + task_id + "] .timer").val(time);
 
 				}
+				
+				$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
+				$("tbody tr[task_id=" + task_id + "] .class").html(response[i].class);
+				$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
 			}
 		}
 		else if (user_type === 'student') {
