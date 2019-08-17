@@ -96,17 +96,11 @@ function load_display_data(date,user_id,user_type,date_format) {
 				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i].name);
 				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i].class);
 				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
-			}
-
-			var len = response.length - 1;
-			for (var i = 1; i <= len; i++)
-			{
-				if(response[i] && response[i].length) 
+				console.log(response[task_id])
+				if(response[task_id][i] && response[task_id][i].length) 
 				{
-				console.log(response[i][0]);
-
-					var task_id = response[i][0].task_id;
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").val(response[i][0].total_time);
+					var task_id = response[task_id][i][0].task_id;
+					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").val(response[task_id][i][0].total_time);
 					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").css('display', 'table-row');
 
 				}

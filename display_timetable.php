@@ -49,6 +49,7 @@
 			// 	$dates[$i] = $date + ($i * 86400);
 			// }
 			$results = array();
+			$res = array();
 			//foreach ($dates as $date) {
 				if ($_REQUEST['user_type'] === 'teacher') {
 					$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
@@ -58,10 +59,11 @@
 						foreach ($week_dates as $date) {
 							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$value['task_id']." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 							$result2 = $obj->select_records($conn, $query2);
-							array_push($results, $result2);
+							array_push($res, $result2);
 						}
+						$results[$value['task_id']] = $res;
 					}
-					//pd($results);
+					pd($results);
 					
 				}
 
