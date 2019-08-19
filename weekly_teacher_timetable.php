@@ -18,7 +18,7 @@
 					<div class="box-header">
 						<!-- <input class="date" id="date" type="date"> -->
 						<input id="date" class="datepicker">
-						<button type="button" id="share" class="btn btn-success pull-right">Share</button>
+						
 					</div>
 
 					<?php foreach ($result as $key => $value) { ?>
@@ -63,26 +63,26 @@
 									</div>
 								</div>
 							</td>
-							<td width="10%" dow="0">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="0" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="1">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="1" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="2">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="2" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="3">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="3" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="4">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="4" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="5">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="5" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
-							<td width="10%" dow="6">
-								<input type="text" size="4" style="display:none;">
+							<td width="10%" dow="6" date="">
+								<input class="input" type="text" size="4" style="display:none;">
 							</td>
 
 							<!-- <td class="name" width="25%"></td>

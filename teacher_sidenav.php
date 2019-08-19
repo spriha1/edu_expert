@@ -111,8 +111,13 @@
 					</a>
 				</li>
 				<li>
-					<a href="teacher_timetable.php">
-						<i class="fa fa-th"></i> <span>Time Table</span>
+					<a href="daily_teacher_timetable.php">
+						<i class="fa fa-th"></i> <span>Daily Time Table</span>
+					</a>
+				</li>
+				<li>
+					<a href="weekly_teacher_timetable.php">
+						<i class="fa fa-th"></i> <span>Weekly Time Table</span>
 					</a>
 				</li>
 				<li>

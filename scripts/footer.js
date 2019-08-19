@@ -53,7 +53,8 @@ $(document).ready(function() {
 		})
 		$('.stop').click(function() {
 			var task_id = $(this).closest('tr').attr('task_id');
-
+			var date = $('#date').val();
+			var date_format = $('#date_format').val();
 			$('tbody tr[task_id=' + task_id + '] .start').css('display', 'none');
 			$('tbody tr[task_id=' + task_id + '] .stop').css('display', 'none');
 			$('tbody tr[task_id=' + task_id + '] .pause').css('display', 'none');
@@ -64,7 +65,7 @@ $(document).ready(function() {
 			var user_id = $('#user_id').val();
 			var user_type = $('#user_type').val();
 
-			$.post('add_completion_time.php', {task_id: task_id, user_id: user_id, time: time, user_type: user_type})
+			$.post('add_completion_time.php', {task_id: task_id, user_id: user_id, time: time, user_type: user_type, date: date, date_format: date_format})
 		})
 		$('.resume').click(function() {
 			var task_id = $(this).closest('tr').attr('task_id');

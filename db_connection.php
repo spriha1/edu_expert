@@ -95,6 +95,7 @@
 					}
 					
 				}
+				//pd($query);
 				$sql = $conn->prepare($query);
 			    $sql->execute();
 			}

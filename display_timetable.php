@@ -73,7 +73,7 @@
 					foreach ($tasks as $task) {
 						$res = [];
 						foreach ($week_dates as $date) {
-							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$task." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+							$query2 = "SELECT task_id, on_date, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$task." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 							$result2 = $obj->select_records($conn, $query2);
 							array_push($res, $result2);
 						}
@@ -93,8 +93,10 @@
 					$result = $obj->select_records($conn, $query);
 					array_push($results, $result);
 				}
+
+				$results['dates'] = $week_dates;
 			//}
-			
+			// pd($results);
 			print_r(json_encode($results));
 		}
 	}

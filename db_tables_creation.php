@@ -86,6 +86,7 @@
 				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 				task_id INT UNSIGNED,
 				teacher_id INT,
+				on_date INT DEFAULT '0',
 				total_time INT DEFAULT '0',
 				CONSTRAINT test1 FOREIGN KEY (task_id)
 	   			REFERENCES tasks(id)
