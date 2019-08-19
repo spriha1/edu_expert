@@ -77,6 +77,7 @@ function load_display_data(date,user_id,user_type,date_format) {
 		var length = tasks.length;
 		if (user_type === 'teacher') {
 			for (var i = 0; i < length; i++) {
+				console.log(response)
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
 				element.attr('task_id', tasks[i].task_id);
 				element.appendTo('.timetable');
@@ -96,26 +97,31 @@ function load_display_data(date,user_id,user_type,date_format) {
 				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i].name);
 				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i].class);
 				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
-				console.log(response[task_id])
-				if(response[task_id][i] && response[task_id][i].length) 
+				console.log(response[task_id].length);
+				var len = response[task_id].length;
+				for(var j = 0; j < len; j++)
 				{
-					var task_id = response[task_id][i][0].task_id;
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").val(response[task_id][i][0].total_time);
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + (i-1) + "] input").css('display', 'table-row');
+					if(response[task_id][j].length != 0) 
+					{
+						console.log("hi");
+						var task_id = response[task_id][j][0].task_id;
+						$("tbody tr[task_id=" + task_id + "] td[dow=" + j + "] input").val(response[task_id][j][0].total_time);
+						$("tbody tr[task_id=" + task_id + "] td[dow=" + j + "] input").css('display', 'table-row');
 
+					}
 				}
 			}
 		}
-		else if (user_type === 'student') {
-			for (var i = 0; i < length; i++) {
-				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
-				element.attr('task_id', response[i].task_id);
-				element.appendTo('.timetable');
-				task_id = response[i].task_id;
-				$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
-				$("tbody tr[task_id=" + task_id + "] .teacher").html(response[i].firstname);
-				$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
-			}
-		}
+		// else if (user_type === 'student') {
+		// 	for (var i = 0; i < length; i++) {
+		// 		let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
+		// 		element.attr('task_id', response[i].task_id);
+		// 		element.appendTo('.timetable');
+		// 		task_id = response[i].task_id;
+		// 		$("tbody tr[task_id=" + task_id + "] .name").html(response[i].name);
+		// 		$("tbody tr[task_id=" + task_id + "] .teacher").html(response[i].firstname);
+		// 		$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
+		// 	}
+		// }
 	});
 }

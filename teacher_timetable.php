@@ -64,25 +64,25 @@
 								</div>
 							</td>
 							<td width="10%" dow="0">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="1">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="2">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="3">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="4">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="5">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 							<td width="10%" dow="6">
-								<input type="text" style="display:none;">
+								<input type="text" size="4" style="display:none;">
 							</td>
 
 							<!-- <td class="name" width="25%"></td>

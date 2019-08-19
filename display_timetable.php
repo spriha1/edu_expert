@@ -56,6 +56,7 @@
 					$result = $obj->select_records($conn, $query);
 					array_push($results, $result);
 					foreach ($result as $key => $value) {
+						$res = [];
 						foreach ($week_dates as $date) {
 							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$value['task_id']." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 							$result2 = $obj->select_records($conn, $query2);
@@ -63,7 +64,7 @@
 						}
 						$results[$value['task_id']] = $res;
 					}
-					pd($results);
+					// pd($results);
 					
 				}
 
