@@ -77,11 +77,11 @@ function load_display_data(date,user_id,user_type,date_format) {
 		var length = tasks.length;
 		if (user_type === 'teacher') {
 			for (var i = 0; i < length; i++) {
-				console.log(response)
+				//console.log(response)
 				let element = $(".editable").clone(true).css('display', 'table-row').removeClass('editable');
-				element.attr('task_id', tasks[i].task_id);
+				element.attr('task_id', tasks[i][0].task_id);
 				element.appendTo('.timetable');
-				var task_id = tasks[i].task_id;
+				var task_id = tasks[i][0].task_id;
 
 				// var seconds = response[i].total_time;
 				// if (seconds > 0) {
@@ -94,8 +94,8 @@ function load_display_data(date,user_id,user_type,date_format) {
 
 				// }
 				
-				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i].name);
-				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i].class);
+				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i][0].name);
+				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i][0].class);
 				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
 				console.log(response[task_id].length);
 				var len = response[task_id].length;

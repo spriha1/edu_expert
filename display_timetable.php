@@ -50,21 +50,36 @@
 			// }
 			$results = array();
 			$res = array();
+			$tasks = array();
+			$arr = array();
 			//foreach ($dates as $date) {
 				if ($_REQUEST['user_type'] === 'teacher') {
-					$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
-					$result = $obj->select_records($conn, $query);
-					array_push($results, $result);
-					foreach ($result as $key => $value) {
+					foreach ($week_dates as $date) {
+						$query = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+						$result = $obj->select_records($conn, $query);
+						foreach ($result as $key => $value) {
+							array_push($tasks, $value['task_id']);
+						}
+						
+					}
+					$tasks = array_unique($tasks);
+					foreach ($tasks as $task) {
+
+						$query3 = "SELECT task_id, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$task." AND teacher_id = ".$_REQUEST['user_id'];
+						$result3 = $obj->select_records($conn, $query3);
+						array_push($arr, $result3);
+					}
+					array_push($results, $arr);
+					foreach ($tasks as $task) {
 						$res = [];
 						foreach ($week_dates as $date) {
-							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$value['task_id']." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+							$query2 = "SELECT task_id, total_time, class, name FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_tasks.task_id = ".$task." AND teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 							$result2 = $obj->select_records($conn, $query2);
 							array_push($res, $result2);
 						}
-						$results[$value['task_id']] = $res;
+						$results[$task] = $res;
 					}
-					// pd($results);
+					//pd($results);
 					
 				}
 
