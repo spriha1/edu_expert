@@ -84,6 +84,7 @@ function load_display_data(date,user_id,user_type,date_format) {
 
 				var seconds = response[i].total_time;
 				if (seconds > 0) {
+					// $("tbody tr[task_id=" + task_id + "] .start").css('display','none');
 					var hours = Math.floor(seconds / 3600);
 					seconds = seconds - (hours * 3600);
 					var minutes = Math.floor(seconds / 60);
@@ -92,9 +93,10 @@ function load_display_data(date,user_id,user_type,date_format) {
 					$("tbody tr[task_id=" + task_id + "] .timer").val(time);
 
 				}
-				
+
 				$("tbody tr[task_id=" + task_id + "] .name").text(response[i].name);
 				$("tbody tr[task_id=" + task_id + "] .class").text(response[i].class);
+				// $("tbody tr[task_id=" + task_id + "] .timer").val(response[i].total_time);
 				$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
 
 				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);

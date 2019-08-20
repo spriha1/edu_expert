@@ -30,10 +30,30 @@
 
 			$obj = new DB_connect();
 			if ($_REQUEST['user_type'] === 'teacher') {
-    			$table = "teacher_tasks";
-                $columns = array("task_id", "teacher_id", "on_date", "total_time");
-                $values = array($_REQUEST['task_id'], $_REQUEST['user_id'], $date, $_REQUEST['time']);
-                $obj->insert($conn, $table, $columns, $values);
+                $query = "SELECT * FROM teacher_tasks WHERE task_id = ".$_REQUEST['task_id']." AND teacher_id = ".$_REQUEST['user_id'];
+                $result = $obj->select_records($conn, $query);
+
+                foreach ($result as $key => $value) {
+                    if ($value['on_date'] == 0 && $value['total_time'] == 0) {
+                        $table = "teacher_tasks";
+                        $columns = array("total_time" => $_REQUEST['time'], "on_date" => $date);
+                        $conditions = array("task_id" => $_REQUEST['task_id'], "teacher_id" => $_REQUEST['user_id']);
+                        $obj->update($conn, $table, $columns, $conditions);
+                    }
+                    else if ($value['on_date'] == $date) {
+                        $table = "teacher_tasks";
+                        $columns = array("total_time" => $_REQUEST['time']);
+                        $conditions = array("task_id" => $_REQUEST['task_id'], "teacher_id" => $_REQUEST['user_id'], "on_date" => $date);
+                        $obj->update($conn, $table, $columns, $conditions);
+                    }
+                    else {
+                        $table = "teacher_tasks";
+                        $columns = array("task_id", "teacher_id", "on_date", "total_time");
+                        $values = array($_REQUEST['task_id'], $_REQUEST['user_id'], $date, $_REQUEST['time']);
+                        $obj->insert($conn, $table, $columns, $values);
+                    }
+                }
+    			
 			}
 			// else if ($_REQUEST['user_type'] === 'student') {
 			// 	$table = "student_tasks";
