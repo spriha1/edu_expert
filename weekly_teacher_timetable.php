@@ -31,14 +31,37 @@
 						<table id="timetable" class="table table-bordered table-striped responsive">
 							<thead>
 								<tr>
-									<th width="30%">Task</th>
-									<th width="10%">Monday</th>
-									<th width="10%">Tuesday</th>
-									<th width="10%">Wednesday</th>
-									<th width="10%">Thursday</th>
-									<th width="10%">Friday</th>
-									<th width="10%">Saturday</th>
-									<th width="10%">Sunday</th>
+									<th width="30%">
+										Subject/Class
+									</th>
+									<th width="10%">
+										<p>Monday</p>
+										<p id="0"></p>
+									</th>
+									<th width="10%">
+										<p>Tuesday</p>
+										<p id="1"></p>
+									</th>
+									<th width="10%">
+										<p>Wednesday</p>
+										<p id="2"></p>
+									</th>
+									<th width="10%">
+										<p>Thursday</p>
+										<p id="3"></p>
+									</th>
+									<th width="10%">
+										<p>Friday</p>
+										<p id="4"></p>
+									</th>
+									<th width="10%">
+										<p>Saturday</p>
+										<p id="5"></p>
+									</th>
+									<th width="10%">
+										<p>Sunday</p>
+										<p id="6"></p>
+									</th>
 								</tr>
 							</thead>
 							<tbody class="timetable">
@@ -47,8 +70,8 @@
 						</table>
 						<table style="display:none">
 						<tr class="editable" width="25%" task_id="" style="display:none;">
-
-							<td width="30%" class="task">
+							<td class="task"></td>
+							<!-- <td width="30%" class="task">
 								<div class="form-group">
 									<label for="subject" class="col-sm-3 control-label">Subject</label>
 									<div class="col-sm-9">
@@ -62,7 +85,7 @@
 										<input type="text" class="form-control class" id="class" name="class">
 									</div>
 								</div>
-							</td>
+							</td> -->
 							<td width="10%" dow="0" date="">
 								<input class="input" type="text" size="4" style="display:none;">
 							</td>

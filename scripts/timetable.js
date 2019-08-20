@@ -85,6 +85,38 @@ function load_display_data(date,user_id,user_type,date_format) {
 	$.post('display_timetable.php', {date: date, user_id: user_id, user_type: user_type, date_format: date_format}, function(result) {
 		var response = JSON.parse(result);
 
+		var len = response['original_dates'].length;
+		for (var i = 0; i < len; i++) {
+			var date = new Date(response['original_dates'][i] * 1000);
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			if (day < 10) {
+				day = '0' + day;
+			}
+			if (month < 10) {
+				month = '0' + month;
+			}
+			if (date_format === "yyyy/mm/dd") {
+				date = year + '/' + month + '/' + day;
+	    	}
+	    	else if (date_format === "yyyy.mm.dd") {
+	    		date = year + '.' + month + '.' + day;
+	    	}
+	    	else if (date_format === "yyyy-mm-dd") {
+	    		date = year + '-' + month + '-' + day;
+	    	}
+	    	else if (date_format === "dd/mm/yyyy") {
+	    		date = day + '/' + month + '/' + year;
+	    	}
+	    	else if (date_format === "dd-mm-yyyy") {
+	    		date = day + '-' + month + '-' + year;
+	    	}
+	    	else if (date_format === "dd.mm.yyyy") {
+	    		date = day + '.' + month + '.' + year;
+	    	}
+			$('table thead #' + i).text(date);
+		}
 
 		var tasks = response[0];
 		var length = tasks.length;
@@ -104,6 +136,8 @@ function load_display_data(date,user_id,user_type,date_format) {
 					}
 					
 				}
+
+
 				// var seconds = response[i].total_time;
 				// if (seconds > 0) {
 				// 	var hours = Math.floor(seconds / 3600);
@@ -114,9 +148,10 @@ function load_display_data(date,user_id,user_type,date_format) {
 				// 	$("tbody tr[task_id=" + task_id + "] .timer").val(time);
 
 				// }
-				
-				$("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i][0].name);
-				$("tbody tr[task_id=" + task_id + "] .class").val(tasks[i][0].class);
+				var task = tasks[i][0].name + ' / ' + tasks[i][0].class;
+				// $("tbody tr[task_id=" + task_id + "] .subject").val(tasks[i][0].name);
+				// $("tbody tr[task_id=" + task_id + "] .class").val(tasks[i][0].class);
+				$("tbody tr[task_id=" + task_id + "] .task").text(task);
 				//$("tbody tr[task_id=" + task_id + "] .stop").attr('task_id', response[i].task_id);
 				//console.log(response[task_id].length);
 				var len = response[task_id].length;

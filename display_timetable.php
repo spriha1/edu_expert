@@ -52,7 +52,7 @@
 			$res = array();
 			$tasks = array();
 			$arr = array();
-
+			$week = $week_dates;
 			$counter = 0;
 			$sql = "SELECT * FROM holiday";
 			$res = $obj->select_records($conn, $sql);
@@ -72,7 +72,7 @@
 					}
 				}
 			}
-			
+
 
 			//foreach ($dates as $date) {
 				if ($_REQUEST['user_type'] === 'teacher') {
@@ -117,6 +117,7 @@
 				}
 
 				$results['dates'] = $week_dates;
+				$results['original_dates'] = $week;
 			//}
 			// pd($results);
 			print_r(json_encode($results));
