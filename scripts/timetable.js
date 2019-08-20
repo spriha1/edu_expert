@@ -99,7 +99,9 @@ function load_display_data(date,user_id,user_type,date_format) {
 				var len = response['dates'].length;
 				for(var k = 0; k < len; k++)
 				{
-					$("tbody tr[task_id=" + task_id + "] td[dow=" + k + "]").attr('date', response['dates'][k]);
+					if(response['dates'][k] != 0) {
+						$("tbody tr[task_id=" + task_id + "] td[dow=" + k + "]").attr('date', response['dates'][k]);
+					}
 					
 				}
 				// var seconds = response[i].total_time;

@@ -1,3 +1,5 @@
+<?php include_once 'static_file_version.php'; ?>
+
 <?php if ($file === 'footer') { ?>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

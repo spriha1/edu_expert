@@ -72,6 +72,7 @@ $(document).ready(function() {
 
 			$('tbody tr[task_id=' + task_id + '] .resume').css('display', 'none');
 			$('tbody tr[task_id=' + task_id + '] .stop').css('display', 'table-row');
+			$('tbody tr[task_id=' + task_id + '] .pause').css('display', 'table-row');
 
 			$(this).closest('tr').find('.timer').timer('resume');
 		})
@@ -90,6 +91,10 @@ $(document).ready(function() {
 		});
 
 		$('.subject').select2({
+			width: 'resolve'
+		});
+
+		$('.day').select2({
 			width: 'resolve'
 		});
 	}

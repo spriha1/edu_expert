@@ -27,22 +27,41 @@
         	$date = $date->format('Y-m-d');
 			$obj = new DB_connect();
 			$date = strtotime($_REQUEST['date']);
-			//$date = strtotime($date);
-			if ($_REQUEST['user_type'] === 'teacher') {
-				$query = "SELECT task_id, class, name, total_time, on_date FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
-				$result = $obj->select_records($conn, $query);
+			$dow = date('w', $date);
+			
+			$counter = 0;
+			$sql = "SELECT * FROM holiday";
+			$res = $obj->select_records($conn, $sql);
+			foreach ($res as $key => $value) {
+				if (!is_null($value['dow']) && $dow == $value['dow']) {
+					$counter++;
+				}
+				else if (!is_null($value['start_date']) && !is_null($value['end_date'])) {
+					if (($value['start_date'] <= $date) && ($value['end_date'] >= $date)) {
+						$counter++;
+					}
+				}
 			}
-			else if ($_REQUEST['user_type'] === 'student') {
-				$query = "SELECT teacher_tasks.task_id, teacher.firstname, name 
-				FROM student_tasks 
-				INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
-				INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
-				INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
-				INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
-				$result = $obj->select_records($conn, $query);
+
+			if ($counter === 0) {
+				//$date = strtotime($date);
+				if ($_REQUEST['user_type'] === 'teacher') {
+					$query = "SELECT task_id, class, name, total_time, on_date FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+					$result = $obj->select_records($conn, $query);
+				}
+				else if ($_REQUEST['user_type'] === 'student') {
+					$query = "SELECT teacher_tasks.task_id, teacher.firstname, name 
+					FROM student_tasks 
+					INNER JOIN tasks ON (tasks.id = student_tasks.task_id) 
+					INNER JOIN teacher_tasks ON (tasks.id = teacher_tasks.task_id)
+					INNER JOIN subjects ON (tasks.subject_id = subjects.id) 
+					INNER JOIN users teacher ON (teacher.id = teacher_tasks.teacher_id) WHERE student_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+					$result = $obj->select_records($conn, $query);
+				}
+				//pd($result);
+				print_r(json_encode($result));
 			}
-			//pd($result);
-			print_r(json_encode($result));
+			
 		}
 	}
 ?>

@@ -152,6 +152,14 @@
 				parameter_id INT,
 				rating_id INT
 			)";
+		$conn->exec($sql);
+
+		$sql = "CREATE TABLE IF NOT EXISTS holiday (
+				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+				dow INT,
+				start_date INT,
+				end_date INT
+			)";
 		$conn->exec($sql);	
 
 		$sql = "DROP TRIGGER IF EXISTS before_goal_plan_update;";

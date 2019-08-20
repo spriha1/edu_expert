@@ -52,6 +52,28 @@
 			$res = array();
 			$tasks = array();
 			$arr = array();
+
+			$counter = 0;
+			$sql = "SELECT * FROM holiday";
+			$res = $obj->select_records($conn, $sql);
+			$length = count($week_dates);
+			for($i = 0; $i < $length; $i++) 
+			{
+				$dow = date('w', $week_dates[$i]);
+
+				foreach ($res as $key => $value) {
+					if (!is_null($value['dow']) && $dow == $value['dow']) {
+						$week_dates[$i] = 0;
+					}
+					else if (!is_null($value['start_date']) && !is_null($value['end_date'])) {
+						if (($value['start_date'] <= $week_dates[$i]) && ($value['end_date'] >= $week_dates[$i])) {
+							$week_dates[$i] = 0;
+						}
+					}
+				}
+			}
+			
+
 			//foreach ($dates as $date) {
 				if ($_REQUEST['user_type'] === 'teacher') {
 					foreach ($week_dates as $date) {
