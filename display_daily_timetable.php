@@ -29,7 +29,7 @@
 			$date = strtotime($_REQUEST['date']);
 			//$date = strtotime($date);
 			if ($_REQUEST['user_type'] === 'teacher') {
-				$query = "SELECT task_id, class, name, total_time FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
+				$query = "SELECT task_id, class, name, total_time, on_date FROM teacher_tasks INNER JOIN tasks ON (tasks.id = teacher_tasks.task_id) INNER JOIN subjects ON (tasks.subject_id = subjects.id) WHERE teacher_id = ".$_REQUEST['user_id']." AND start_date <= ".$date." AND end_date >= ".$date;
 				$result = $obj->select_records($conn, $query);
 			}
 			else if ($_REQUEST['user_type'] === 'student') {

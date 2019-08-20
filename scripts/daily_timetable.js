@@ -73,6 +73,33 @@ $(document).ready(function() {
 function load_display_data(date,user_id,user_type,date_format) {
 	$.post('display_daily_timetable.php', {date: date, user_id: user_id, user_type: user_type, date_format: date_format}, function(result) {
 		var response = JSON.parse(result);
+		console.log(date);
+		if (date_format === "yyyy/mm/dd") {
+			date = date.split('/');
+			date = new Date(date[0], date[1]-1, date[2]).getTime();
+    	}
+    	else if (date_format === "yyyy.mm.dd") {
+    		date = date.split('.');
+			date = new Date(date[0], date[1]-1, date[2]).getTime();
+    	}
+    	else if (date_format === "yyyy-mm-dd") {
+    		date = date.split('-');
+			date = new Date(date[0], date[1]-1, date[2]).getTime();
+    	}
+    	else if (date_format === "dd/mm/yyyy") {
+    		date = date.split('/');
+			date = new Date(date[2], date[1]-1, date[0]).getTime();
+    	}
+    	else if (date_format === "dd-mm-yyyy") {
+    		date = date.split('-');
+			date = new Date(date[2], date[1]-1, date[0]).getTime();
+    	}
+    	else if (date_format === "dd.mm.yyyy") {
+    		date = date.split('.');
+			date = new Date(date[2], date[1]-1, date[0]).getTime();
+    	}
+    	date = date/1000;
+    	console.log(date);
 		var length = response.length;
 		if (user_type === 'teacher') {
 			for (var i = 0; i < length; i++) {
@@ -90,8 +117,10 @@ function load_display_data(date,user_id,user_type,date_format) {
 					var minutes = Math.floor(seconds / 60);
 					seconds = seconds - (minutes * 60);
 					var time = hours + ':' + minutes + ':' + seconds;
-					$("tbody tr[task_id=" + task_id + "] .timer").val(time);
-
+					if (date == response[i].on_date) {
+						$("tbody tr[task_id=" + task_id + "] .timer").val(time);
+					}
+					
 				}
 
 				$("tbody tr[task_id=" + task_id + "] .name").text(response[i].name);
