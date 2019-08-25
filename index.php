@@ -47,11 +47,12 @@
   </div>
 </div>
 
-<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
 <?php 
 	$file = 'footer';
 	include_once 'footer.php'; 
 ?>
+<script src="<?php autoVer('/scripts/validate.js'); ?>"></script>
+
 </body>
 </html>
 <!--<body class="body1">

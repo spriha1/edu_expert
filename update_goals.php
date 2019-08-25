@@ -7,7 +7,7 @@
 			$obj = new DB_connect();
 			$table = "goal_plan";
 			//pd("hi")
-			$to_time = date('Y-m-d H:i:s',time());
+			$to_time = time();
 		    $columns = array("to_time" => $to_time, "check_status" => 1);
 		    $conditions = array("id" => $_REQUEST['goal_id']);
 		    $obj->update($conn, $table, $columns, $conditions);

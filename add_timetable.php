@@ -43,8 +43,11 @@
 			for($i = 0; $i < $length; $i++)
 			{
 				$subject_id = $_REQUEST['subject'][$i];
-				$query = "SELECT * FROM tasks WHERE subject_id = ".$subject_id." AND class = ".$_REQUEST['class']." AND start_date = ".$start_date." AND end_date = ".$end_date;
-				$result = $obj->select_records($conn, $query);
+				for ($a = $start_date; $a < $end_date; $a = $a + 86400) {
+					$query = "SELECT * FROM tasks WHERE subject_id = ".$subject_id." AND class = ".$_REQUEST['class']." AND start_date <= ".$a." AND end_date >= ".$a;
+					$result = $obj->select_records($conn, $query);
+				}
+				
 				if (!$result) {
 					$table = "tasks";
 					$columns = array("subject_id", "class", "start_date", "end_date");

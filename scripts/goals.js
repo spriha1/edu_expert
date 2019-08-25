@@ -5,6 +5,8 @@ $(document).ready(function() {
 	date = $('#date').val(); 
 	date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
 	console.log(date);
+	date = new Date(date);
+	date = date.getTime()/1000;
 	//var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 	var user_id = $('#user_id').val();
 	var total_time = 0;
@@ -22,9 +24,52 @@ $(document).ready(function() {
 		$("#goal").css("display", "none");
 		$(".add").css("display", "none");
 		$(".add_item").css("display", "block");
+		date = $('#date').val();
+		date_format = $('#date_format').val();
+		date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
+		date = new Date(date);
+		time = date.getTime()/1000;
+		// if (date_format === "yyyy/mm/dd") {
+		// 	var date = date.split("/");
+		// 	var year = date[0];
+		// 	var month = date[1]+1;
+		// 	var day = date[2];
+  //   	}
+  //   	else if (date_format === "yyyy.mm.dd") {
+  //   		var date = date.split(".");
+		// 	var year = date[0];
+		// 	var month = date[1]+1;
+		// 	var day = date[2];
+  //   	}
+  //   	else if (date_format === "yyyy-mm-dd") {
+  //   		var date = date.split("-");
+		// 	var year = date[0];
+		// 	var month = date[1]+1;
+		// 	var day = date[2];
+  //   	}
+  //   	else if (date_format === "dd/mm/yyyy") {
+  //   		var date = date.split("/");
+		// 	var year = date[2];
+		// 	var month = date[1]+1;
+		// 	var day = date[0];
+  //   	}
+  //   	else if (date_format === "dd-mm-yyyy") {
+  //   		var date = date.split("-");
+		// 	var year = date[2];
+		// 	var month = date[1]+1;
+		// 	var day = date[0];
+  //   	}
+  //   	else if (date_format === "dd.mm.yyyy") {
+  //   		var date = date.split(".");
+		// 	var year = date[2];
+		// 	var month = date[1]+1;
+		// 	var day = date[0];
+  //   	}
+  //   	var date = new Date(year, month, day);
+  //   	var time = date.getTime()/100;
 		var goal = $("textarea").val();
 		var user_id = $(".add").attr("user_id");
-		$.post('add_goals.php', {goal: goal, user_id: user_id}, function(result) {
+		$.post('add_goals.php', {goal: goal, user_id: user_id, time: time}, function(result) {
 			var response = JSON.parse(result);
 			let element = $(".editable").clone(true).css('display', 'block').removeClass('editable');
 			element.find('.text').html(response[0].goal);
@@ -45,6 +90,8 @@ $(document).ready(function() {
 			var time = new Date(null);
 			time.setSeconds(response[0].total_time);
 			var total_time = time.toISOString().substr(11, 8);
+			console.log(total_time)
+
 			$("ul li[goal_id=" + goal_id + "]").find('.time').css('visibility', 'visible');
 			$("ul li[goal_id=" + goal_id + "]").find('.total_time').text(total_time);
 
@@ -70,6 +117,8 @@ $(document).ready(function() {
 	$('.datepicker').datepicker().on('changeDate', function(e) {
 		var date = e.format();
 		date = $(".datepicker").data('datepicker').getFormattedDate('yyyy-mm-dd');
+		date = new Date(date);
+		date = date.getTime()/1000;
 		var user_id = $('#user_id').val();
 		$('.todo').html("");
 		load_display_data(date,user_id);

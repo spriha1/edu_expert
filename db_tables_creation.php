@@ -37,21 +37,22 @@
 			)";
 		$conn->exec($sql);
 
-		$sql = "CREATE TABLE IF NOT EXISTS chat_message (
-				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				to_user_id INT,
-				from_user_id INT,
-				chat_message TEXT,
-				chat_time timestamp DEFAULT CURRENT_TIMESTAMP
-			)";
-		$conn->exec($sql);
+		// $sql = "CREATE TABLE IF NOT EXISTS chat_message (
+		// 		id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		// 		to_user_id INT,
+		// 		from_user_id INT,
+		// 		chat_message TEXT,
+		// 		chat_time timestamp DEFAULT CURRENT_TIMESTAMP
+		// 	)";
+		// $conn->exec($sql);
 
 		$sql = "CREATE TABLE IF NOT EXISTS goal_plan (
 				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 				user_id INT,
 				goal TEXT,
-				from_time timestamp DEFAULT CURRENT_TIMESTAMP,
-				to_time timestamp DEFAULT CURRENT_TIMESTAMP,
+				from_time INT,
+				to_time INT,
+				on_date INT,
 				total_time INT DEFAULT '0',
 				check_status TINYINT(1) NOT NULL DEFAULT '0'
 			)";
@@ -133,26 +134,26 @@
 			)";
 		$conn->exec($sql);
 
-		$sql = "CREATE TABLE IF NOT EXISTS feedback_parameters (
-				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				parameter TEXT
-			)";
-		$conn->exec($sql);	
+		// $sql = "CREATE TABLE IF NOT EXISTS feedback_parameters (
+		// 		id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		// 		parameter TEXT
+		// 	)";
+		// $conn->exec($sql);	
 
-		$sql = "CREATE TABLE IF NOT EXISTS feedback_ratings (
-				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				rating VARCHAR(20)
-			)";
-		$conn->exec($sql);
+		// $sql = "CREATE TABLE IF NOT EXISTS feedback_ratings (
+		// 		id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		// 		rating VARCHAR(20)
+		// 	)";
+		// $conn->exec($sql);
 
-		$sql = "CREATE TABLE IF NOT EXISTS feedback (
-				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-				from_id INT,
-				for_id INT,
-				parameter_id INT,
-				rating_id INT
-			)";
-		$conn->exec($sql);
+		// $sql = "CREATE TABLE IF NOT EXISTS feedback (
+		// 		id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		// 		from_id INT,
+		// 		for_id INT,
+		// 		parameter_id INT,
+		// 		rating_id INT
+		// 	)";
+		// $conn->exec($sql);
 
 		$sql = "CREATE TABLE IF NOT EXISTS holiday (
 				id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

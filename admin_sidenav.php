@@ -125,17 +125,6 @@
 						<i class="fa fa-th"></i> <span>Teacher Timesheet</span>
 					</a>
 				</li>
-				<!-- <li>
-					<a href="teacher_goalplan.php">
-						<i class="fa fa-th"></i> <span>Teacher Goal Plan</span>
-					</a>
-				</li> -->
-				<!-- <li>
-					<a href="view_feedback.php">
-						<i class="fa fa-th"></i> <span>Student Feedback</span>
-					</a>
-				</li> -->
-				
 				<li>
 					<a href="task_management.php">
 						<i class="fa fa-th"></i> <span>Task Management</span>

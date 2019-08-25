@@ -108,7 +108,7 @@
 						<i class="ion ion-clipboard"></i>
 						<h3 class="box-title">Plan for the day</h3>
 						<!-- <input class="pull-right date" id="date" type="date"> -->
-						<input class="datepicker">
+						<input class="datepicker" id="date">
 						<!-- <div class="box-tools pull-right">
 							<ul class="pagination pagination-sm inline">
 								<li><a href="#">&laquo;</a></li>
