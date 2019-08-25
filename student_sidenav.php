@@ -111,25 +111,15 @@
 					</a>
 				</li>
 				<li>
-					<a href="student_timetable.php">
-						<i class="fa fa-th"></i> <span>Time Table</span>
+					<a href="daily_student_timetable.php">
+						<i class="fa fa-th"></i> <span>Daily Time Table</span>
 					</a>
 				</li>
 				<li>
-					<a href="#">
-						<i class="fa fa-users"></i> <span>Attendance</span>
+					<a href="weekly_student_timetable.php">
+						<i class="fa fa-th"></i> <span>Weekly Time Table</span>
 					</a>
 				</li>
-				<!-- <li>
-					<a href="#">
-						<i class="fa fa-th"></i> <span>Dues</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-th"></i> <span>Feedback</span>
-					</a>
-				</li> -->
 			</ul>
 		</section>
 		<!-- /.sidebar -->

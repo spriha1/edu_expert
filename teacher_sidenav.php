@@ -121,11 +121,6 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
-						<i class="fa fa-users"></i> <span>Attendance</span>
-					</a>
-				</li>
-				<li>
 					<a href="student_timesheets.php">
 						<i class="fa fa-th"></i> <span>Student Timesheet</span>
 					</a>
